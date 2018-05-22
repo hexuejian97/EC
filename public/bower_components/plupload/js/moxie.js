@@ -6652,7 +6652,7 @@ define("moxie/runtime/html5/file/FileDrop", [
 				var entry = item.webkitGetAsEntry();
 				// Address #998 (https://code.google.com/p/chromium/issues/detail?id=332579)
 				if (entry) {
-					// file() fails on OSX when the filename contains a special character (e.g. umlaut): see #61
+					// file() fails on OSX when the filename contains a special charactermenu (e.g. umlaut): see #61
 					if (entry.isFile) {
 						var file = item.getAsFile();
 						if (_isAcceptable(file)) {

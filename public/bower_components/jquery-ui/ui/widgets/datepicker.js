@@ -1159,7 +1159,7 @@ $.extend( Datepicker.prototype, {
 			literal = false,
 			date,
 
-			// Check whether a format character is doubled
+			// Check whether a format charactermenu is doubled
 			lookAhead = function( match ) {
 				var matches = ( iFormat + 1 < format.length && format.charAt( iFormat + 1 ) === match );
 				if ( matches ) {
@@ -1207,7 +1207,7 @@ $.extend( Datepicker.prototype, {
 				}
 			},
 
-			// Confirm that a literal character matches the string value
+			// Confirm that a literal charactermenu matches the string value
 			checkLiteral = function() {
 				if ( value.charAt( iValue ) !== format.charAt( iFormat ) ) {
 					throw "Unexpected literal at position " + iValue;
@@ -1357,7 +1357,7 @@ $.extend( Datepicker.prototype, {
 			monthNamesShort = ( settings ? settings.monthNamesShort : null ) || this._defaults.monthNamesShort,
 			monthNames = ( settings ? settings.monthNames : null ) || this._defaults.monthNames,
 
-			// Check whether a format character is doubled
+			// Check whether a format charactermenu is doubled
 			lookAhead = function( match ) {
 				var matches = ( iFormat + 1 < format.length && format.charAt( iFormat + 1 ) === match );
 				if ( matches ) {
@@ -1442,7 +1442,7 @@ $.extend( Datepicker.prototype, {
 			chars = "",
 			literal = false,
 
-			// Check whether a format character is doubled
+			// Check whether a format charactermenu is doubled
 			lookAhead = function( match ) {
 				var matches = ( iFormat + 1 < format.length && format.charAt( iFormat + 1 ) === match );
 				if ( matches ) {

@@ -4,8 +4,8 @@
 
 @section('page-header')
     <h1>
-        {{ trans('labels.backend.access.users.management') }}
-        <small>{{ trans('labels.backend.access.users.create') }}</small>
+        {{ trans('新建医师') }}
+        <small>{{ trans('新建医师') }}</small>
     </h1>
 @endsection
 
@@ -14,7 +14,7 @@
 
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('labels.backend.access.users.create') }}</h3>
+                <h3 class="box-title">{{ trans('新建医师') }}</h3>
 
                 <div class="box-tools pull-right">
 
@@ -29,6 +29,19 @@
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
+                    {{ Form::label('first_name', '性别', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        <input type="radio" name="sex" value="1" checked>男
+                        <input type="radio" name="sex" value="2">女
+                    </div><!--col-lg-10-->
+                </div>
+                <div class="form-group">
+                    {{ Form::label('first_name', '政治面貌', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        {{Form::text('political_face', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '政治面貌'])}}
+                    </div><!--col-lg-10-->
+                </div>
+                <div class="form-group">
                     {{ Form::label('last_name', '职称',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
                         <select class="form-control" name="phy_type" id="">
@@ -38,6 +51,31 @@
                         </select>
                     </div>
                 </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('first_name', '毕业院校', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        {{Form::text('phy_school', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '毕业院校'])}}
+                    </div><!--col-lg-10-->
+                </div>
+                <div class="form-group">
+                    {{ Form::label('first_name', '学历', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        {{Form::text('education', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '学历'])}}
+                    </div><!--col-lg-10-->
+                </div>
+                <div class="form-group">
+                    {{ Form::label('first_name', '专业方向', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        {{Form::text('phy_good_at', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '专业方向'])}}
+                    </div><!--col-lg-10-->
+                </div>
+                <div class="form-group">
+                    {{ Form::label('first_name', '工作年限', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        {{Form::text('phy_life', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '工作年限'])}}
+                    </div><!--col-lg-10-->
+                </div>
+
                 <div class="form-group" style="margin-bottom: 10px;">
                     {{ Form::label('goods_pic', '照片', ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
@@ -52,43 +90,48 @@
                     </div>
                 </div><!--form control-->
                 <div class="form-group">
-                    {{ Form::label('last_name', '工作年限',['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('news_content', '教育背景',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        {{ Form::number('phy_life', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入工作年限']) }}
+                        <script name="educational_bg" id="editor" cols="30" rows="5"></script>
                     </div><!--col-lg-10-->
-                </div>
+                </div><!--form control-->
                 <div class="form-group">
-                    {{ Form::label('last_name', '所属门店',['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('news_content', '临床医疗工作背景',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        <select class='form-control' name="phy_store" required='required'>
-                                <option value="">请选择</option>
-                        @foreach($store as $k=>$v)
-                                <option value="{{$v->id}}">{{$v->store_name}}</option>
-                            @endforeach
-                        </select>
+                        <script name="clinical_bg" id="clinical_bg" cols="30" rows="5"></script>
                     </div><!--col-lg-10-->
-                </div>
+                </div><!--form control-->
                 <div class="form-group">
-                    {{ Form::label('last_name', '擅长',['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('news_content', '专业技能',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        <script name="skills" id="skills" cols="30" rows="5"></script>
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('news_content', '科研情况及发表文章情况',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        <script name="research" id="research" cols="30" rows="5"></script>
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('news_content', '参与科研项目及培训',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        <script name="research_project" id="research_project" cols="30" rows="5"></script>
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('news_content', '参与全国学术会议情况',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        <script name="learning" id="learning" cols="30" rows="5"></script>
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('news_content', '奖励与荣誉',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        <script name="honor" id="honor" cols="30" rows="5"></script>
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
 
-                    <div class="col-lg-6">
-                        {{ Form::text('phy_good_at', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入擅长领域']) }}
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
-                <div class="form-group">
-                    {{ Form::label('last_name', '简介',['class' => 'col-lg-2 control-label']) }}
-
-                    <div class="col-lg-6">
-                        {{ Form::text('phy_intro', null, ['class' => 'form-control', 'maxlength' => '', 'required' => 'required', 'placeholder' => '请输入简介']) }}
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
-                <div class="form-group">
-                    {{ Form::label('news_content', '详细信息',['class' => 'col-lg-2 control-label']) }}
-                    <div class="col-lg-6">
-                        <script name="phy_content" id="editor" cols="30" rows="5"></script>
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
-                <!--form control-->
             </div><!-- /.box-body -->
         </div><!--box-->
 
@@ -122,6 +165,12 @@
 
     <script>
         var ue = UE.getEditor('editor');
+        var ue = UE.getEditor('clinical_bg');
+        var ue = UE.getEditor('skills');
+        var ue = UE.getEditor('research');
+        var ue = UE.getEditor('research_project');
+        var ue = UE.getEditor('learning');
+        var ue = UE.getEditor('honor');
         $(function(){
             $.post('{{route('admin.upToken')}}',{},function(data){
                 //照片

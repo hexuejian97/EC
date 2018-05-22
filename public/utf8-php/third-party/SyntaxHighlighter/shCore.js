@@ -55,7 +55,7 @@ if (XRegExp) {
                 output.push(tokenResult.output);
                 pos += (tokenResult.match[0].length || 1);
             } else {
-                // Check for native multicharacter metasequences (excluding character classes) at
+                // Check for native multicharacter metasequences (excluding charactermenu classes) at
                 // the current position
                 if (match = nativ.exec.call(nativeTokens[currScope], pattern.slice(pos))) {
                     output.push(match[0]);
@@ -66,7 +66,7 @@ if (XRegExp) {
                         currScope = XRegExp.INSIDE_CLASS;
                     else if (chr === "]")
                         currScope = XRegExp.OUTSIDE_CLASS;
-                    // Advance position one character
+                    // Advance position one charactermenu
                     output.push(chr);
                     pos++;
                 }
@@ -120,7 +120,7 @@ if (XRegExp) {
         nativeTokens = {};
 
     // `nativeTokens` match native multicharacter metasequences only (including deprecated octals,
-    // excluding character classes)
+    // excluding charactermenu classes)
     nativeTokens[XRegExp.INSIDE_CLASS] = /^(?:\\(?:[0-3][0-7]{0,2}|[4-7][0-7]?|x[\dA-Fa-f]{2}|u[\dA-Fa-f]{4}|c[A-Za-z]|[\s\S]))/;
     nativeTokens[XRegExp.OUTSIDE_CLASS] = /^(?:\\(?:0(?:[0-3][0-7]{0,2}|[4-7][0-7]?)?|[1-9]\d*|x[\dA-Fa-f]{2}|u[\dA-Fa-f]{4}|c[A-Za-z]|[\s\S])|\(\?[:=!]|[?*+]\?|{\d+(?:,\d*)?}\??)/;
 
@@ -607,7 +607,7 @@ if (XRegExp) {
         }
     );
 
-    // Empty character class: [] or [^]
+    // Empty charactermenu class: [] or [^]
     XRegExp.addToken(
         /\[\^?]/,
         function (match) {
@@ -3522,7 +3522,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'session_user space substring sum system_user upper user year';
 
 		var keywords =	'absolute action add after alter as asc at authorization begin bigint ' +
-						'binary bit by cascade char character check checkpoint close collate ' +
+						'binary bit by cascade char charactermenu check checkpoint close collate ' +
 						'column commit committed connect connection constraint contains continue ' +
 						'create cube current current_date current_time cursor database date ' +
 						'deallocate dec decimal declare default delete desc distinct double drop ' +

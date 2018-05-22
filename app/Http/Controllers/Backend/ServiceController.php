@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Service\News;
 use App\Models\Service\NewsType;
+use App\Models\Service\Paib;
 use App\Models\Service\Physician;
 use App\Models\Service\PhyType;
 use App\Models\Service\Project;
@@ -91,13 +92,21 @@ class ServiceController extends Controller
         try{
             $phy = new Physician();
             $phy->phy_name = $req['phy_name'];
-            $phy->phy_content = $req['phy_content'];
+            $phy->sex = $req['sex'];
             $phy->phy_type = $req['phy_type'];
-            $phy->phy_life = $req['phy_life'];
-            $phy->phy_life = $req['phy_store'];
-            $phy->phy_picture = $req['phy_picture'];
+            $phy->political_face = $req['political_face'];
+            $phy->phy_school = $req['phy_school'];
+            $phy->education = $req['education'];
             $phy->phy_good_at = $req['phy_good_at'];
-            $phy->phy_intro = $req['phy_intro'];
+            $phy->phy_life = $req['phy_life'];
+            $phy->phy_picture = $req['phy_picture'];
+            $phy->educational_bg = $req['educational_bg'];
+            $phy->clinical_bg = $req['clinical_bg'];
+            $phy->skills = $req['skills'];
+            $phy->research = $req['research'];
+            $phy->research_project = $req['research_project'];
+            $phy->learning = $req['learning'];
+            $phy->honor = $req['honor'];
             if($phy->save()){
                 return redirect()->route('admin.physician.index')->withFlashSuccess('添加医师成功');
             }{
@@ -127,13 +136,21 @@ class ServiceController extends Controller
         try{
             $phy = Physician::find($req['id']);
             $phy->phy_name = $req['phy_name'];
-            $phy->phy_content = $req['phy_content'];
+            $phy->sex = $req['sex'];
             $phy->phy_type = $req['phy_type'];
-            $phy->phy_store = $req['phy_store'];
+            $phy->political_face = $req['political_face'];
+            $phy->phy_school = $req['phy_school'];
+            $phy->education = $req['education'];
             $phy->phy_good_at = $req['phy_good_at'];
-            $phy->phy_intro = $req['phy_intro'];
             $phy->phy_life = $req['phy_life'];
             $phy->phy_picture = $req['phy_picture'];
+            $phy->educational_bg = $req['educational_bg'];
+            $phy->clinical_bg = $req['clinical_bg'];
+            $phy->skills = $req['skills'];
+            $phy->research = $req['research'];
+            $phy->research_project = $req['research_project'];
+            $phy->learning = $req['learning'];
+            $phy->honor = $req['honor'];
             if($phy->save()){
                 return redirect()->route('admin.physician.index')->withFlashSuccess('修改医师信息成功');
             }else{
@@ -161,8 +178,97 @@ class ServiceController extends Controller
             \Log::info($e->getMessage());
             return return_err_json('删除失败',2001);
         }
+    }
+
+    /**
+     * 排班
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function paib(){
+        return view('backend.service.physician.paibindex');
+    }
+
+    public function paibdata(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $name = $this->request->get('phy_name');
+        $query = Physician::select();
+        if($this->request->get('name')){
+            $query->where('phy_name', 'like', "%$name%");
+        }
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+        return ['total' => $total, 'rows' => $list];
+    }
+    public function createpaib($id){
+        $data = Physician::find($id)->toArray();
+        $data['time']=time();
+        $paibinfo = Paib::where('phy_id',$id)->first();
+        if($paibinfo!==null){
+            $paibinfo = $paibinfo->toarray();
+            $paibinfo['content']= unserialize($paibinfo['content']);
+            foreach ($paibinfo['content'] as $k=>$v){
+                $paibinfo['content'][$k] = explode(',',$v);
+            }
+            $data['paib'] = $paibinfo['content'];
+        }else{
+            $data['paib'] = [];
+        }
+
+        return view('backend.service.physician.paibcreate',['data'=>$data]);
+    }
+
+    /**
+     *排班添加 编辑
+     * @param Request $request
+     * @return $this
+     * @throws \Exception
+     */
+    public function addpaibdata(Request $request){
+        $data = $request->all();
+        $paib = new Paib();
+        $oldpaib = $paib::where('phy_id',$data['id'])->first();
+        foreach($data['times'] as $k=>$v){
+            if(!empty($data['time'.$v])){
+                $da[] = implode(',',$data['time'.$v]);
+            }
+        }
+        if($oldpaib!==null){
+            $oldpaib->delete();
+        }
+        $paib->phy_id = $data['id'];
+        $paib->content = serialize($da);
+        if($paib->save()){
+            return redirect()->route('admin.paib.index')->withFlashSuccess('操作成功');
+        }else{
+            return back()->withErrors('请重新提交');
+        }
+//        if($oldpaib!==null){
+//            $oldpaib->phy_id = $data['id'];
+//            $oldpaib->content = serialize($da);
+//            if($oldpaib->save()){
+//                return redirect()->route('admin.paib.index')->withFlashSuccess('操作成功');
+//            }else{
+//                return back()->withErrors('请重新提交');
+//            }
+//        }else{
+//            $paib->phy_id = $data['id'];
+//            $paib->content = serialize($da);
+//            if($paib->save()){
+//                return redirect()->route('admin.paib.index')->withFlashSuccess('操作成功');
+//            }else{
+//                return back()->withErrors('请重新提交');
+//            }
+//        }
 
     }
+
+
+
+
 
     public function physicianInfo($id){
         $phy = Physician::leftJoin('store','physician.phy_store','=','store.id')
@@ -211,7 +317,7 @@ class ServiceController extends Controller
         return view('backend.service.store.index');
     }
     /*
-     * 医师数据
+     * 门店数据
      * */
     public function storeData()
     {
@@ -226,6 +332,9 @@ class ServiceController extends Controller
         $offset = $offset ? $offset : 0;
         $limit = $limit ? $limit : 10;
         $list = $query->skip($offset)->take($limit)->get();
+//        foreach($list as $key=>$val){
+//            $list[$key]['store_name']=storeType::where('store_position',$val['id'])->get()->values('st_name');
+//        }
         return ['total' => $total, 'rows' => $list];
     }
     /*
@@ -589,7 +698,7 @@ class ServiceController extends Controller
         $offset = $this->request->get('offset');
         $limit = $this->request->get('limit');
         $type = $this->request->get('type');
-        $query = News::join('news_type','news.news_type','=','news_type.id')
+        $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
             ->select('news.*','news_type.nt_name');
         if($this->request->get('type')){
             $query->where('news_type', '=', $type);
@@ -876,6 +985,81 @@ class ServiceController extends Controller
         }catch (Exception $e){
             \Log::info($e->getMessage());
         }
+    }
+
+    /**
+     * 特色案例
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function  teser(){
+        return  view('backend.service.teser.index');
+    }
+    public function teserdata(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $type = $this->request->get('type');
+        $name = $this->request->get('name');
+        $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
+            ->select('news.*','news_type.nt_name');
+        $query->where('news_type', '=', 6);
+        if($this->request->get('name')){
+            $query->where('news_title', 'like', "%$name%");
+        }
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+//        dd($list);
+        return ['total' => $total, 'rows' => $list];
+
+    }
+
+    /**
+     * 媒体查询
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function media(){
+        return  view('backend.service.media.index');
+    }
+    public function mediadata(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $type = $this->request->get('type');
+        $name = $this->request->get('name');
+        $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
+            ->select('news.*','news_type.nt_name');
+        $query->where('news_type', '=', 10);
+        if($this->request->get('name')){
+            $query->where('news_title', 'like', "%$name%");
+        }
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+        return ['total' => $total, 'rows' => $list];
+
+    }
+
+    /**
+     * 人气医师
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function physhot(){
+        return  view('backend.service.physhot.index');
+    }
+    public function physhotdata(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $name = $this->request->get('phy_name');
+        $query = Physician::where('phy_sort',1)->select();
+        if($this->request->get('name')){
+            $query->where('phy_name', 'like', "%$name%");
+        }
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+        return ['total' => $total, 'rows' => $list];
     }
 }
 

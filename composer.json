@@ -20,7 +20,8 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "5.4.*",
         "qiniu/php-sdk": "^7.2",
-        "yajra/laravel-datatables-oracle": "^7.0"
+        "yajra/laravel-datatables-oracle": "^7.0",
+        "qcloudsms/qcloudsms_php": "0.1.*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^2.4",

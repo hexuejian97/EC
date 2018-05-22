@@ -46,7 +46,7 @@
                 <div class="form-group">
                     {{ Form::label('last_name', '门店电话',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        {{ Form::number('store_tel', null, ['class' => 'form-control', 'maxlength' => '11', 'required' => 'required', 'placeholder' => '请输入职称']) }}
+                        {{ Form::number('store_tel', null, ['class' => 'form-control', 'maxlength' => '12', 'required' => 'required', 'placeholder' => '请输入职称']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">

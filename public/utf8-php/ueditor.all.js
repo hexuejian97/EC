@@ -5700,7 +5700,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                 end;
             nativeRange = this.document.body.createTextRange();
             nativeRange.moveToElementText(start);
-            nativeRange.moveStart('character', 1);
+            nativeRange.moveStart('charactermenu', 1);
             if (!this.collapsed) {
                 var nativeRangeEnd = this.document.body.createTextRange();
                 end = bookmark.end;
@@ -5719,7 +5719,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                     fillData = tmpText;
                     mergeSibling(tmp, 'previousSibling');
                     mergeSibling(start, 'nextSibling');
-                    nativeRange.moveStart('character', -1);
+                    nativeRange.moveStart('charactermenu', -1);
                     nativeRange.collapse(true);
                 }
             }
@@ -6452,7 +6452,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                 }
                 tmpRange = range.duplicate();
                 //修正ie下<b>x</b>[xx] 闭合后 <b>x|</b>xx
-                tmpRange.text.length > 0 && tmpRange.moveStart( 'character', 1 );
+                tmpRange.text.length > 0 && tmpRange.moveStart( 'charactermenu', 1 );
                 tmpRange.collapse( 1 );
                 start = tmpRange.parentElement();
                 parent = tmp = range.parentElement();

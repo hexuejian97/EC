@@ -591,7 +591,7 @@ UE.I18N['en'] = {
         },
         getEnd:"Has the search to the bottom!",
         getStart:"Has the search to the top!",
-        countMsg:"Altogether replaced {#count} character(s)!"
+        countMsg:"Altogether replaced {#count} charactermenu(s)!"
     },
     snapscreen:{
         'static':{

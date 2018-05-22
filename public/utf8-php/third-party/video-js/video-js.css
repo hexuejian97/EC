@@ -15,7 +15,7 @@ e.g. <video class="video-js my-skin-name">
 }
 /* Custom Icon Font
 --------------------------------------------------------------------------------
-The control icons are from a custom font. Each icon corresponds to a character
+The control icons are from a custom font. Each icon corresponds to a charactermenu
 (e.g. "\e001"). Font icons allow for easy scaling and coloring of icons.
 */
 @font-face {

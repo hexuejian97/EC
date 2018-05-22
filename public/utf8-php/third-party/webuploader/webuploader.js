@@ -70,7 +70,7 @@
         exportsTo = function( obj ) {
             var key, host, parts, part, last, ucFirst;
 
-            // make the first character upper case.
+            // make the first charactermenu upper case.
             ucFirst = function( str ) {
                 return str && (str.charAt( 0 ).toUpperCase() + str.substr( 1 ));
             };

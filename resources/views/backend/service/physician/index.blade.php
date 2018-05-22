@@ -44,11 +44,10 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-sort-name="id" data-sort-order="desc" data-align="center">{{ trans('labels.backend.service.physician.id') }}</th>
-                        <th data-field="phy_name"  data-align="center">{{ trans('labels.backend.service.physician.name') }}</th>
-                        <th data-field="phy_picture" data-formatter="avatarFormatter" data-align="center">{{ trans('labels.backend.service.physician.picture') }}</th>
-                        <th data-field="phy_good_at" data-align="center">{{ trans('labels.backend.service.physician.good_at') }}</th>
-                        <th data-field="phy_intro" data-sort-name="car_id" data-sort-order="desc" data-align="center">{{ trans('labels.backend.service.physician.intro') }}</th>
+                        <th data-field="id" data-sort-name="id" data-sort-order="desc" data-align="center">{{ trans('序号') }}</th>
+                        <th data-field="phy_name"  data-align="center">{{ trans('名称') }}</th>
+                        <th data-field="phy_picture" data-formatter="avatarFormatter" data-align="center">{{ trans('照片') }}</th>
+                        <th data-field="phy_good_at" data-align="center">{{ trans('专业方向') }}</th>
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
                     </thead>
@@ -252,6 +251,7 @@
                 'click .update' : function(e, value, row){
                     window.location.href='{{url('admin/front/update')}}'+'/'+row.id;
                 }
+
             };
             var $batch_delete = $("#batch_delete");
             $batch_delete.click(function (){

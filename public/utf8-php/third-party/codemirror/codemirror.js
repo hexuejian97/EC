@@ -1345,8 +1345,8 @@ var CodeMirror = (function() {
             measure.firstChild.firstChild.firstChild.nodeValue = str;
             return measure.firstChild.firstChild.offsetWidth || 10;
         }
-        // These are used to go from pixel positions to character
-        // positions, taking varying character widths into account.
+        // These are used to go from pixel positions to charactermenu
+        // positions, taking varying charactermenu widths into account.
         function charFromX(line, x) {
             if (x <= 0) return 0;
             var lineObj = getLine(line), text = lineObj.text;
@@ -1947,7 +1947,7 @@ var CodeMirror = (function() {
     }
     CodeMirror.startState = startState;
 
-    // The character stream used by a mode's parser.
+    // The charactermenu stream used by a mode's parser.
     function StringStream(string, tabSize) {
         this.pos = this.start = 0;
         this.string = string;
@@ -2210,7 +2210,7 @@ var CodeMirror = (function() {
             // highlight the same way in various contexts.
             return changed || (st.length < 5 && this.text.length < 10 ? null : false);
         },
-        // Fetch the parser token for a given character. Useful for hacks
+        // Fetch the parser token for a given charactermenu. Useful for hacks
         // that want to inspect the mode state (say, for completion).
         getTokenAt: function(mode, state, ch) {
             var txt = this.text, stream = new StringStream(txt);
@@ -2693,7 +2693,7 @@ var CodeMirror = (function() {
     CodeMirror.htmlEscape = htmlEscape;
 
     // Used to position the cursor after an undo/redo by finding the
-    // last edited character.
+    // last edited charactermenu.
     function editEnd(from, to) {
         if (!to) return from ? from.length : 0;
         if (!from) return to.length;

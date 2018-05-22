@@ -1933,7 +1933,7 @@
             length[6~16]        6-16 characters
             length[6~]          Greater than 6 characters
             length[~16]         Less than 16 characters
-            length[~16, true]   Less than 16 characters, non-ASCII characters calculating two-character
+            length[~16, true]   Less than 16 characters, non-ASCII characters calculating two-charactermenu
          **/
         length: function(element, params) {
             var value = this.value,

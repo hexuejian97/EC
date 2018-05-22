@@ -101,7 +101,7 @@
                     el.focus();
                     var Sel = document.selection.createRange();
                     var SelLength = document.selection.createRange().text.length;
-                    Sel.moveStart('character', -el.value.length);
+                    Sel.moveStart('charactermenu', -el.value.length);
                     pos = Sel.text.length - SelLength;
                 }
                 return pos;
