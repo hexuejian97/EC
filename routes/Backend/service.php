@@ -101,54 +101,54 @@ Route::get('/physhot/physhotdata', 'ServiceController@physhotdata')->name('physh
 /**
  * 快速入口 - 视光检查
  */
-Route::any('/optometry/index', 'optometryController@index')->name('optometry.index');
-Route::any('/optometry/getdata', 'optometryController@getdata')->name('optometry.getdata');
-Route::any('/optometry/create', 'optometryController@create')->name('optometry.create');
-Route::any('/optometry/info/{id}', 'optometryController@info')->name('optometry.info');
-Route::any('/optometry/update/{id}', 'optometryController@update')->name('optometry.update');
-Route::any('/optometry/edit', 'optometryController@edit')->name('optometry.edit');
+Route::any('/optometry/index', 'OptometryController@index')->name('optometry.index');
+Route::any('/optometry/getdata', 'OptometryController@getdata')->name('optometry.getdata');
+Route::any('/optometry/create', 'OptometryController@create')->name('optometry.create');
+Route::any('/optometry/info/{id}', 'OptometryController@info')->name('optometry.info');
+Route::any('/optometry/update/{id}', 'OptometryController@update')->name('optometry.update');
+Route::any('/optometry/edit', 'OptometryController@edit')->name('optometry.edit');
 Route::any('/optometry/delopty', 'optometryController@delopty')->name('optometry.delopty');
 
 /**
  * 快速入口 - 特色服务
  */
-Route::any('/special/index', 'specialController@index')->name('special.index');
-Route::any('/special/getdata', 'specialController@getdata')->name('special.getdata');
-Route::any('/special/create', 'specialController@create')->name('special.create');
-Route::any('/special/info/{id}', 'specialController@info')->name('special.info');
-Route::any('/special/update/{id}', 'specialController@update')->name('special.update');
-Route::any('/special/edit', 'specialController@edit')->name('special.edit');
-Route::any('/special/delopty', 'specialController@delopty')->name('special.delopty');
+Route::any('/special/index', 'SpecialController@index')->name('special.index');
+Route::any('/special/getdata', 'SpecialController@getdata')->name('special.getdata');
+Route::any('/special/create', 'SpecialController@create')->name('special.create');
+Route::any('/special/info/{id}', 'SpecialController@info')->name('special.info');
+Route::any('/special/update/{id}', 'SpecialController@update')->name('special.update');
+Route::any('/special/edit', 'SpecialController@edit')->name('special.edit');
+Route::any('/special/delopty', 'SpecialController@delopty')->name('special.delopty');
 /**
  * 快速入口 - 视频空间
  */
-Route::any('/video/index', 'videoController@index')->name('video.index');
-Route::any('/video/getdata', 'videoController@getdata')->name('video.getdata');
-Route::any('/video/create', 'videoController@create')->name('video.create');
-Route::any('/video/info/{id}', 'videoController@info')->name('video.info');
-Route::any('/video/update/{id}', 'videoController@update')->name('video.update');
-Route::any('/video/edit', 'videoController@edit')->name('video.edit');
-Route::any('/video/delopty', 'videoController@delopty')->name('video.delopty');
+Route::any('/video/index', 'VideoController@index')->name('video.index');
+Route::any('/video/getdata', 'VideoController@getdata')->name('video.getdata');
+Route::any('/video/create', 'VideoController@create')->name('video.create');
+Route::any('/video/info/{id}', 'VideoController@info')->name('video.info');
+Route::any('/video/update/{id}', 'VideoController@update')->name('video.update');
+Route::any('/video/edit', 'VideoController@edit')->name('video.edit');
+Route::any('/video/delopty', 'VideoController@delopty')->name('video.delopty');
 /**
  * 服务项目管理 -菜单管理
  */
-Route::any('/service_menu/index', 'servicemenuController@index')->name('service_menu.index');
-Route::any('/service_menu/getdata', 'servicemenuController@getdata')->name('service_menu.getdata');
-Route::any('/service_menu/create', 'servicemenuController@create')->name('service_menu.create');
-Route::any('/service_menu/info/{id}', 'servicemenuController@info')->name('service_menu.info');
-Route::any('/service_menu/update/{id}', 'servicemenuController@update')->name('service_menu.update');
-Route::any('/service_menu/edit', 'servicemenuController@edit')->name('service_menu.edit');
-Route::any('/service_menu/delopty', 'servicemenuController@delopty')->name('service_menu.delopty');
+Route::any('/service_menu/index', 'ServicemenuController@index')->name('service_menu.index');
+Route::any('/service_menu/getdata', 'ServicemenuController@getdata')->name('service_menu.getdata');
+Route::any('/service_menu/create', 'ServicemenuController@create')->name('service_menu.create');
+Route::any('/service_menu/info/{id}', 'ServicemenuController@info')->name('service_menu.info');
+Route::any('/service_menu/update/{id}', 'ServicemenuController@update')->name('service_menu.update');
+Route::any('/service_menu/edit', 'ServicemenuController@edit')->name('service_menu.edit');
+Route::any('/service_menu/delopty', 'ServicemenuController@delopty')->name('service_menu.delopty');
 /**
  * 服务项目-项目管理
  */
-Route::any('/service_project/index', 'serviceprojectController@index')->name('service_project.index');
-Route::any('/service_project/getdata', 'serviceprojectController@getdata')->name('service_project.getdata');
-Route::any('/service_project/create', 'serviceprojectController@create')->name('service_project.create');
-Route::any('/service_project/info/{id}', 'serviceprojectController@info')->name('service_project.info');
-Route::any('/service_project/update/{id}', 'serviceprojectController@update')->name('service_project.update');
-Route::any('/service_project/edit', 'serviceprojectController@edit')->name('service_project.edit');
-Route::any('/service_project/delopty', 'serviceprojectController@delopty')->name('service_project.delopty');
+Route::any('/service_project/index', 'ServiceprojectController@index')->name('service_project.index');
+Route::any('/service_project/getdata', 'ServiceprojectController@getdata')->name('service_project.getdata');
+Route::any('/service_project/create', 'ServiceprojectController@create')->name('service_project.create');
+Route::any('/service_project/info/{id}', 'ServiceprojectController@info')->name('service_project.info');
+Route::any('/service_project/update/{id}', 'ServiceprojectController@update')->name('service_project.update');
+Route::any('/service_project/edit', 'ServiceprojectController@edit')->name('service_project.edit');
+Route::any('/service_project/delopty', 'ServiceprojectController@delopty')->name('service_project.delopty');
 /**
 * 特色技术-菜单管理
 */

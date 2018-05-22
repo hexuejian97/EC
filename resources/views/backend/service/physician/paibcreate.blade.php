@@ -49,16 +49,16 @@
             @else
                 @foreach($data['paib'] as $k=>$v)
                     <div class="form-group">
-                        <label for="" class="col-lg-2 control-label">排班信息</label>
-                        <div class="col-lg-6">
-                            <label for="" ><span> &nbsp; &nbsp; 预约开始时间：</span><input class="form-control ss test1 {{'str'.$k}}" onclick="times({{'str'.$k}})"  start="test1" type="text" value="{{$v[0]}}" name="time{{$data['time'].$k}}[]" placeholder="" ></label>-
-                            <label for="" ><span> &nbsp; &nbsp; 预约结束时间：</span><input class="form-control ss test2 {{'end'.$k}}"  start="test2" onclick="times({{'end'.$k}})" type="text" value="{{$v[1]}}" name="time{{$data['time'].$k}}[]" placeholder="" ></label>
-                            <input type="hidden" name="times[]" value="{{$data['time'].$k}}">
-                            <label for=""  num="" ><span class="addpb" pbinfo="1"  style="color: green;font-size: 25px;cursor: pointer">+</span>&nbsp;&nbsp;&nbsp;<span class="delpb" pbinfo="1"  style="color:red;font-size: 24px;cursor: pointer">x</span></label>
-                        </div><!--col-lg-10-->
-                    </div>
-                @endforeach
-            @endif
+                    <label for="" class="col-lg-2 control-label">排班信息</label>
+                    <div class="col-lg-6">
+                        <label for="" ><span> &nbsp; &nbsp; 预约开始时间：</span><input class="form-control ss test1 {{'str'.$k}}" onclick="times({{'str'.$k}})"  start="test1" type="text" value="{{$v[0]}}" name="time{{$data['time'].$k}}[]" placeholder="" ></label>-
+                        <label for="" ><span> &nbsp; &nbsp; 预约结束时间：</span><input class="form-control ss test2 {{'end'.$k}}"  start="test2" onclick="times({{'end'.$k}})" type="text" value="{{$v[1]}}" name="time{{$data['time'].$k}}[]" placeholder="" ></label>
+                        <input type="hidden" name="times[]" value="{{$data['time'].$k}}">
+                        <label for=""  num="" ><span class="addpb" pbinfo="1"  style="color: green;font-size: 25px;cursor: pointer">+</span>&nbsp;&nbsp;&nbsp;<span class="delpb" pbinfo="1"  style="color:red;font-size: 24px;cursor: pointer">x</span></label>
+                    </div><!--col-lg-10-->
+        </div>
+        @endforeach
+        @endif
         </div><!-- /.box-body -->
     </div><!--box-->
 
