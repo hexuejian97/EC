@@ -93,6 +93,12 @@ Route::get('/teser/teserdata', 'ServiceController@teserdata')->name('teser.teser
  */
 Route::get('/media/index', 'ServiceController@media')->name('media.index');
 Route::get('/media/mediadata', 'ServiceController@mediadata')->name('media.mediadata');
+
+/**
+ * 解疑服务
+ */
+Route::get('/problem/index', 'ServiceController@problem')->name('problem.index');
+Route::get('/problem/problemdata', 'ServiceController@problemdata')->name('problem.problemdata');
 /**
  * 人气医师
  */

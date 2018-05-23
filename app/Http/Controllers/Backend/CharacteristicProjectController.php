@@ -32,7 +32,11 @@ class CharacteristicProjectController extends Controller
         $limit = $limit ? $limit : 10;
         $list = $query->skip($offset)->take($limit)->get();
         foreach($list as $k=>$v){
-            $list[$k]['prent_id'] = ServiceMenu::find($v['prent_id'])['name'];
+            if($v['prent_id']==0){
+                $list[$k]['prent_id']='顶级菜单';
+            }else{
+                $list[$k]['prent_id'] = ServiceMenu::find($v['prent_id'])['name'];
+            }
         }
         return ['total' => $total, 'rows' => $list];
     }
@@ -56,8 +60,7 @@ class CharacteristicProjectController extends Controller
                 return back()->withErrors('添加医师失败，请重新添加');
             }
         }
-        $data = ServiceMenu::where('type',2)->get()->toArray();
-        $dat = $this->gettree($data,0);
+        $dat = ServiceMenu::where('type',2)->where('prent_id',0)->get()->toArray();
         return view('backend.service.characterproject.create',['menu'=>$dat]);
     }
     /**
@@ -77,7 +80,7 @@ class CharacteristicProjectController extends Controller
      */
     public function update($id){
         $data = ServiceProject::find($id);
-        $menu = ServiceMenu::where('type',1)->get()->toArray();
+        $menu = ServiceMenu::where('type',2)->where('prent_id',0)->get()->toArray();
         $dat = $this->gettree($menu,0);
         return view('backend.service.characterproject.edit',['project'=>$data,'menu'=>$dat]);
     }
@@ -93,6 +96,7 @@ class CharacteristicProjectController extends Controller
         $data->intro =$request->input('intro');
         $data->prent_id = $request->input('parnt');
         $data->content =$request->input('content');
+//        dd($data);
         if($data->save()){
             return redirect()->route('admin.characteristic_project.index')->withFlashSuccess('修改成功');
         }else{

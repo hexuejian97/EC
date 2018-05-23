@@ -46,7 +46,7 @@
                         <th data-field="id" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
                         <th data-field="title"  data-align="center">标题</th>
                         <th data-field="prent_id"  data-align="center">上级菜单</th>
-                        <th data-field="intro"  data-align="center">介绍</th>
+                        {{--<th data-field="intro"  data-align="center">介绍</th>--}}
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
                     </thead>

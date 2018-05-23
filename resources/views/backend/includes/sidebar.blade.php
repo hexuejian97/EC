@@ -107,7 +107,7 @@
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.ask.index') }}">
+                        <a href="{{ route('admin.problem.index') }}">
                             <i class="fa fa-circle-o"></i>
                             <span>解疑服务管理</span>
                         </a>
@@ -186,7 +186,7 @@
             <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-list"></i>
-                    <span>产品咨迅</span>
+                    <span>产品资讯</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">

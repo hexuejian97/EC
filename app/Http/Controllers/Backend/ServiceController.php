@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Communicate\Ask;
 use App\Models\Service\News;
 use App\Models\Service\NewsType;
 use App\Models\Service\Paib;
@@ -93,6 +94,7 @@ class ServiceController extends Controller
             $phy = new Physician();
             $phy->phy_name = $req['phy_name'];
             $phy->sex = $req['sex'];
+            $phy->phy_stroe = $req['phy_store'];
             $phy->phy_type = $req['phy_type'];
             $phy->political_face = $req['political_face'];
             $phy->phy_school = $req['phy_school'];
@@ -140,6 +142,7 @@ class ServiceController extends Controller
             $phy->phy_type = $req['phy_type'];
             $phy->political_face = $req['political_face'];
             $phy->phy_school = $req['phy_school'];
+            $phy->phy_stroe = $req['phy_store'];
             $phy->education = $req['education'];
             $phy->phy_good_at = $req['phy_good_at'];
             $phy->phy_life = $req['phy_life'];
@@ -215,9 +218,8 @@ class ServiceController extends Controller
             }
             $data['paib'] = $paibinfo['content'];
         }else{
-            $data['paib'] = [];
+            $data['paib'] =1;
         }
-
         return view('backend.service.physician.paibcreate',['data'=>$data]);
     }
 
@@ -1045,15 +1047,38 @@ class ServiceController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function physhot(){
-        return  view('backend.service.physhot.index');
+        $data = Physician::select('id','phy_name')->get();
+        return  view('backend.service.physhot.index',['data'=>$data]);
     }
     public function physhotdata(){
         $offset = $this->request->get('offset');
         $limit = $this->request->get('limit');
-        $name = $this->request->get('phy_name');
+        $name = $this->request->get('name');
         $query = Physician::where('phy_sort',1)->select();
         if($this->request->get('name')){
             $query->where('phy_name', 'like', "%$name%");
+        }
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+        return ['total' => $total, 'rows' => $list];
+    }
+
+    /**
+     * 解疑服务
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function problem(){
+        return  view('backend.service.problem.index');
+    }
+    public function problemdata(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $name = $this->request->get('name');
+        $query = Ask::select();
+        if($this->request->get('name')){
+            $query->where('ask_title', 'like', "%$name%");
         }
         $total = $query->count();
         $offset = $offset ? $offset : 0;

@@ -51,6 +51,7 @@
                         </select>
                     </div>
                 </div><!--form control-->
+
                 <div class="form-group">
                     {{ Form::label('first_name', '毕业院校', ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
@@ -62,6 +63,16 @@
                     <div class="col-lg-6">
                         {{Form::text('education', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '学历'])}}
                     </div><!--col-lg-10-->
+                </div>
+                <div class="form-group">
+                    {{ Form::label('last_name', '门店',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        <select class="form-control" name="phy_store" id="">
+                            @foreach($store as $k=>$v)
+                                <option value="{{$v->id}}" >{{$v->store_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     {{ Form::label('first_name', '专业方向', ['class' => 'col-lg-2 control-label']) }}

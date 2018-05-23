@@ -30,13 +30,13 @@
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
-                    {{ Form::label('relay', '回复', ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('relay', '链接', ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
                         {{ Form::text('link', $car->car_link, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                     </div><!--col-lg-10-->
                 </div>
                 <div class="form-group" style="margin-bottom: 10px;">
-                    {{ Form::label('goods_pic', '封推图', ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('goods_pic', '图片', ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-10">
                         <img src="{{$car->car_picture}}" alt="" style="width:250px;height:100px" id="img">
                         <div id="container1">

@@ -53,6 +53,16 @@
                 </div>
             </div><!--form control-->
             <div class="form-group">
+                {{ Form::label('last_name', '门店',['class' => 'col-lg-2 control-label']) }}
+                <div class="col-lg-6">
+                    <select class="form-control" name="phy_store" id="">
+                        @foreach($store as $k=>$val)
+                            <option value="{{$val->id}}"  @if($phy['phy_store']==$val['id']) selected="selected" @endif>{{$val->store_name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 {{ Form::label('first_name', '毕业院校', ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-6">
                     {{Form::text('phy_school', $phy->phy_school, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '毕业院校'])}}

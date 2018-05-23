@@ -36,13 +36,13 @@
                     </tr>
                 </div>
             </div>
-            @if(empty($data['paib']))
+            @if($data['paib']==1)
                 <div class="form-group">
                     <label for="" class="col-lg-2 control-label">排班信息</label>
                     <div class="col-lg-6">
                         <label for="" ><span> &nbsp; &nbsp; 预约开始时间：</span><input class="form-control ss test1 {{'str'.$data['time']}}" onclick="times({{'str'.$data['time']}})"  start="test1" type="text"  name="time{{$data['time']}}[]" placeholder="" ></label>-
                         <label for="" ><span> &nbsp; &nbsp; 预约结束时间：</span><input class="form-control ss test2 {{'end'.$data['time']}}"  start="test2" onclick="times({{'end'.$data['time']}})" type="text"  name="time{{$data['time']}}[]" placeholder="" ></label>
-                        <input type="hidden" name="times[]" value="{{$data['time'].$k}}">
+                        <input type="hidden" name="times[]" value="{{$data['time']}}">
                         <label for=""  num="" ><span class="addpb" pbinfo="1"  style="color: green;font-size: 25px;cursor: pointer">+</span>&nbsp;&nbsp;&nbsp;<span class="delpb" pbinfo="1"  style="color:red;font-size: 24px;cursor: pointer">x</span></label>
                     </div><!--col-lg-10-->
                 </div>
@@ -56,9 +56,9 @@
                         <input type="hidden" name="times[]" value="{{$data['time'].$k}}">
                         <label for=""  num="" ><span class="addpb" pbinfo="1"  style="color: green;font-size: 25px;cursor: pointer">+</span>&nbsp;&nbsp;&nbsp;<span class="delpb" pbinfo="1"  style="color:red;font-size: 24px;cursor: pointer">x</span></label>
                     </div><!--col-lg-10-->
-        </div>
-        @endforeach
-        @endif
+                </div>
+                @endforeach
+            @endif
         </div><!-- /.box-body -->
     </div><!--box-->
 
@@ -115,18 +115,31 @@
             trigger: 'click',
             type: 'datetime'
         });
-        @foreach($data['paib'] as $k=>$v)
+        @if($data['paib']!==1)
+            @foreach($data['paib'] as $k=>$v)
+                laydate.render({
+                    elem: "{{'.str'.$k}}",
+                    trigger: 'click',
+                    type: 'datetime'
+                });
+                laydate.render({
+                    elem: "{{'.end'.$k}}",
+                    trigger: 'click',
+                    type: 'datetime'
+                });
+            @endforeach
+        @else
             laydate.render({
-                elem: "{{'.str'.$k}}",
+                elem: "{{'.str'}}",
                 trigger: 'click',
                 type: 'datetime'
             });
             laydate.render({
-                elem: "{{'.end'.$k}}",
+                elem: "{{'.end'}}",
                 trigger: 'click',
                 type: 'datetime'
             });
-        @endforeach
+        @endif
         function time(val){
             laydate.render({
                 elem: '.'+''+val+'',

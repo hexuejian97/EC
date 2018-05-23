@@ -33,7 +33,11 @@ class ServiceProjectController extends Controller
         $limit = $limit ? $limit : 10;
         $list = $query->skip($offset)->take($limit)->get();
         foreach($list as $k=>$v){
-            $list[$k]['prent_id'] = ServiceMenu::find($v['prent_id'])['name'];
+            if($list[$k]['prent_id']==0){
+                $list[$k]['prent_id'] = '顶级菜单';
+            }else{
+                $list[$k]['prent_id'] = ServiceMenu::find($v['prent_id'])['name'];
+            }
         }
         return ['total' => $total, 'rows' => $list];
     }
@@ -57,8 +61,8 @@ class ServiceProjectController extends Controller
                 return back()->withErrors('添加医师失败，请重新添加');
             }
         }
-        $data = ServiceMenu::where('type',1)->get()->toArray();
-        $dat = $this->gettree($data,0);
+        $dat = ServiceMenu::where('type',1)->where('prent_id',0)->get()->toArray();
+//        $dat = $this->gettree($data,0);
         return view('backend.service.serviceproject.create',['menu'=>$dat]);
     }
     /**
@@ -78,7 +82,7 @@ class ServiceProjectController extends Controller
      */
     public function update($id){
         $data = ServiceProject::find($id);
-        $menu = ServiceMenu::where(['type'=>1])->get()->toArray();
+        $menu = ServiceMenu::where(['type'=>1])->where('prent_id',0)->get()->toArray();
         $dat = $this->gettree($menu,0);
         return view('backend.service.serviceproject.edit',['project'=>$data,'menu'=>$dat]);
     }

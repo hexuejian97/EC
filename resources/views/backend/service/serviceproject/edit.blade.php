@@ -32,21 +32,21 @@
             {{ Form::label('last_name', '上级菜单',['class' => 'col-lg-2 control-label']) }}
             <div class="col-lg-10">
                 <select class="form-control" name="parnt" id="" required="required">
-                    <option value="">请选择</option>
+                    <option value="0">顶级菜单</option>
                     @foreach($menu as $k=>$v)
                         <option value="{{$v['id']}}" @if($project['prent_id']==$v['id']) selected="selected" @endif>{{$v['name']}}</option>
                     @endforeach
                 </select>
             </div><!--col-lg-10-->
         </div>
-        <div class="box-body">
-            <div class="form-group">
-                {{ Form::label('first_name', '介绍', ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('intro', $project->intro, ['class' => 'form-control', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入标题']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
-        </div>
+        {{--<div class="box-body">--}}
+            {{--<div class="form-group">--}}
+                {{--{{ Form::label('first_name', '介绍', ['class' => 'col-lg-2 control-label']) }}--}}
+                {{--<div class="col-lg-10">--}}
+                    {{--{{ Form::text('intro', $project->intro, ['class' => 'form-control', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入标题']) }}--}}
+                {{--</div><!--col-lg-10-->--}}
+            {{--</div><!--form control-->--}}
+        {{--</div>--}}
         <div class="form-group">
             {{ Form::label('news_content', '内容',['class' => 'col-lg-2 control-label']) }}
             <div class="col-lg-10">
