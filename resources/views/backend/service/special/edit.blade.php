@@ -27,12 +27,12 @@
                     {{ Form::text('title', $special->title, ['class' => 'form-control', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入标题']) }}
                 </div><!--col-lg-10-->
             </div><!--form control-->
-            <div class="form-group">
-                {{ Form::label('intro', '简介', ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('intro', $special->intro, ['class' => 'form-control', 'maxlength' => '500', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入标题']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+            {{--<div class="form-group">--}}
+                {{--{{ Form::label('intro', '简介', ['class' => 'col-lg-2 control-label']) }}--}}
+                {{--<div class="col-lg-10">--}}
+                    {{--{{ Form::text('intro', $special->intro, ['class' => 'form-control', 'maxlength' => '500', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入标题']) }}--}}
+                {{--</div><!--col-lg-10-->--}}
+            {{--</div><!--form control-->--}}
             <div class="form-group">
                 {{ Form::label('news_content', '内容',['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">

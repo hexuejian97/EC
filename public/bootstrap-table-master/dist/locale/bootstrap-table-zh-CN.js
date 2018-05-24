@@ -39,6 +39,7 @@
         formatClearFilters: function () {
             return '清空过滤';
         }
+
     };
 
     $.extend($.fn.bootstrapTable.defaults, $.fn.bootstrapTable.locales['zh-CN']);

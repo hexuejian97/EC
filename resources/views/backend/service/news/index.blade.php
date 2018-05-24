@@ -47,7 +47,7 @@
         <div class="box-body">
             <div class="table-responsive" >
 
-                <table  id="table"  data-toggle="table" data-url="{{route('admin.news.data')}}" data-toolbar="#toolbar"
+                <table  id="tabletable"  data-toggle="table" data-url="{{route('admin.news.data')}}" data-toolbar="#toolbar"
                         {{--data-click-to-select="true"--}}
                         data-show-refresh="true"
                         data-show-toggle="true"
@@ -63,7 +63,7 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
+                        <th  data-field="index" data-formatter="getidnex"  data-sort-name="id" data-sort-order="desc"  data-align="center">ID</th>
                         <th data-field="news_title"  data-align="center">新闻标题</th>
                         <th data-field="nt_name"  data-align="center">新闻类型</th>
                         <th data-field="news_intro"  data-align="center">简介</th>
@@ -83,7 +83,12 @@
     <script src="/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script>
+        function getidnex(value, row,index) {
+            var options = $('#tabletable').bootstrapTable('getOptions');
+            return options.pageSize * (options.pageNumber - 1) + index + 1
+        }
         $(function() {
+
             var $table = $('#table');
             //点击执行搜索
             var $search = $('#search');

@@ -31,7 +31,7 @@
                 {{ Form::label('last_name', '上级菜单',['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
                     <select class="form-control" name="parnt" id="" required="required">
-                        <option value="">顶级菜单</option>
+                        <option value="0">顶级菜单</option>
                         @foreach($menu as $k=>$v)
                             <option value="{{$v['id']}}">{{$v['name']}}</option>
                         @endforeach

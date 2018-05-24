@@ -44,7 +44,7 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-sort-name="id" data-sort-order="desc" data-align="center">{{ trans('序号') }}</th>
+                        <th data-field="index" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">{{ trans('序号') }}</th>
                         <th data-field="phy_name"  data-align="center">{{ trans('名称') }}</th>
                         <th data-field="phy_picture" data-formatter="avatarFormatter" data-align="center">{{ trans('照片') }}</th>
                         <th data-field="phy_good_at" data-align="center">{{ trans('专业方向') }}</th>
@@ -64,6 +64,10 @@
     <script src="/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script>
+        function getidnex(e, value, index) {
+            var options = $('#table').bootstrapTable('getOptions');
+            return options.pageSize * (options.pageNumber - 1) + index + 1
+        }
         $(function() {
             var $table = $('#table');
             //点击执行搜索
@@ -310,6 +314,9 @@
         }
 
         function actionFormatter(value, row, index) {
+            var ddp = '<a href="{{url('admin/paib/create')}}/'+row.id+'" class="btn btn-xs btn-primary "> ' +
+                '<i class="fa fa-pencil " data-toggle="tooltip" data-placement="top" ' +
+                'data-toggle="tooltip" data-placement="top" title="排班信息">排班信息</i></a>&nbsp;&nbsp;';
 
             var ddf = '<a href="{{url('admin/physician/info')}}/'+row.id+'" class="btn btn-xs btn-primary "> ' +
                 '<i class="fa fa-pencil " data-toggle="tooltip" data-placement="top" ' +
@@ -330,7 +337,7 @@
 
             if(row.phy_sort == 1){
 
-                return ddw+''+ddf+''+del+''+dde;
+                return ddw+''+ddf+''+del+''+dde+''+ddp;
 
             }else if(row.phy_sort == 0){
 

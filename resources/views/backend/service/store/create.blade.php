@@ -23,13 +23,13 @@
                 <div class="form-group">
                     {{ Form::label('first_name', '门店名称', ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        {{ Form::text('store_name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入姓名']) }}
+                        {{ Form::text('store_name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '门店名称']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
                     {{ Form::label('last_name', '门店地址',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        {{ Form::text('store_address', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入职称']) }}
+                        {{ Form::text('store_address', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '门店地址']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
@@ -46,7 +46,7 @@
                 <div class="form-group">
                     {{ Form::label('last_name', '门店电话',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        {{ Form::number('store_tel', null, ['class' => 'form-control', 'maxlength' => '12', 'required' => 'required', 'placeholder' => '请输入职称']) }}
+                        {{ Form::number('store_tel', null, ['class' => 'form-control', 'maxlength' => '12', 'required' => 'required', 'placeholder' => '门店电话']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
@@ -62,7 +62,7 @@
                     {{ Form::label('last_name', '门店交通',['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-5">
-                        {{ Form::text('store_traffic[]', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '']) }}
+                        {{ Form::text('store_traffic[]', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '门店交通']) }}
 
                     </div><!--col-lg-10-->
                     <div class="col-lg-1">
@@ -70,7 +70,7 @@
                     </div>
                 </div><!--form control-->
                 <div class="form-group">
-                    {{ Form::label('news_content', '资讯内容',['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('news_content', '门店信息',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
                         <script name="store_intro" id="editor" cols="30" rows="5"></script>
                     </div><!--col-lg-10-->

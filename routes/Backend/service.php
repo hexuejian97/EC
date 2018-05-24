@@ -33,7 +33,6 @@ Route::post('/physician/hot', 'ServiceController@physicianHot')->name('physician
 /**
  * 排班信息
  */
-Route::get('/paib/index', 'ServiceController@paib')->name('paib.index');
 Route::any('/paib/paibdata', 'ServiceController@paibdata')->name('paib.paibdata');
 Route::any('/paib/create/{id}', 'ServiceController@createpaib')->name('paib.create');
 Route::any('/paib/addpaibdata', 'ServiceController@addpaibdata')->name('paib.addpaibdata');

@@ -44,7 +44,7 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
+                        <th data-field="index" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
                         <th data-field="nt_name"  data-align="center">类型名称</th>
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
@@ -62,6 +62,10 @@
     <script src="/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script>
+        function getidnex(e, value, index) {
+            var options = $('#table').bootstrapTable('getOptions');
+            return options.pageSize * (options.pageNumber - 1) + index + 1
+        }
         $(function() {
             var $table = $('#table');
             //点击执行搜索

@@ -80,7 +80,7 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-sort-name="id" data-align="center">ID</th>
+                        <th data-field="index" data-formatter="getidnex" data-sort-name="id" data-align="center">ID</th>
                         <th data-field="order_name"  data-align="center">病人姓名</th>
                         <th data-field="order_tel"  data-align="center">病人联系方式</th>
                         <th data-field="order_time"  data-align="center">预定时间</th>
@@ -105,6 +105,10 @@
     <script type="text/javascript" src="/layDate-v5.0.7/laydate/laydate.js"></script>
 
     <script>
+        function getidnex(e, value, index) {
+            var options = $('#table').bootstrapTable('getOptions');
+            return options.pageSize * (options.pageNumber - 1) + index + 1
+        }
         laydate.render({
             elem: '#test5'
             ,type: 'datetime'

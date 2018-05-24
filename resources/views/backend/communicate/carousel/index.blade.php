@@ -58,7 +58,7 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id"  data-align="center">ID</th>
+                        <th data-field="index" data-formatter="getidnex"  data-align="center">ID</th>
                         <th data-field="car_title"  data-align="center">标题</th>
                         <th data-field="car_picture" data-formatter="avatarFormatter" data-align="center">轮播图片</th>
                         <th data-field="car_link"  data-align="center">跳转链接</th>
@@ -78,7 +78,12 @@
     {{ Html::script("js/backend/plugin/datatables/dataTables-extend.js") }}
     <script src="/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
+
     <script>
+        function getidnex(e, value, index) {
+            var options = $('#table').bootstrapTable('getOptions');
+            return options.pageSize * (options.pageNumber - 1) + index + 1
+        }
         $(function() {
             var $table = $('#table');
             //点击执行搜索

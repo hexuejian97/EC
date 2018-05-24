@@ -54,7 +54,7 @@
                         <label for="" ><span> &nbsp; &nbsp; 预约开始时间：</span><input class="form-control ss test1 {{'str'.$k}}" onclick="times({{'str'.$k}})"  start="test1" type="text" value="{{$v[0]}}" name="time{{$data['time'].$k}}[]" placeholder="" ></label>-
                         <label for="" ><span> &nbsp; &nbsp; 预约结束时间：</span><input class="form-control ss test2 {{'end'.$k}}"  start="test2" onclick="times({{'end'.$k}})" type="text" value="{{$v[1]}}" name="time{{$data['time'].$k}}[]" placeholder="" ></label>
                         <input type="hidden" name="times[]" value="{{$data['time'].$k}}">
-                        <label for=""  num="" ><span class="addpb" pbinfo="1"  style="color: green;font-size: 25px;cursor: pointer">+</span>&nbsp;&nbsp;&nbsp;<span class="delpb" pbinfo="1"  style="color:red;font-size: 24px;cursor: pointer">x</span></label>
+                        <label for=""  num="" ><span class="addpb" pbinfo="1"  style="color: green;font-size: 25px;cursor: pointer">+</span>&nbsp;&nbsp;&nbsp;<span onclick="delpd(this)" class="delpb" pbinfo="1"  style="color:red;font-size: 24px;cursor: pointer">x</span></label>
                     </div><!--col-lg-10-->
                 </div>
                 @endforeach
@@ -86,7 +86,7 @@
     <script src="/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script type="text/javascript" src="/layDate-v5.0.7/laydate/laydate.js"></script>
-    <script  src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+    {{--<script  src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>--}}
     <script>
         $(function(){
             $('.addpb').click(function(){
@@ -97,13 +97,10 @@
                 str+='<div class="form-group"><label for="" class="col-lg-2 control-label">排班</label><div class="col-lg-6">';
                 str+='<label for="" ><span> &nbsp; &nbsp; 预约开始时间：</span><input class="form-control ss test1 '+start+'" star="'+start+'" type="text" name="time'+time+'[]" onclick="time(\''+start+'\')" placeholder="" ></label>-';
                 str+='<label for="" ><span> &nbsp; &nbsp; 预约结束时间：</span><input class="form-control ss test2 '+end+'" star="'+end+'" type="text" name="time'+time+'[]" onclick="time(\''+end+'\')" placeholder="" ></label>';
-                str+='<label for="" ><span onclick="delpd()" class="delpb" pbinfo="1" style="font-size: 25px;cursor: pointer">x</span></label></div></div>';
+                str+='<label for="" ><span onclick="delpd(this)" class="delpb" pbinfo="1" style="font-size: 25px;cursor: pointer">x</span></label></div></div>';
                 str+='<input type="hidden" name="times[]" value="'+time+'" />'
                 $('#add').append(str);
             });
-            $('.delpb').live('click',function(){
-                $(this).parent().parent().parent('.form-group').remove()
-            })
         });
         laydate.render({
             elem: "{{'.str'.$data['time']}}",
@@ -147,5 +144,9 @@
                 show: true
             });
         }
+        function delpd(t) {
+            t.parentNode.parentNode.parentNode.remove()
+        }
+
     </script>
 @endsection

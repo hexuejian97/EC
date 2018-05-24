@@ -223,12 +223,6 @@
                             <span>医师职称</span>
                         </a>
                     </li>
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.paib.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>排班</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
@@ -262,7 +256,7 @@
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
                         <a href="{{ route('admin.news.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('menus.backend.service.news.index') }}</span>
+                            <span>新闻列表</span>
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">

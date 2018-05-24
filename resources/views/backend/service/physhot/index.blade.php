@@ -19,15 +19,10 @@
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">医师列表</h3>
-
-            <div class="box-tools pull-right">
-                <a href="{{route('admin.physician.add')}}" class="btn btn-success btn-xs">新建医师</a>
-            </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
         <div id="toolbar" class="btn-group">
             <div class="form-inline" role="form">
                 <div class="form-group">
-                    <span>区域：</span>
                     <select id="area" class="select2" name="name">
                         <option value="" >请选择区域</option>
                         @foreach($data as $k=>$v)
@@ -59,7 +54,7 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-sort-name="id" data-sort-order="desc" data-align="center">{{ trans('序号') }}</th>
+                        <th data-field="index" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">{{ trans('序号') }}</th>
                         <th data-field="phy_name"  data-align="center">{{ trans('名称') }}</th>
                         <th data-field="phy_picture" data-formatter="avatarFormatter" data-align="center">{{ trans('照片') }}</th>
                         <th data-field="phy_good_at" data-align="center">{{ trans('专业方向') }}</th>
@@ -80,7 +75,10 @@
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
     <script src="/select2/select2.js"></script>
     <script>
-
+        function getidnex(e, value, index) {
+            var options = $('#table').bootstrapTable('getOptions');
+            return options.pageSize * (options.pageNumber - 1) + index + 1
+        }
         $(function() {
             $("#area").select2({
                 placeholder: '请选择医生',
@@ -91,8 +89,6 @@
             var $search = $('#search');
             $search.click(function () {
                 $table.bootstrapTable('refresh');
-
-
             });
             /*var $key = $('#key-submit');
             $key.click(function () {

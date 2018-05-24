@@ -244,7 +244,7 @@ class ServiceController extends Controller
         $paib->phy_id = $data['id'];
         $paib->content = serialize($da);
         if($paib->save()){
-            return redirect()->route('admin.paib.index')->withFlashSuccess('操作成功');
+            return redirect()->route('admin.physician.index')->withFlashSuccess('操作成功');
         }else{
             return back()->withErrors('请重新提交');
         }
@@ -795,6 +795,10 @@ class ServiceController extends Controller
         return view('backend.service.news.show',['news'=>$news]);
     }
 
+    /**
+     * 新闻置顶
+     * @return array
+     */
     public function newsTop(){
         try{
             $id = $this->request->input('id');
@@ -994,7 +998,8 @@ class ServiceController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function  teser(){
-        return  view('backend.service.teser.index');
+        $data = News::where('news_type',6)->select('id','news_title')->get();
+        return  view('backend.service.teser.index',['data'=>$data]);
     }
     public function teserdata(){
         $offset = $this->request->get('offset');
@@ -1003,7 +1008,7 @@ class ServiceController extends Controller
         $name = $this->request->get('name');
         $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
             ->select('news.*','news_type.nt_name');
-        $query->where('news_type', '=', 6);
+        $query->where('news_type', '=', 6)->where('news_top',1);
         if($this->request->get('name')){
             $query->where('news_title', 'like', "%$name%");
         }
@@ -1021,7 +1026,8 @@ class ServiceController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function media(){
-        return  view('backend.service.media.index');
+        $data = News::where('news_type',10)->select('id','news_title')->get();
+        return  view('backend.service.media.index',['data'=>$data]);
     }
     public function mediadata(){
         $offset = $this->request->get('offset');
@@ -1030,7 +1036,7 @@ class ServiceController extends Controller
         $name = $this->request->get('name');
         $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
             ->select('news.*','news_type.nt_name');
-        $query->where('news_type', '=', 10);
+        $query->where('news_type', '=', 10)->where('news_top',1);
         if($this->request->get('name')){
             $query->where('news_title', 'like', "%$name%");
         }
@@ -1070,13 +1076,14 @@ class ServiceController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function problem(){
-        return  view('backend.service.problem.index');
+        $data = Ask::select('id','ask_title')->get();
+        return  view('backend.service.problem.index',['data'=>$data]);
     }
     public function problemdata(){
         $offset = $this->request->get('offset');
         $limit = $this->request->get('limit');
         $name = $this->request->get('name');
-        $query = Ask::select();
+        $query = Ask::where('ask_hot',1)->select();
         if($this->request->get('name')){
             $query->where('ask_title', 'like', "%$name%");
         }

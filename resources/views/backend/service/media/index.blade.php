@@ -5,6 +5,7 @@
 @section('after-styles')
     {{ Html::style("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.css") }}
     <link rel="stylesheet" href="/bootstrap-table-master/dist/bootstrap-table.css">
+    <link href="/select2/select2.css" rel="stylesheet" />
 
 @endsection
 
@@ -19,17 +20,17 @@
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">新闻列表</h3>
-
-            <div class="box-tools pull-right">
-                <a href="{{route('admin.news.add')}}" class="btn btn-success btn-xs">新建新闻</a>
-            </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
         <div id="toolbar" class="btn-group">
             <div class="form-inline" role="form">
                 <div class="form-group">
-                    <label for="" ><span> &nbsp; &nbsp;标题：</span><input class="form-control ss" type="text" name="name" placeholder="" ></label>
+                    <select id="area" class="select2" name="name">
+                        <option value="" >请选择区域</option>
+                        @foreach($data as $k=>$v)
+                            <option value="{{$v->news_title}}">{{$v->news_title}}</option>
+                        @endforeach
+                    </select>
                     <button id="search" type="submit" class="btn btn-default" style="margin-left: 52px">查&nbsp; &nbsp; &nbsp; &nbsp;询</button>
-
                     {{--批量操作--}}
                 </div>
             </div>
@@ -54,7 +55,7 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
+                        <th data-field="index" data-formatter="getidnex"  data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
                         <th data-field="news_title"  data-align="center">新闻标题</th>
                         <th data-field="nt_name"  data-align="center">新闻类型</th>
                         <th data-field="news_intro"  data-align="center">简介</th>
@@ -73,10 +74,20 @@
     {{ Html::script("js/backend/plugin/datatables/dataTables-extend.js") }}
     <script src="/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/select2/select2.js"></script>
     <script>
+        function getidnex(value, row, index) {
+            var options = $('#table').bootstrapTable('getOptions');
+            return options.pageSize * (options.pageNumber - 1) + index + 1
+        }
         $(function() {
+
             var $table = $('#table');
             //点击执行搜索
+            $("#area").select2({
+                placeholder: '请选择',
+                width:"700px",
+            });
             var $search = $('#search');
             $search.click(function () {
                 $table.bootstrapTable('refresh');
