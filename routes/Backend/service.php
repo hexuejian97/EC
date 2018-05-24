@@ -112,7 +112,7 @@ Route::any('/optometry/create', 'OptometryController@create')->name('optometry.c
 Route::any('/optometry/info/{id}', 'OptometryController@info')->name('optometry.info');
 Route::any('/optometry/update/{id}', 'OptometryController@update')->name('optometry.update');
 Route::any('/optometry/edit', 'OptometryController@edit')->name('optometry.edit');
-Route::any('/optometry/delopty', 'optometryController@delopty')->name('optometry.delopty');
+Route::any('/optometry/delopty', 'OptometryController@delopty')->name('optometry.delopty');
 
 /**
  * 快速入口 - 特色服务
