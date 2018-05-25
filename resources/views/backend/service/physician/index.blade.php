@@ -341,7 +341,7 @@
 
             }else if(row.phy_sort == 0){
 
-                return ddq+''+ddf+''+del+''+dde;
+                return ddq+''+ddf+''+del+''+dde+''+ddp;
             }
             //return ddf+del+dde;
 

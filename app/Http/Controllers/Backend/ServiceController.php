@@ -109,6 +109,7 @@ class ServiceController extends Controller
             $phy->research_project = $req['research_project'];
             $phy->learning = $req['learning'];
             $phy->honor = $req['honor'];
+            $phy->phy_sort = 0;
             if($phy->save()){
                 return redirect()->route('admin.physician.index')->withFlashSuccess('添加医师成功');
             }{
