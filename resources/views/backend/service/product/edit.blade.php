@@ -28,7 +28,14 @@
                 </div><!--col-lg-10-->
             </div><!--form control-->
         </div><!-- /.box-body -->
->
+        <div class="box-body">
+            <div class="form-group">
+                {{ Form::label('first_name', 'url地址', ['class' => 'col-lg-2 control-label']) }}
+                <div class="col-lg-10">
+                    {{ Form::text('url', null, ['class' => 'form-control', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '第三方url地址']) }}
+                </div><!--col-lg-10-->
+            </div><!--form control-->
+        </div><!-- /.box-body -->
         <div class="form-group">
             {{ Form::label('news_content', '内容',['class' => 'col-lg-2 control-label']) }}
             <div class="col-lg-10">

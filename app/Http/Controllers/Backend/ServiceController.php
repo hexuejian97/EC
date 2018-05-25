@@ -700,11 +700,11 @@ class ServiceController extends Controller
     public function newsData(){
         $offset = $this->request->get('offset');
         $limit = $this->request->get('limit');
-        $type = $this->request->get('type');
+        $type = $this->request->get('name');
         $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
             ->select('news.*','news_type.nt_name');
-        if($this->request->get('type')){
-            $query->where('news_type', '=', $type);
+        if($this->request->get('name')){
+            $query->where('news_type', $type);
         }
         $total = $query->count();
         $offset = $offset ? $offset : 0;
@@ -1009,9 +1009,11 @@ class ServiceController extends Controller
         $name = $this->request->get('name');
         $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
             ->select('news.*','news_type.nt_name');
-        $query->where('news_type', '=', 6)->where('news_top',1);
         if($this->request->get('name')){
+            $query->where('news_type', '=', 6);
             $query->where('news_title', 'like', "%$name%");
+        }else{
+            $query->where('news_type', '=', 6)->where('news_top',1);
         }
         $total = $query->count();
         $offset = $offset ? $offset : 0;

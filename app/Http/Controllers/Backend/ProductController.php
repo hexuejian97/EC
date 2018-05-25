@@ -42,6 +42,7 @@ class ProductController extends Controller
             $opto = new Product();
             $opto->title = $request->input('title');
             $opto->content = $request->input('content');
+            $opto->url = $request->input('url');
             $opto->created_at = date('Y-m-d H:i:s');
             if($opto->save()){
                 return redirect()->route('admin.product.index')->withFlashSuccess('添加成功');
@@ -79,6 +80,7 @@ class ProductController extends Controller
         $data = Product::find($request->input('id'));
         $data->title = $request->input('title');
         $data->content =$request->input('content');
+        $data->url =$request->input('url');
         if($data->save()){
             return redirect()->route('admin.product.index')->withFlashSuccess('修改成功');
         }else{
