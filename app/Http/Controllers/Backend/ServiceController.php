@@ -94,7 +94,7 @@ class ServiceController extends Controller
             $phy = new Physician();
             $phy->phy_name = $req['phy_name'];
             $phy->sex = $req['sex'];
-            $phy->phy_stroe = $req['phy_store'];
+            $phy->phy_store = $req['phy_store'];
             $phy->phy_type = $req['phy_type'];
             $phy->political_face = $req['political_face'];
             $phy->phy_school = $req['phy_school'];
@@ -142,7 +142,7 @@ class ServiceController extends Controller
             $phy->phy_type = $req['phy_type'];
             $phy->political_face = $req['political_face'];
             $phy->phy_school = $req['phy_school'];
-            $phy->phy_stroe = $req['phy_store'];
+            $phy->phy_store = $req['phy_store'];
             $phy->education = $req['education'];
             $phy->phy_good_at = $req['phy_good_at'];
             $phy->phy_life = $req['phy_life'];
