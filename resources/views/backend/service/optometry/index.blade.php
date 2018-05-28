@@ -45,7 +45,7 @@
                         <th data-field="" data-checkbox="true"></th>
                         <th data-field="index" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
                         <th data-field="title"  data-align="center">标题</th>
-                        <th data-field="intro"  data-align="center">简介</th>
+                        {{--<th data-field="intro"  data-align="center">简介</th>--}}
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
                     </thead>

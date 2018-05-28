@@ -20,6 +20,9 @@
     <div class="box box-success">
         <div class="box-header with-border">
             <h3 class="box-title">新闻列表</h3>
+            <div class="box-tools pull-right">
+                <a href="{{route('admin.news.add')}}" class="btn btn-success btn-xs">新建新闻</a>
+            </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
         <div id="toolbar" class="btn-group">
             <div class="form-inline" role="form">
