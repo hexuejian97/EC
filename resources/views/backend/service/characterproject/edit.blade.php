@@ -50,8 +50,7 @@
         <div class="form-group">
             {{ Form::label('news_content', '内容',['class' => 'col-lg-2 control-label']) }}
             <div class="col-lg-10">
-                <textarea name="content" id="editor" cols="30" rows="10"></textarea>
-                <textarea name="news_content" id="editor"  style="width: 100%;height: 300px" cols="30" rows="10">{!! $project->content !!}</textarea>
+                <textarea name="content" id="editor"  style="width: 100%;height: 300px" cols="30" rows="10">{!! $project->content !!}</textarea>
             </div><!--col-lg-10-->
         </div><!--fo
     </div><!--box-->

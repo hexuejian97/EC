@@ -37,7 +37,7 @@
             </div><!--form control-->
         </div><!-- /.box-body -->
         <div class="form-group">
-            {{ Form::label('news_content', '内容',['class' => 'col-lg-2 control-label']) }}
+            {{ Form::label('content', '内容',['class' => 'col-lg-2 control-label']) }}
             <div class="col-lg-10">
                 <textarea name="news_content" id="editor"  style="width: 100%;height: 300px" cols="30" rows="10">{!! $product->content !!}</textarea>
             </div><!--col-lg-10-->
