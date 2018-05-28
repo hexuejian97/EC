@@ -50,7 +50,8 @@
         <div class="form-group">
             {{ Form::label('news_content', '内容',['class' => 'col-lg-2 control-label']) }}
             <div class="col-lg-10">
-                <textarea name="content" id="editor" cols="30" rows="10">{{$project->content}}</textarea>
+                <textarea name="content" id="editor" cols="30" rows="10"></textarea>
+                <textarea name="news_content" id="editor"  style="width: 100%;height: 300px" cols="30" rows="10">{!! $project->content !!}</textarea>
             </div><!--col-lg-10-->
         </div><!--fo
     </div><!--box-->
@@ -72,8 +73,8 @@
 
 @section('after-scripts')
     {{ Html::script('js/backend/access/users/script.js') }}
-    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.all.min.js"> </script>
+            <script type="text/javascript" charset="utf-8" src="/qiniu_ueditor/ueditor.config.js"></script>
+            <script type="text/javascript" charset="utf-8" src="/qiniu_ueditor/ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>

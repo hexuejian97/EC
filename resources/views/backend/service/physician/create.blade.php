@@ -103,19 +103,19 @@
                 <div class="form-group">
                     {{ Form::label('news_content', '教育背景',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        <script name="educational_bg" id="editor" cols="30" rows="5"></script>
+                        <textarea name="educational_bg" id="editor" style="height: 300px;width: 100%" cols="30" rows="5"></textarea>
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
                     {{ Form::label('news_content', '临床医疗工作背景',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        <script name="clinical_bg" id="clinical_bg" cols="30" rows="5"></script>
+                        <textarea name="clinical_bg" id="clinical_bg" style="height: 300px;width: 100%" cols="30" rows="5"></textarea>
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
                     {{ Form::label('news_content', '专业技能',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        <script name="skills" id="skills" cols="30" rows="5"></script>
+                        <textarea name="skills" id="skills" style="height: 300px;width: 100%" cols="30" rows="5"></textarea>
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
@@ -127,19 +127,19 @@
                 <div class="form-group">
                     {{ Form::label('news_content', '参与科研项目及培训',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        <script name="research_project" id="research_project" cols="30" rows="5"></script>
+                        <textarea name="research_project" id="research_project" style="height: 300px;width: 100%" cols="30" rows="5"></textarea>
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
                     {{ Form::label('news_content', '参与全国学术会议情况',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        <script name="learning" id="learning" cols="30" rows="5"></script>
+                        <textarea name="learning"  id="learning" cols="30" style="height: 300px;width: 100%" rows="5"></textarea>
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
                     {{ Form::label('news_content', '奖励与荣誉',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                        <script name="honor" id="honor" cols="30" rows="5"></script>
+                        <textarea name="honor" id="honor" style="height: 300px;width: 100%" cols="30" rows="5"></textarea>
                     </div><!--col-lg-10-->
                 </div><!--form control-->
 
@@ -165,8 +165,8 @@
 
 @section('after-scripts')
     {{ Html::script('js/backend/access/users/script.js') }}
-    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/qiniu_ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/qiniu_ueditor/ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
