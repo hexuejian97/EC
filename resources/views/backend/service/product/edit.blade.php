@@ -39,7 +39,7 @@
         <div class="form-group">
             {{ Form::label('content', '内容',['class' => 'col-lg-2 control-label']) }}
             <div class="col-lg-10">
-                <textarea name="news_content" id="editor"  style="width: 100%;height: 300px" cols="30" rows="10">{!! $product->content !!}</textarea>
+                <textarea name="content" id="editor"  style="width: 100%;height: 300px" cols="30" rows="10">{!! $product->content !!}</textarea>
             </div><!--col-lg-10-->
         </div><!--fo
     </div><!--box-->
@@ -68,7 +68,9 @@
     <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="/layDate-v5.0.7/laydate/laydate.js"></script>
     <script>
-        var ue = UE.getEditor('editor');
+        var ue = UE.getEditor('editor',{
+            catchRemoteImageEnable: false
+        });
         //常规用法
         laydate.render({
             elem: '#test1'

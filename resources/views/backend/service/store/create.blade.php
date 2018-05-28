@@ -107,7 +107,9 @@
     <script src="http://ouvegnn6u.bkt.clouddn.com/moxie.js"></script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/plupload.dev.js"></script>
     <script>
-        var ue = UE.getEditor('editor');
+        var ue = UE.getEditor('editor',{
+            catchRemoteImageEnable: false
+        });
         var arrUrl = [];
         $(function(){
             $.post('{{route('admin.upToken')}}',{},function(data){

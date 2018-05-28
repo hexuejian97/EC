@@ -66,7 +66,9 @@
     <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="/layDate-v5.0.7/laydate/laydate.js"></script>
     <script>
-        var ue = UE.getEditor('editor');
+        var ue = UE.getEditor('editor',{
+            catchRemoteImageEnable: false
+        });
         //常规用法
         laydate.render({
             elem: '#test1'

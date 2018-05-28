@@ -81,7 +81,7 @@ class EyesVideoController extends Controller
         $data->title = $request->input('title');
         $data->content =$request->input('content');
         if($data->save()){
-            return redirect()->route('admin.product.index')->withFlashSuccess('修改成功');
+            return redirect()->route('admin.eyesvideo.index')->withFlashSuccess('修改成功');
         }else{
             return back()->withErrors('修改失败,请稍后再试');
         }

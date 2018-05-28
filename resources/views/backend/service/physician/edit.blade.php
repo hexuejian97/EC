@@ -174,13 +174,27 @@
     <script src="http://ouvegnn6u.bkt.clouddn.com/moxie.js"></script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/plupload.dev.js"></script>
     <script >
-        var ue = UE.getEditor('editor');
-        var ue = UE.getEditor('clinical_bg');
-        var ue = UE.getEditor('skills');
-        var ue = UE.getEditor('research');
-        var ue = UE.getEditor('research_project');
-        var ue = UE.getEditor('learning');
-        var ue = UE.getEditor('honor');
+        var ue = UE.getEditor('editor',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('clinical_bg',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('skills',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('research',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('research_project',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('learning',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('honor',{
+            catchRemoteImageEnable: false
+        });
         var check = $('.check').val();
         $('.forcheck').each(function(index,element){
             if($(this).val() == check){

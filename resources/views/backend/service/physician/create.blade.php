@@ -175,13 +175,27 @@
     <script src="http://ouvegnn6u.bkt.clouddn.com/plupload.dev.js"></script>
 
     <script>
-        var ue = UE.getEditor('editor');
-        var ue = UE.getEditor('clinical_bg');
-        var ue = UE.getEditor('skills');
-        var ue = UE.getEditor('research');
-        var ue = UE.getEditor('research_project');
-        var ue = UE.getEditor('learning');
-        var ue = UE.getEditor('honor');
+        var ue = UE.getEditor('editor',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('clinical_bg',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('skills',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('research',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('research_project',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('learning',{
+            catchRemoteImageEnable: false
+        });
+        var ue = UE.getEditor('honor',{
+            catchRemoteImageEnable: false
+        });
         $(function(){
             $.post('{{route('admin.upToken')}}',{},function(data){
                 //照片

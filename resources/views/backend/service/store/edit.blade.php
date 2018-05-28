@@ -130,7 +130,9 @@
                 $('.forcheck').eq(index).remove();
             }
         });
-        var ue = UE.getEditor('editor');
+        var ue = UE.getEditor('editor',{
+            catchRemoteImageEnable: false
+        });
         var arrUrl = [];
         $(function(){
             //证件
