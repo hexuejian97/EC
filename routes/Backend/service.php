@@ -194,3 +194,11 @@ Route::any('/eyesvideo/info/{id}', 'EyesVideoController@info')->name('eyesvideo.
 Route::any('/eyesvideo/update/{id}', 'EyesVideoController@update')->name('eyesvideo.update');
 Route::any('/eyesvideo/edit', 'EyesVideoController@edit')->name('eyesvideo.edit');
 Route::any('/eyesvideo/delopty', 'EyesVideoController@delopty')->name('eyesvideo.delopty');
+/**
+ *
+ */
+Route::any('/message/index', 'MessageController@index')->name('message.index');
+Route::any('/message/getdata', 'MessageController@getdata')->name('message.getdata');
+Route::any('/message/create', 'MessageController@create')->name('message.create');
+Route::any('/message/info/{id}', 'MessageController@info')->name('message.info');
+Route::any('/message/delopty', 'MessageController@delopty')->name('message.delopty');
