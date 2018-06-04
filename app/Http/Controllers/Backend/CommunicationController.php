@@ -43,7 +43,7 @@ class CommunicationController extends Controller
         $time = $this->request->get('time');
         $phy = $this->request->get('phy');
         $store = $this->request->get('store');
-        $query = Order::join('store','store.id','=','order.order_store')
+        $query = Order::join('store','store.store_position','=','order.order_store')
             ->join('physician','physician.id','=','order.order_phy')->select('order.*','store.store_name','physician.phy_name');
         if($this->request->get('phone')){
             $query->where('order_tel', 'like', "%$phone%");

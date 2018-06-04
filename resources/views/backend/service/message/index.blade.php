@@ -42,6 +42,7 @@
                         <th data-field="" data-checkbox="true"></th>
                         <th  data-field="index" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
                         <th data-field="uname"  data-align="center">用户名</th>
+                        <th data-field="content"  data-align="center">留言内容</th>
                         <th data-field="created_at"  data-align="center">时间</th>
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
