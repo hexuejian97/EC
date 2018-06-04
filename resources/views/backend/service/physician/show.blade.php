@@ -43,31 +43,77 @@
                                 <th>名字</th>
                                 <td>{{$phy->phy_name}}</td>
                             </tr>
-
+                            <tr>
+                                <th>性别</th>
+                                <td>{{$phy->sex}}</td>
+                            </tr>
                             <tr>
                                 <th>职称</th>
-                                <td>{{$phy->pt_name}}</td>
+                                <td>{{$phy->phy_type}}</td>
                             </tr>
 
                             <tr>
-                                <th>擅长</th>
+                                <th>政治面貌</th>
+                                <td>{{$phy->political_face}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>毕业院校</th>
+                                <td>{{$phy->phy_school}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>学历</th>
+                                <td>{{$phy->education}}</td>
+                            </tr>
+
+                            <tr>
+                                <th>门店</th>
+                                <td>{{$phy->phy_store}}</td>
+                            </tr>
+                            <tr>
+                                <th>专业方向</th>
                                 <td>{{$phy->phy_good_at}}</td>
                             </tr>
 
                             <tr>
-                                <th>所属门店</th>
-                                <td>{{$phy->store_name}}</td>
+                                <th>工作年限</th>
+                                <td>{{$phy->phy_life}}</td>
+                            </tr>
+                            <tr>
+                                <th>教育背景</th>
+                                <td>{!! $phy->educational_bg !!}</td>
                             </tr>
 
                             <tr>
-                                <th>简介</th>
-                                <td>{{$phy->phy_intro}}</td>
+                                <th>临床医疗工作背景</th>
+                                <td>{!! $phy->clinical_bg !!}</td>
+                            </tr>
+                            <tr>
+                                <th>专业技能</th>
+                                <td>{!! $phy->skills !!}</td>
                             </tr>
 
                             <tr>
-                                <th>详细信息</th>
-                                <td>{{$phy->phy_content}}</td>
+                                <th>科研情况及发表文章情况</th>
+                                <td>{!! $phy->research !!}</td>
                             </tr>
+                            <tr>
+                                <th>参与科研项目及培训</th>
+                                <td>{!! $phy->research_project !!}</td>
+                            </tr>
+
+                            <tr>
+                                <th>参与全国学术会议情况</th>
+                                <td>{!! $phy->learning !!}</td>
+                            </tr>
+                            <tr>
+                                <th>奖励与荣誉
+                                </th>
+                                <td>{!!$phy->honor  !!}</td>
+                            </tr>
+
+
 
                             </tbody></table>                    </div><!--tab overview profile-->
 

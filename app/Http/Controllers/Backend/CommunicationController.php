@@ -150,11 +150,11 @@ class CommunicationController extends Controller
     public function askData(){
         $offset = $this->request->get('offset');
         $limit = $this->request->get('limit');
-        $query = Ask::join('user','ask.user_id','=','user.id')->select('ask.*','user.user_name');
+        $query = Ask::join('user','ask.user_id','=','user.id')->select('ask.*','user.user_phone');
         $total = $query->count();
         $offset = $offset ? $offset : 0;
         $limit = $limit ? $limit : 10;
-        $list = $query->skip($offset)->take($limit)->get();
+        $list = $query->orderBy('created_at','desc')->skip($offset)->take($limit)->get();
         return ['total' => $total, 'rows' => $list];
     }
 

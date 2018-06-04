@@ -56,9 +56,9 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="index" data-formatter="getidnex" data-sort-name="id" data-align="center">ID</th>
+                        {{--<th data-field="index" data-formatter="getidnex" data-sort-name="id" data-align="center">ID</th>--}}
                         <th data-field="ask_title"  data-align="center">问题</th>
-                        <th data-field="user_name"  data-align="center">用户名</th>
+                        <th data-field="user_phone"  data-align="center">用户名</th>
                         <th data-field="ask_status"  data-formatter="statusFormatter" data-align="center">状态</th>
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>

@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Backend;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Access\User\User;
+use App\Models\Service\Font;
 use App\Models\Service\Message;
 use Illuminate\Http\Request;
 
@@ -30,7 +32,10 @@ class MessageController extends Controller
         $total = $query->count();
         $offset = $offset ? $offset : 0;
         $limit = $limit ? $limit : 10;
-        $list = $query->skip($offset)->take($limit)->get();
+        $list = $query->orderBy('created_at','desc')->skip($offset)->take($limit)->get();
+        foreach ($list as $k=>$v){
+            $list[$k]['uname'] = Font::where('id',$v['u_id'])->value('user_phone');
+        }
         return ['total' => $total, 'rows' => $list];
     }
     /**

@@ -349,7 +349,7 @@
                 var freeze = ''
                 //return edit+' '+freeze+' '+del;
             }*/
-            if(row.order_sure==1){
+            if(row.order_sure==2){
                 return ddf;
 
             }else{

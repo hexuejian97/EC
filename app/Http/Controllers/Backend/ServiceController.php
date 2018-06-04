@@ -70,7 +70,7 @@ class ServiceController extends Controller
         $total = $query->count();
         $offset = $offset ? $offset : 0;
         $limit = $limit ? $limit : 10;
-        $list = $query->skip($offset)->take($limit)->get();
+        $list = $query->orderBy('created_at','desc')->skip($offset)->take($limit)->get();
         return ['total' => $total, 'rows' => $list];
     }
     /*
@@ -277,6 +277,13 @@ class ServiceController extends Controller
         $phy = Physician::leftJoin('store','physician.phy_store','=','store.id')
             ->leftJoin('phy_type','phy_type.id','=','physician.phy_type')
             ->select('physician.*','store.store_name','phy_type.pt_name')->find($id);
+        $phy['phy_type'] = PhyType::where('id', $phy['phy_type'])->value('pt_name');
+        if($phy['sex']==2){
+            $phy['sex']='女';
+        }else{
+            $phy['sex'] ='男';
+        }
+        $phy['phy_store'] = Store::where('store_position',$phy['phy_store'])->value('store_name');
         return view('backend.service.physician.show',['phy'=>$phy]);
     }
 
