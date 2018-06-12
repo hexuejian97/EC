@@ -59,7 +59,10 @@ class CommunicationController extends Controller
             $query->where('order_phy', '=', $phy);
         }
         if($this->request->get('store')){
-            $query->where('order_store', '=', $store);
+            $query->where('store.id',$store);
+        }
+        if(access()->user()->contro!=0){
+            $query->where('store.id',access()->user()->contro);
         }
         $total = $query->count();
         $offset = $offset ? $offset : 0;
@@ -155,6 +158,7 @@ class CommunicationController extends Controller
         $offset = $offset ? $offset : 0;
         $limit = $limit ? $limit : 10;
         $list = $query->orderBy('created_at','desc')->skip($offset)->take($limit)->get();
+        foreach ($list as $k=>$v){}
         return ['total' => $total, 'rows' => $list];
     }
 

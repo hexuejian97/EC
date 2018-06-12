@@ -195,7 +195,7 @@ Route::any('/eyesvideo/update/{id}', 'EyesVideoController@update')->name('eyesvi
 Route::any('/eyesvideo/edit', 'EyesVideoController@edit')->name('eyesvideo.edit');
 Route::any('/eyesvideo/delopty', 'EyesVideoController@delopty')->name('eyesvideo.delopty');
 /**
- *
+ *在线留言
  */
 Route::any('/message/index', 'MessageController@index')->name('message.index');
 Route::any('/message/getdata', 'MessageController@getdata')->name('message.getdata');

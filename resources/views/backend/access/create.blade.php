@@ -4,8 +4,8 @@
 
 @section('page-header')
     <h1>
-        {{ trans('labels.backend.access.users.management') }}
-        <small>{{ trans('labels.backend.access.users.create') }}</small>
+        {{ trans('创建用户') }}
+        <small></small>
     </h1>
 @endsection
 
@@ -23,7 +23,7 @@
 
             <div class="box-body">
                 <div class="form-group">
-                    {{ Form::label('first_name', trans('validation.attributes.backend.access.users.first_name'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('first_name', trans('用户姓'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::text('first_name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => trans('validation.attributes.backend.access.users.first_name')]) }}
@@ -31,7 +31,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('last_name', trans('validation.attributes.backend.access.users.last_name'),
+                    {{ Form::label('last_name', trans('用户名'),
                      ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
@@ -40,7 +40,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('email', trans('validation.attributes.backend.access.users.email'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('email', trans('邮箱'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::email('email', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => trans('validation.attributes.backend.access.users.email')]) }}
@@ -48,7 +48,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('password', trans('validation.attributes.backend.access.users.password'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('password', trans('密码'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::password('password', ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('validation.attributes.backend.access.users.password')]) }}
@@ -56,7 +56,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('password_confirmation', trans('validation.attributes.backend.access.users.password_confirmation'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('password_confirmation', trans('确认密码'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::password('password_confirmation', ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('validation.attributes.backend.access.users.password_confirmation')]) }}
@@ -72,7 +72,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('confirmed', trans('validation.attributes.backend.access.users.confirmed'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('confirmed', trans('是否启用'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-1">
                         {{ Form::checkbox('confirmed', '1', true) }}
@@ -92,7 +92,7 @@
                 @endif
 
                 <div class="form-group">
-                    {{ Form::label('associated_roles', trans('validation.attributes.backend.access.users.associated_roles'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('associated_roles', trans('角色'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-3">
                         @if (count($roles) > 0)
@@ -127,6 +127,18 @@
                         @endif
                     </div><!--col-lg-3-->
                 </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('last_name', '门店',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        <select class="form-control" name="contro" id="" required="required">
+                            <option value="">请选择</option>
+                            <option value="0">全部门店</option>
+                                @foreach($store as $k=>$v)
+                                <option value="{{$v->id}}">{{$v->st_name}}</option>
+                                @endforeach
+                        </select>
+                    </div><!--col-lg-10-->
+                </div>
             </div><!-- /.box-body -->
         </div><!--box-->
 

@@ -52,15 +52,18 @@
             </div><!--form control-->
             <div class="form-group">
                 {{ Form::label('car_sort', '门店照片', ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-4">
+                <div class="col-lg-4" id="container1">
                     <div id="container2">
-                        <a href="javascript:void(0)" id="pickfiles2"><img src="http://owgtlty2t.bkt.clouddn.com/1.jpeg" alt="" width="150px" height="100px"></a><br>
-                        @foreach($store->public as $k=>$v)
-                            <div style="display:inline" ><img style="width:100px;height:100px" class="old" sid="{{$v->id}}" src='{{$v->public_picture}}'><img class="img_list_cover" src="/img/close.jpg"></div>
-                        @endforeach
-                        <input type="hidden" name="old_public" value="">
-                        <input type="hidden" name="new_public" value="">
+                        <a class="btn btn-default btn-lg " id="pickfiles2" href="#" >
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>选择文件</span>
+                        </a>
                     </div>
+                    @foreach($store->public as $k=>$v)
+                        <div style="float: left" ><img style="width:100px;height:100px" class="old" sid="{{$v->id}}" src='{{$v->public_picture}}'><span class="img_list_cover" style="font-size: 20px;color: red;cursor: pointer">&nbsp;X&nbsp;</span></div>
+                    @endforeach
+                    <input type="hidden" name="old_public" value="">
+                    <input type="hidden" name="new_public" value="">
                 </div><!--col-lg-10-->
             </div>
 
@@ -182,9 +185,9 @@
                             //队列文件处理完毕后，处理相关的事情
                             var imgList = '';
                             for(var i=0; i<arrUrl.length; i++) {
-                                imgList =      '<div style="display:inline" class="div">'+'<img style="width:100px;height:100px" class="show_img" sid="111" src='+ arrUrl[i] +'>'+'<img class="img_list_covers" onclick="remove($(this))" src="/img/close.jpg">'+'</div>';
+                                imgList =      '<div style="float: left" class="div">'+'<img style="width:100px;height:100px" class="show_img" sid="111" src='+ arrUrl[i] +'>'+'<span class="img_list_cover" style="font-size: 20px;color: red;cursor: pointer">&nbsp;X&nbsp;</span>'+'</div>';
                                 // var imgList='< img class="show_img" src="'+arrUrl[i]+'">'
-                                $("#container2").append(imgList);
+                                $("#container1").append(imgList);
 
                             }
                             $('input[name="new_public').val(arrUrl);

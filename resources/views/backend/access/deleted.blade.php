@@ -28,14 +28,14 @@
                 <table id="users-table" class="table table-condensed table-hover">
                     <thead>
                         <tr>
-                            <th>{{ trans('labels.backend.access.users.table.last_name') }}</th>
-                            <th>{{ trans('labels.backend.access.users.table.first_name') }}</th>
-                            <th>{{ trans('labels.backend.access.users.table.email') }}</th>
-                            <th>{{ trans('labels.backend.access.users.table.confirmed') }}</th>
-                            <th>{{ trans('labels.backend.access.users.table.roles') }}</th>
-                            <th>{{ trans('labels.backend.access.users.table.created') }}</th>
-                            <th>{{ trans('labels.backend.access.users.table.last_updated') }}</th>
-                            <th>{{ trans('labels.general.actions') }}</th>
+                            <th>{{ trans('用户名') }}</th>
+                            <th>{{ trans('邮箱') }}</th>
+                            <th>{{ trans('状态') }}</th>
+                            <th>{{ trans('角色') }}</th>
+                            <th>{{ trans('labels.backend.access.users.table.social') }}</th>
+                            <th>{{ trans('创建时间') }}</th>
+                            <th>{{ trans('更新时间') }}</th>
+                            <th>{{ trans('操作') }}</th>
                         </tr>
                     </thead>
                 </table>

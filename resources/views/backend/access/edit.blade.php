@@ -4,8 +4,7 @@
 
 @section('page-header')
     <h1>
-        {{ trans('labels.backend.access.users.management') }}
-        <small>{{ trans('labels.backend.access.users.edit') }}</small>
+        {{ trans('编辑用户') }}
     </h1>
 @endsection
 
@@ -14,7 +13,7 @@
 
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('labels.backend.access.users.edit') }}</h3>
+                <h3 class="box-title">{{ trans('编辑用户') }}</h3>
 
                 <div class="box-tools pull-right">
                     @include('backend.access.includes.partials.user-header-buttons')
@@ -23,7 +22,7 @@
 
             <div class="box-body">
                 <div class="form-group">
-                    {{ Form::label('first_name', trans('validation.attributes.backend.access.users.first_name'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('first_name', trans('用户姓'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::text('first_name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => trans('validation.attributes.backend.access.users.first_name')]) }}
@@ -31,7 +30,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('last_name', trans('validation.attributes.backend.access.users.last_name'),
+                    {{ Form::label('last_name', trans('用户名'),
                     ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
@@ -40,7 +39,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('email', trans('validation.attributes.backend.access.users.email'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('email', trans('邮箱'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::email('email', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => trans('validation.attributes.backend.access.users.email')]) }}
@@ -57,7 +56,7 @@
                     </div><!--form control-->
 
                     <div class="form-group">
-                        {{ Form::label('associated_roles', trans('validation.attributes.backend.access.users.associated_roles'), ['class' => 'col-lg-2 control-label']) }}
+                        {{ Form::label('associated_roles', trans('角色'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-3">
                             @if (count($roles) > 0)
@@ -93,6 +92,18 @@
                         </div><!--col-lg-3-->
                     </div><!--form control-->
                 @endif
+                <div class="form-group">
+                    {{ Form::label('last_name', '门店',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        <select class="form-control" name="contro" id="" required="required">
+                            <option value="">请选择</option>
+                            <option value="0">全部门店</option>
+                            @foreach($store as $k=>$v)
+                                <option value="{{$v->id}}"  @if($v['id']==$user['contro']) selected="selected"  @endif >{{$v->st_name}}</option>
+                            @endforeach
+                        </select>
+                    </div><!--col-lg-10-->
+                </div>
             </div><!-- /.box-body -->
         </div><!--box-->
 

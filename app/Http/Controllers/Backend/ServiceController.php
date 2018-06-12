@@ -67,6 +67,9 @@ class ServiceController extends Controller
         if($this->request->get('name')){
             $query->where('phy_name', 'like', "%$name%");
         }
+        if(access()->user()->contro!=0){
+            $query->where('phy_store',access()->user()->contro);
+        }
         $total = $query->count();
         $offset = $offset ? $offset : 0;
         $limit = $limit ? $limit : 10;

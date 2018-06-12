@@ -146,8 +146,7 @@ class UserRepository extends BaseRepository
                 }
 
                 event(new UserCreated($user));
-
-                return true;
+                return $user->id;
             }
 
             throw new GeneralException(trans('exceptions.backend.access.users.create_error'));
@@ -432,7 +431,7 @@ class UserRepository extends BaseRepository
         $user->status = isset($input['status']) ? 1 : 0;
         $user->confirmation_code = md5(uniqid(mt_rand(), true));
         $user->confirmed = isset($input['confirmed']) ? 1 : 0;
-
+        $user->contro = $input['contro'];
         return $user;
     }
 }

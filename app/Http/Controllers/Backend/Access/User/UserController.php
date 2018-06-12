@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend\Access\User;
 
 use App\Models\Access\User\User;
 use App\Http\Controllers\Controller;
+use App\Models\Service\storeType;
+use App\Models\Service\Viewauth;
 use App\Repositories\Backend\Access\Role\RoleRepository;
 use App\Repositories\Backend\Access\User\UserRepository;
 use App\Http\Requests\Backend\Access\User\StoreUserRequest;
@@ -52,7 +54,8 @@ class UserController extends Controller
      */
     public function create(ManageUserRequest $request)
     {
-        return view('backend.access.create')
+        $store = storeType::get();
+        return view('backend.access.create',['store'=>$store])
             ->withRoles($this->roles->getAll());
     }
 
@@ -63,9 +66,10 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $this->users->create(
+       $this->users->create(
             [
                 'data' => $request->only(
+                    'contro',
                     'first_name',
                     'last_name',
                     'email',
@@ -76,7 +80,6 @@ class UserController extends Controller
                 ),
                 'roles' => $request->only('assignees_roles'),
             ]);
-
         return redirect()->route('admin.access.user.index')->withFlashSuccess(trans('alerts.backend.users.created'));
     }
 
@@ -88,6 +91,7 @@ class UserController extends Controller
      */
     public function show(User $user, ManageUserRequest $request)
     {
+
         return view('backend.access.show')
             ->withUser($user);
     }
@@ -100,7 +104,8 @@ class UserController extends Controller
      */
     public function edit(User $user, ManageUserRequest $request)
     {
-        return view('backend.access.edit')
+        $store = storeType::get();
+        return view('backend.access.edit',['store'=>$store])
             ->withUser($user)
             ->withUserRoles($user->roles->pluck('id')->all())
             ->withRoles($this->roles->getAll());

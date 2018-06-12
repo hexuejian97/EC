@@ -1,8 +1,8 @@
 <div class="pull-right mb-10 hidden-sm hidden-xs">
-    {{ link_to_route('admin.access.user.index', trans('menus.backend.access.users.all'), [], ['class' => 'btn btn-primary btn-xs']) }}
-    {{ link_to_route('admin.access.user.create', trans('menus.backend.access.users.create'), [], ['class' => 'btn btn-success btn-xs']) }}
-    {{ link_to_route('admin.access.user.deactivated', trans('menus.backend.access.users.deactivated'), [], ['class' => 'btn btn-warning btn-xs']) }}
-    {{ link_to_route('admin.access.user.deleted', trans('menus.backend.access.users.deleted'), [], ['class' => 'btn btn-danger btn-xs']) }}
+    {{ link_to_route('admin.access.user.index', trans('用户列表'), [], ['class' => 'btn btn-primary btn-xs']) }}
+    {{ link_to_route('admin.access.user.create', trans('创建用户'), [], ['class' => 'btn btn-success btn-xs']) }}
+    {{ link_to_route('admin.access.user.deactivated', trans('禁用用户'), [], ['class' => 'btn btn-warning btn-xs']) }}
+    {{ link_to_route('admin.access.user.deleted', trans('删除用户'), [], ['class' => 'btn btn-danger btn-xs']) }}
 </div><!--pull right-->
 
 <div class="pull-right mb-10 hidden-lg hidden-md">

@@ -21,7 +21,7 @@ class MessageController extends Controller
      * 在线留言列表
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(){
+    public function index(Request $request){
         return view('backend.service.message.index');
     }
 
