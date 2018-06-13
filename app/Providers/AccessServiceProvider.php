@@ -85,7 +85,6 @@ class AccessServiceProvider extends ServiceProvider
         Blade::directive('needsroles', function ($roles) {
             return '<?php if (access()->hasRoles('.$roles.', true)): ?>';
         });
-
         /*
          * Permission based blade extensions
          * Accepts wither string of Permission Name or Permission ID

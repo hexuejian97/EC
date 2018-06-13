@@ -23,10 +23,10 @@ return [
      |  Locale
      | ------------------------------------------------------------------------------------------------
      |  Supported locales :
-     |    'auto', 'ar', 'de', 'en', 'es', 'fa', 'fr', 'hu', 'hy', 'it', 'ko', 'nl', 'pl', 'pt_BR', 'ro', 'ru',
-     |    'sv', 'th', 'tr', 'zh-TW', 'zh'
+     |    'auto', 'ar', 'bg', 'de', 'en', 'es', 'et', 'fa', 'fr', 'hu', 'hy', 'it', 'ko', 'nl', 'pl',
+     |    'pt-BR', 'ro', 'ru', 'sv', 'th', 'tr', 'zh-TW', 'zh'
      */
-    'locale'        => 'auto',
+    'locale'        => 'zh',
 
     /* ------------------------------------------------------------------------------------------------
      |  Route settings
@@ -36,9 +36,9 @@ return [
         'enabled'    => true,
 
         'attributes' => [
-            'prefix'     => 'admin/log-viewer',
+            'prefix'     => 'log-viewer',
 
-            'middleware' => ['web', 'admin'],
+            'middleware' => null,
         ],
     ],
 
@@ -79,8 +79,8 @@ return [
      |  Icons
      | ------------------------------------------------------------------------------------------------
      */
-    'icons' => [
-        /*
+    'icons' =>  [
+        /**
          * Font awesome >= 4.3
          * http://fontawesome.io/icons/
          */
@@ -99,7 +99,7 @@ return [
      |  Colors
      | ------------------------------------------------------------------------------------------------
      */
-    'colors' => [
+    'colors' =>  [
         'levels'    => [
             'empty'     => '#D1D1D1',
             'all'       => '#8A8A8A',
