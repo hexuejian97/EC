@@ -48,7 +48,7 @@
 
                 @if ($user->id != 1)
                     <div class="form-group">
-                        {{ Form::label('status', trans('validation.attributes.backend.access.users.active'), ['class' => 'col-lg-2 control-label']) }}
+                        {{ Form::label('status', trans('激活'), ['class' => 'col-lg-2 control-label']) }}
 
                         <div class="col-lg-1">
                             {{ Form::checkbox('status', '1', $user->status == 1) }}

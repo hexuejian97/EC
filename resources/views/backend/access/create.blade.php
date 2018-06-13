@@ -64,7 +64,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('status', trans('validation.attributes.backend.access.users.active'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('status', trans('激活'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-1">
                         {{ Form::checkbox('status', '1', true) }}
@@ -81,7 +81,7 @@
 
                 @if (! config('access.users.requires_approval'))
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">{{ trans('validation.attributes.backend.access.users.send_confirmation_email') }}<br/>
+                        <label class="col-lg-2 control-label">{{ trans('发送确认电子邮件') }}<br/>
                             <small>{{ trans('strings.backend.access.users.if_confirmed_off') }}</small>
                         </label>
 
