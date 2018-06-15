@@ -53,7 +53,8 @@ class ServiceController extends Controller
      * */
     public function physicianIndex()
     {
-        return view('backend.service.physician.index');
+        $data = Physician::get();
+        return view('backend.service.physician.index',['data'=>$data]);
     }
     /*
      * 医师数据
@@ -64,7 +65,7 @@ class ServiceController extends Controller
         $limit = $this->request->get('limit');
         $name = $this->request->get('phy_name');
         $query = Physician::select();
-        if($this->request->get('name')){
+        if($this->request->get('phy_name')){
             $query->where('phy_name', 'like', "%$name%");
         }
         if(access()->user()->contro!=0){
