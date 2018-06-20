@@ -1,11 +1,11 @@
 @extends ('backend.layouts.app')
 
-@section ('title', trans('labels.backend.access.roles.management') . ' | ' . trans('labels.backend.access.roles.create'))
+@section ('title', trans('角色添加') . ' | ' . trans('角色添加'))
 
 @section('page-header')
     <h1>
-        {{ trans('labels.backend.access.roles.management') }}
-        <small>{{ trans('labels.backend.access.roles.create') }}</small>
+        {{ trans('角色添加') }}
+        <small>{{ trans('角色添加') }}</small>
     </h1>
 @endsection
 
@@ -14,7 +14,7 @@
 
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">{{ trans('labels.backend.access.roles.create') }}</h3>
+                <h3 class="box-title">{{ trans('角色添加') }}</h3>
 
                 <div class="box-tools pull-right">
                     @include('backend.access.includes.partials.role-header-buttons')
@@ -23,7 +23,7 @@
 
             <div class="box-body">
                 <div class="form-group">
-                    {{ Form::label('name', trans('validation.attributes.backend.access.roles.name'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('name', trans('名称'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::text('name', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => trans('validation.attributes.backend.access.roles.name')]) }}
@@ -31,7 +31,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('associated-permissions', trans('validation.attributes.backend.access.roles.associated_permissions'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('associated-permissions', trans('关联权限'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::select('associated-permissions', array('all' => trans('labels.general.all'), 'custom' => trans('labels.general.custom')), 'all', ['class' => 'form-control']) }}
@@ -53,7 +53,7 @@
                 </div><!--form control-->
 
                 <div class="form-group">
-                    {{ Form::label('sort', trans('validation.attributes.backend.access.roles.sort'), ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('sort', trans('排序'), ['class' => 'col-lg-2 control-label']) }}
 
                     <div class="col-lg-10">
                         {{ Form::text('sort', ($role_count+1), ['class' => 'form-control', 'placeholder' => trans('validation.attributes.backend.access.roles.sort')]) }}
@@ -65,11 +65,11 @@
         <div class="box box-success">
             <div class="box-body">
                 <div class="pull-left">
-                    {{ link_to_route('admin.access.role.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
+                    {{ link_to_route('admin.access.role.index', trans('取消'), [], ['class' => 'btn btn-danger btn-xs']) }}
                 </div><!--pull-left-->
 
                 <div class="pull-right">
-                    {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+                    {{ Form::submit(trans('保存'), ['class' => 'btn btn-success btn-xs']) }}
                 </div><!--pull-right-->
 
                 <div class="clearfix"></div>

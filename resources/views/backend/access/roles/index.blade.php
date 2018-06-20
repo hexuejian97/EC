@@ -7,13 +7,13 @@
 @endsection
 
 @section('page-header')
-    <h1>{{ trans('labels.backend.access.roles.management') }}</h1>
+    <h1>{{ trans('角色管理') }}</h1>
 @endsection
 
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">{{ trans('labels.backend.access.roles.management') }}</h3>
+            <h3 class="box-title">{{ trans('角色管理') }}</h3>
 
             <div class="box-tools pull-right">
                 @include('backend.access.includes.partials.role-header-buttons')
@@ -25,11 +25,12 @@
                 <table id="roles-table" class="table table-condensed table-hover">
                     <thead>
                         <tr>
-                            <th>{{ trans('labels.backend.access.roles.table.role') }}</th>
-                            <th>{{ trans('labels.backend.access.roles.table.permissions') }}</th>
-                            <th>{{ trans('labels.backend.access.roles.table.number_of_users') }}</th>
-                            <th>{{ trans('labels.backend.access.roles.table.sort') }}</th>
-                            <th>{{ trans('labels.general.actions') }}</th>
+                            <th>{{ trans('角色名称') }}</th>
+                            <th>{{ trans('权限') }}</th>
+                            {{--<th>{{ trans('关联用户') }}</th>--}}
+                            <th>{{ trans('排序') }}</th>
+                            <th>{{ trans('操作') }}</th
+                            {{--<th>{{ trans('labels.general.actions') }}</th>--}}
                         </tr>
                     </thead>
                 </table>
@@ -72,7 +73,7 @@
                 columns: [
                     {data: 'name', name: '{{config('access.roles_table')}}.name'},
                     {data: 'permissions', name: '{{config('access.permissions_table')}}.display_name', sortable: false},
-                    {data: 'users', name: 'users', searchable: false},
+                    // {data: 'users', name: 'users', searchable: false},
                     {data: 'sort', name: '{{config('access.roles_table')}}.sort'},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],
