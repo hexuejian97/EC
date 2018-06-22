@@ -39,18 +39,18 @@
             @if($data['paib']==1)
                 <div class="form-group">
                     <label for="" class="col-lg-2 control-label">排班信息</label>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 null">
                         <label for="" ><span> &nbsp; &nbsp; 禁止预约开始时间：</span><input class="form-control ss test1 {{'str'.$data['time']}}" onclick="times({{'str'.$data['time']}})"  start="test1" type="text"  name="time{{$data['time']}}[]" placeholder="" ></label>-
                         <label for="" ><span> &nbsp; &nbsp; 禁止预约结束时间：</span><input class="form-control ss test2 {{'end'.$data['time']}}"  start="test2" onclick="times({{'end'.$data['time']}})" type="text"  name="time{{$data['time']}}[]" placeholder="" ></label>
                         <input type="hidden" name="times[]" value="{{$data['time']}}">
-                        <label for=""  num="" ><span class="addpb" pbinfo="1"  style="color: green;font-size: 25px;cursor: pointer">+</span>&nbsp;&nbsp;&nbsp;<span class="delpb" pbinfo="1"  style="color:red;font-size: 24px;cursor: pointer">x</span></label>
+                        <label for=""  num="" ><span class="addpb" pbinfo="1"  style="color: green;font-size: 25px;cursor: pointer">+</span>&nbsp;&nbsp;&nbsp;<span onclick="delpd(this)" class="delpb" pbinfo="1"  style="color:red;font-size: 24px;cursor: pointer">x</span></label>
                     </div><!--col-lg-10-->
                 </div>
             @else
                 @foreach($data['paib'] as $k=>$v)
                     <div class="form-group">
                     <label for="" class="col-lg-2 control-label">排班信息</label>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 null">
                         <label for="" ><span> &nbsp; &nbsp; 禁止预约开始时间：</span><input class="form-control ss test1 {{'str'.$k}}" onclick="times({{'str'.$k}})"  start="test1" type="text" value="{{$v[0]}}" name="time{{$data['time'].$k}}[]" placeholder="" ></label>-
                         <label for="" ><span> &nbsp; &nbsp; 禁止预约结束时间：</span><input class="form-control ss test2 {{'end'.$k}}"  start="test2" onclick="times({{'end'.$k}})" type="text" value="{{$v[1]}}" name="time{{$data['time'].$k}}[]" placeholder="" ></label>
                         <input type="hidden" name="times[]" value="{{$data['time'].$k}}">
@@ -145,7 +145,13 @@
             });
         }
         function delpd(t) {
-            t.parentNode.parentNode.parentNode.remove()
+            var box = document.getElementsByClassName('null');
+            if(box.length==1){
+                alert('清空内容即可！')
+            }else{
+                t.parentNode.parentNode.parentNode.remove()
+            }
+
         }
 
     </script>
