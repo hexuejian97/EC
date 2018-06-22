@@ -287,7 +287,7 @@ class ServiceController extends Controller
         }else{
             $phy['sex'] ='男';
         }
-        $phy['phy_store'] = Store::where('store_position',$phy['phy_store'])->value('store_name');
+        $phy['phy_store'] = Store::where('id',$phy['phy_store'])->value('store_name');
         return view('backend.service.physician.show',['phy'=>$phy]);
     }
 
