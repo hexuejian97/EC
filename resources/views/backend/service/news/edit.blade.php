@@ -65,6 +65,13 @@
                 </div><!--col-lg-10-->
             </div><!--form control-->
             <div class="form-group">
+                {{ Form::label('last_name', '第三方资讯地址',['class' => 'col-lg-2 control-label']) }}
+                <div class="col-lg-10">
+                    {{ Form::text('agent', $news->agent, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入职称']) }}
+
+                </div><!--col-lg-10-->
+            </div>
+            <div class="form-group">
                 {{ Form::label('news_content', '资讯内容',['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
                     <textarea name="news_content" id="editor"  style="width: 100%;height: 300px" cols="30" rows="10">{!! $news->news_content !!}</textarea>

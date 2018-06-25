@@ -746,6 +746,7 @@ class ServiceController extends Controller
             $news->news_intro = $req['news_intro'];
             $news->news_time = $req['news_time'];
             $news->news_content = $req['news_content'];
+            $news->agent = $req['agent'];
             if($news->save()){
                 return redirect()->route('admin.news.index')->withFlashSuccess('创建新闻资讯成功');
             }else{

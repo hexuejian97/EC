@@ -51,7 +51,10 @@
                                 <th>简介</th>
                                 <td>{{$news->news_intro}}</td>
                             </tr>
-
+                            <tr>
+                                <th>第三方资讯地址</th>
+                                <td>{{$news->agent}}</td>
+                            </tr>
                             <tr>
                                 <th>发布时间</th>
                                 <td>{{$news->news_time}}</td>
