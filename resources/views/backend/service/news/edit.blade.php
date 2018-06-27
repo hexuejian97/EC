@@ -67,8 +67,8 @@
             <div class="form-group">
                 {{ Form::label('last_name', '是否为第三方资讯',['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-10">
-                    <input type="radio" name="agent_status" value="1">是 &nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="agent_status" value="2" checked="checked">否
+                    <input type="radio" name="agent_status" value="1" @if($news['agent_status']==1) checked="checked" @endif>是 &nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="agent_status" value="2" @if($news['agent_status']==2) checked="checked" @endif>否
                 </div><!--col-lg-10-->
             </div>
             <div class="form-group">
