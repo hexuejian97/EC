@@ -12,6 +12,8 @@ Route::get('/store/index', 'ServiceController@storeIndex')->name('store.index');
 Route::get('/store/data', 'ServiceController@storeData')->name('store.data');
 Route::get('/store/add', 'ServiceController@storeAdd')->name('store.add');
 Route::post('/store/create', 'ServiceController@storeCreate')->name('store.create');
+//门店预约
+Route::post('/store/order','ServiceController@storeOrder')->name('store.order');
 Route::get('/store/update/{id}', 'ServiceController@storeUpdate')->name('store.update');
 Route::post('/store/edit', 'ServiceController@storeEdit')->name('store.edit');
 Route::post('/store/delete', 'ServiceController@storeDelete')->name('store.delete');
@@ -29,6 +31,8 @@ Route::post('/physician/edit', 'ServiceController@physicianEdit')->name('physici
 Route::post('/physician/delete', 'ServiceController@physicianDelete')->name('physician.delete');
 Route::get('/physician/info/{id}', 'ServiceController@physicianInfo')->name('physician.info');
 Route::post('/physician/hot', 'ServiceController@physicianHot')->name('physician.hot');
+//医师预约
+Route::post('/physician/order','ServiceController@physicianOrder')->name('physician.order');
 
 /**
  * 排班信息
@@ -202,3 +206,11 @@ Route::any('/message/getdata', 'MessageController@getdata')->name('message.getda
 Route::any('/message/create', 'MessageController@create')->name('message.create');
 Route::any('/message/info/{id}', 'MessageController@info')->name('message.info');
 Route::any('/message/delopty', 'MessageController@delopty')->name('message.delopty');
+
+/**
+ *会员管理
+ */
+Route::any('/users/index', 'UsersController@index')->name('users.index');
+Route::any('/users/getdata', 'UsersController@getdata')->name('users.getdata');
+Route::any('/users/info/{id}', 'UsersController@info')->name('users.info');
+
