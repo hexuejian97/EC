@@ -312,6 +312,21 @@
                     </li>
                 </ul>
             </li>
+            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>会员管理</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
+                        <a href="{{ route('admin.users.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>会员列表</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul><!-- /.sidebar-menu -->
     </section><!-- /.sidebar -->
 </aside>

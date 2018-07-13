@@ -276,6 +276,55 @@
 
                 'click .update' : function(e, value, row){
                     window.location.href='{{url('admin/front/update')}}'+'/'+row.id;
+                },
+                //预约 取消预约
+                'click .order': function (e, value, row, index){
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        {{--url: '{{route('admin/news/deletes')}}',--}}
+                        url: '{{route('admin.physician.order')}}',
+                        dataType: 'json',
+                        data:{'id':row.id,'action':2},
+                        success: function(data){
+                            if(data.code==1){
+                                $('#table').bootstrapTable('refresh');
+                            }else if(data.state==2000){
+                                alert(data.msg);
+                            }
+                        },
+                        error: function(xhr, type){
+                            alert('Ajax error!')
+                        }
+                    });
+                },
+                'click .unorder': function (e, value, row, index){
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        {{--url: '{{route('admin/news/deletes')}}',--}}
+                        url: '{{route('admin.physician.order')}}',
+                        dataType: 'json',
+                        data:{'id':row.id,'action':1},
+                        success: function(data){
+                            if(data.code==1){
+                                $('#table').bootstrapTable('refresh');
+                            }else if(data.state==2000){
+                                alert(data.msg);
+                            }
+                        },
+                        error: function(xhr, type){
+                            alert('Ajax error!')
+                        }
+                    });
                 }
 
             };
@@ -355,15 +404,23 @@
             var ddw = '<a href="javascript:void(0)" class="btn btn-xs btn-primary hot"> ' +
                 '<i class="fa fa-pencil hot" data-toggle="tooltip" data-placement="top" ' +
                 'data-toggle="tooltip" data-placement="top" title="取消置顶">取消置顶</i></a>&nbsp;&nbsp;';
-
+            if(row.status == 1){
+                var order = '<a href="javascript:void(0)" class="btn btn-xs btn-primary order"> ' +
+                    '<i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" ' +
+                    'data-toggle="tooltip" data-placement="top" title="恢复预约">恢复预约</i></a>&nbsp;&nbsp;';
+            }else{
+                var order = '<a href="javascript:void(0)" class="btn btn-xs btn-primary unorder"> ' +
+                    '<i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" ' +
+                    'data-toggle="tooltip" data-placement="top" title="禁止预约">禁止预约</i></a>&nbsp;&nbsp;';
+            }
 
             if(row.phy_sort == 1){
 
-                return ddw+''+ddf+''+del+''+dde+''+ddp;
+                return ddw+''+ddf+''+del+''+dde+''+ddp+order;
 
             }else if(row.phy_sort == 0){
 
-                return ddq+''+ddf+''+del+''+dde+''+ddp;
+                return ddq+''+ddf+''+del+''+dde+''+ddp+order;
             }
             //return ddf+del+dde;
 

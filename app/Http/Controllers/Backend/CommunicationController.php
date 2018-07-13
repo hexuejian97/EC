@@ -61,8 +61,8 @@ class CommunicationController extends Controller
         if($this->request->get('store')){
             $query->where('store.id',$store);
         }
-        if(access()->user()->contro!=0){
-            $query->where('store.id',access()->user()->contro);
+        if(access()->user()->contro!=0 || access()->user()->contro!=NULL){
+            $query->where('order.order_store',access()->user()->contro);
         }
         $total = $query->count();
         $offset = $offset ? $offset : 0;

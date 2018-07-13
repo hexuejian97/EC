@@ -68,8 +68,13 @@ class ServiceController extends Controller
         if($this->request->get('phy_name')){
             $query->where('phy_name', 'like', "%$name%");
         }
-        if(access()->user()->contro!=0){
-            $query->where('phy_store',access()->user()->contro);
+        if(access()->user()->contro!=0 || access()->user()->contro!=NULL){
+            $store = Store::where('store_position',access()->user()->contro)->first();
+            if(is_null($store)){
+
+            }else{
+                $query->where('phy_store',$store->id);
+            }
         }
         $total = $query->count();
         $offset = $offset ? $offset : 0;
@@ -338,7 +343,11 @@ class ServiceController extends Controller
         $offset = $this->request->get('offset');
         $limit = $this->request->get('limit');
         $name = $this->request->get('store_name');
+
         $query = Store::select();
+        if(access()->user()->contro!=0 || access()->user()->contro != NULL){
+            $query->where('store_position',access()->user()->contro);
+        }
         if($this->request->get('name')){
             $query->where('store_name', 'like', "%$name%");
         }
@@ -1110,6 +1119,39 @@ class ServiceController extends Controller
         $limit = $limit ? $limit : 10;
         $list = $query->skip($offset)->take($limit)->get();
         return ['total' => $total, 'rows' => $list];
+    }
+
+    /**
+     * 门店预约操作
+     */
+    public function storeOrder(){
+        $id = $this->request->get('id');
+        $store = Store::find($id);
+        if(is_null($store)) return return_json('',2000,'操作失败');
+        $store->status = $this->request->get('action',1);
+        $store->save();
+        //获取店内所有的医生
+        $phylists = Physician::where('phy_store',$id)->get()->toArray();
+        if(!empty($phylists)){
+            foreach ($phylists as $list){
+                $phylist = Physician::find($list['id']);
+                $phylist->status = $this->request->get('action',1);
+                $phylist->save();
+            }
+        }
+
+        return return_json([],1,'操作成功');
+    }
+    /**
+     * 医生预约操作
+     */
+    public function physicianOrder(){
+        $id = $this->request->get('id');
+        $physician = Physician::find($id);
+        if(is_null($physician)) return return_json('',2000,'操作失败');
+        $physician->status = $this->request->get('action',1);
+        $physician->save();
+        return return_json([],1,'操作成功');
     }
 }
 

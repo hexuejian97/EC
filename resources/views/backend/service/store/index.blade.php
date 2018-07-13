@@ -229,6 +229,55 @@
 
                 'click .update' : function(e, value, row){
                     window.location.href='{{url('admin/front/update')}}'+'/'+row.id;
+                },
+                //预约 取消预约
+                'click .order': function (e, value, row, index){
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        {{--url: '{{route('admin/news/deletes')}}',--}}
+                        url: '{{route('admin.store.order')}}',
+                        dataType: 'json',
+                        data:{'id':row.id,'action':2},
+                        success: function(data){
+                            if(data.code==1){
+                                $('#table').bootstrapTable('refresh');
+                            }else if(data.state==2000){
+                                alert(data.msg);
+                            }
+                        },
+                        error: function(xhr, type){
+                            alert('Ajax error!')
+                        }
+                    });
+                },
+                'click .unorder': function (e, value, row, index){
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        {{--url: '{{route('admin/news/deletes')}}',--}}
+                        url: '{{route('admin.store.order')}}',
+                        dataType: 'json',
+                        data:{'id':row.id,'action':1},
+                        success: function(data){
+                            if(data.code==1){
+                                $('#table').bootstrapTable('refresh');
+                            }else if(data.state==2000){
+                                alert(data.msg);
+                            }
+                        },
+                        error: function(xhr, type){
+                            alert('Ajax error!')
+                        }
+                    });
                 }
             };
             var $batch_delete = $("#batch_delete");
@@ -292,6 +341,16 @@
             var dde = '<a href="javascript:void(0)" class="btn btn-xs btn-primary remove"> ' +
                 '<i class="fa fa-pencil remove" data-toggle="tooltip" data-placement="top" ' +
                 'data-toggle="tooltip" data-placement="top" title="删除">删除</i></a>&nbsp;&nbsp;';
+            if(row.status == 1){
+                var order = '<a href="javascript:void(0)" class="btn btn-xs btn-primary order"> ' +
+                    '<i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" ' +
+                    'data-toggle="tooltip" data-placement="top" title="恢复预约">恢复预约</i></a>&nbsp;&nbsp;';
+            }else{
+                var order = '<a href="javascript:void(0)" class="btn btn-xs btn-primary unorder"> ' +
+                    '<i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" ' +
+                    'data-toggle="tooltip" data-placement="top" title="禁止预约">禁止预约</i></a>&nbsp;&nbsp;';
+            }
+
 
 
             /*if(row.status == '已发布'){
@@ -302,7 +361,7 @@
                 var freeze = ''
                 //return edit+' '+freeze+' '+del;
             }*/
-            return ddf+del+dde;
+            return ddf+del+dde+order;
 
         }
 
