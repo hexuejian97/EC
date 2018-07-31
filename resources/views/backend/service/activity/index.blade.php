@@ -10,24 +10,23 @@
 
 @section('page-header')
     <h1>
-        视频管理
-        <small>视频列表</small>
+        活动管理
+        <small>活动列表</small>
     </h1>
 @endsection
 
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">视频管理</h3>
-
+            <h3 class="box-title">活动管理</h3>
             <div class="box-tools pull-right">
-                <a href="{{route('admin.video.create')}}" class="btn btn-success btn-xs">新增</a>
+                <a href="{{route('admin.activity.create')}}" class="btn btn-success btn-xs">新建活动</a>
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
         <div class="box-body">
             <div class="table-responsive" >
 
-                <table  id="table"  data-toggle="table" data-url="{{route('admin.video.getdata')}}" data-toolbar="#toolbar"
+                <table  id="table"  data-toggle="table" data-url="{{route('admin.activity.getdata')}}" data-toolbar="#toolbar"
                         {{--data-click-to-select="true"--}}
                         data-show-refresh="true"
                         data-show-toggle="true"
@@ -43,12 +42,10 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
-
-                        <th data-field="title"  data-align="center">标题</th>
-                        <th data-field="intro"  data-align="center">链接</th>
-                        <th data-field="picture" data-formatter="avatarFormatter" data-align="center">图片</th>
-
+                        <th  data-field="index" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
+                        <th data-field="act_title"  data-align="center">活动名称</th>
+                        <th data-field="act_setime"  data-align="center">活动时间</th>
+                        <th data-field="act_status"  data-align="center">活动状态</th>
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
                     </thead>
@@ -167,7 +164,7 @@
                     });
                     $.ajax({
                         type: 'DELETE',
-                        {{--url: '{{route('admin/video/deletes')}}',--}}
+                        {{--url: '{{route('admin/news/deletes')}}',--}}
                         url: '',
                         dataType: 'json',
                         data:{'id':row.id},
@@ -209,7 +206,7 @@
                         });
                         $.ajax({
                             type: 'post',
-                            url: '{{route('admin.video.delopty')}}',
+                            url: '{{route('admin.activity.delete')}}',
                             dataType: 'json',
                             data: {id:row.id},
                             success: function (data) {
@@ -291,11 +288,6 @@
                 alert(111);
             }
         });*/
-         function avatarFormatter(value, row, index){
-
-            var avatar = '<img src="'+row.picture+'" width="250px"  height="100px"/>'
-            return avatar;
-        }
         //搜索参数
         function getQueryParams(params) {
             $('#toolbar').find('.ss').each(function () {
@@ -328,11 +320,11 @@
                     '<i class="fa fa-pencil top" data-toggle="tooltip" data-placement="top" ' +
                     'data-toggle="tooltip" data-placement="top" title="置顶">置顶</i></a>&nbsp;&nbsp;';
             }
-            var ddf = '<a href="{{url('admin/video/info')}}/'+row.id+'" class="btn btn-xs btn-primary "> ' +
+            var ddf = '<a href="{{url('admin/activity/info')}}/'+row.id+'" class="btn btn-xs btn-primary "> ' +
                 '<i class="fa fa-pencil " data-toggle="tooltip" data-placement="top" ' +
                 'data-toggle="tooltip" data-placement="top" title="查看">查看</i></a>&nbsp;&nbsp;';
-            var del = '<a href="{{url('admin/video/update')}}/'+row.id+'" class="btn btn-xs btn-primary update"> ' +
-                '<i class="fa fa-pencil update" data-toggle="tooltip" data-placement="top" ' +
+            var mod = '<a href="{{url('admin/activity/update')}}/'+row.id+'" class="btn btn-xs btn-primary "> ' +
+                '<i class="fa fa-pencil " data-toggle="tooltip" data-placement="top" ' +
                 'data-toggle="tooltip" data-placement="top" title="修改">修改</i></a>&nbsp;&nbsp;';
             var dde = '<a href="javascript:void(0)" class="btn btn-xs btn-primary remove"> ' +
                 '<i class="fa fa-pencil remove" data-toggle="tooltip" data-placement="top" ' +
@@ -347,12 +339,12 @@
                 var freeze = ''
                 //return edit+' '+freeze+' '+del;
             }*/
-            if(row.news_type==6 || row.news_type==10){
-                return ddq+ddf+del+dde;
+            //if(row.news_type==6 || row.news_type==10){
+            //    return ddf+dde;
 
-            }else{
-                return ddf+del+dde;
-            }
+            //}else{
+                return ddf+dde+mod;
+            //}
 
         }
 

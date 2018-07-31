@@ -5,57 +5,78 @@
 @section('after-styles')
     {{ Html::style("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.css") }}
     <link rel="stylesheet" href="/bootstrap-table-master/dist/bootstrap-table.css">
+    <link href="/select2/select2.css" rel="stylesheet" />
 
 @endsection
 
 @section('page-header')
     <h1>
-        视频管理
-        <small>视频列表</small>
+        资讯置顶管理
+     <!--     <small>新闻列表</small>-->
     </h1>
 @endsection
 
 @section('content')
-    <div class="box box-success">
-        <div class="box-header with-border">
-            <h3 class="box-title">视频管理</h3>
+   <div class="box box-success">
+                                            <form method="POST" action="http://localhost/admin/newtop/edit" accept-charset="UTF-8" class="form-horizontal" role="form"><input name="_token" type="hidden" value="LCM1H73qhXOK8FAJmDpl2gOlNZmSheS4X6QXKIcv">
 
-            <div class="box-tools pull-right">
-                <a href="{{route('admin.video.create')}}" class="btn btn-success btn-xs">新增</a>
-            </div><!--box-tools pull-right-->
-        </div><!-- /.box-header -->
+
         <div class="box-body">
-            <div class="table-responsive" >
+            <div class="form-group">
+                <label for="news_type" class="col-lg-2 control-label">官方公告</label>
+                <div class="col-lg-6">
+                        <select class="form-control" name="activity" id="">
+                        @foreach($news as $k=>$val)
+                            <option value="{{$val->id}}"  @if($news_type['type_name']==$val['id']) selected="selected" @endif>{{$val->news_title}}</option>
+                        @endforeach
+                        </select>
+                </div><!--col-lg-10-->
+            </div><!--form control-->
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="form-group">
+                <label for="news_type" class="col-lg-2 control-label">电竞赛事</label>
+                <div class="col-lg-6">
+                        <select class="form-control" name="activity" id="">
 
-                <table  id="table"  data-toggle="table" data-url="{{route('admin.video.getdata')}}" data-toolbar="#toolbar"
-                        {{--data-click-to-select="true"--}}
-                        data-show-refresh="true"
-                        data-show-toggle="true"
-                        data-side-pagination="server"
-                        data-pagination="true"
-                        data-page-size="10"
-                        data-page-list="[10, 20, 30, 40]"
-                        data-pagination-first-text="第一页"
-                        data-pagination-pre-text="上一页"
-                        data-pagination-next-text="下一页"
-                        data-pagination-last-text="最后一页"
-                        data-query-params="getQueryParams" style="overflow: scroll" >
-                    <thead >
-                    <tr>
-                        <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
+                        </select>
+                </div><!--col-lg-10-->
+            </div><!--form control-->
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="form-group" style="margin-bottom: 10px;">
+                <label for="news_type" class="col-lg-2 control-label">最新活动</label>
+                <div class="col-lg-6">
+                        <select class="form-control" name="activity" id="">
 
-                        <th data-field="title"  data-align="center">标题</th>
-                        <th data-field="intro"  data-align="center">链接</th>
-                        <th data-field="picture" data-formatter="avatarFormatter" data-align="center">图片</th>
+                        </select>
+                </div><!--col-lg-10-->
+            </div><!--form control-->
 
-                        <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
-                    </tr>
-                    </thead>
-                </table>
-            </div><!--table-responsive-->
+
+
+</div><!-- /.box-body -->
+</div>
+   <div class="box box-info">
+        <div class="box-body">
+            <div class="pull-left">
+                {{ link_to_route('admin.newtop.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
+            </div><!--pull-left-->
+
+            <div class="pull-right">
+                {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+            </div><!--pull-right-->
+
+            <div class="clearfix"></div>
         </div><!-- /.box-body -->
     </div><!--box-->
+
+</form>
+
 
 @endsection
 
@@ -64,14 +85,20 @@
     {{ Html::script("js/backend/plugin/datatables/dataTables-extend.js") }}
     <script src="/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/select2/select2.js"></script>
     <script>
-        function getidnex(e, value, index) {
+        function getidnex(value, row, index) {
             var options = $('#table').bootstrapTable('getOptions');
             return options.pageSize * (options.pageNumber - 1) + index + 1
         }
         $(function() {
+
             var $table = $('#table');
             //点击执行搜索
+            $("#area").select2({
+                placeholder: '请选择',
+                width:"700px",
+            });
             var $search = $('#search');
             $search.click(function () {
                 $table.bootstrapTable('refresh');
@@ -88,7 +115,7 @@
                         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                var key = $('input[name="time"]').val();
+                var key = $('input[name="name"]').val();
                 $.ajax({
                     type: 'POST',
                 url: '',
@@ -167,7 +194,7 @@
                     });
                     $.ajax({
                         type: 'DELETE',
-                        {{--url: '{{route('admin/video/deletes')}}',--}}
+                        {{--url: '{{route('admin/news/deletes')}}',--}}
                         url: '',
                         dataType: 'json',
                         data:{'id':row.id},
@@ -209,7 +236,7 @@
                         });
                         $.ajax({
                             type: 'post',
-                            url: '{{route('admin.video.delopty')}}',
+                            url: '{{route('admin.news.delete')}}',
                             dataType: 'json',
                             data: {id:row.id},
                             success: function (data) {
@@ -291,11 +318,6 @@
                 alert(111);
             }
         });*/
-         function avatarFormatter(value, row, index){
-
-            var avatar = '<img src="'+row.picture+'" width="250px"  height="100px"/>'
-            return avatar;
-        }
         //搜索参数
         function getQueryParams(params) {
             $('#toolbar').find('.ss').each(function () {
@@ -328,10 +350,10 @@
                     '<i class="fa fa-pencil top" data-toggle="tooltip" data-placement="top" ' +
                     'data-toggle="tooltip" data-placement="top" title="置顶">置顶</i></a>&nbsp;&nbsp;';
             }
-            var ddf = '<a href="{{url('admin/video/info')}}/'+row.id+'" class="btn btn-xs btn-primary "> ' +
+            var ddf = '<a href="{{url('admin/news/info')}}/'+row.id+'" class="btn btn-xs btn-primary "> ' +
                 '<i class="fa fa-pencil " data-toggle="tooltip" data-placement="top" ' +
                 'data-toggle="tooltip" data-placement="top" title="查看">查看</i></a>&nbsp;&nbsp;';
-            var del = '<a href="{{url('admin/video/update')}}/'+row.id+'" class="btn btn-xs btn-primary update"> ' +
+            var del = '<a href="{{url('admin/news/update')}}/'+row.id+'" class="btn btn-xs btn-primary update"> ' +
                 '<i class="fa fa-pencil update" data-toggle="tooltip" data-placement="top" ' +
                 'data-toggle="tooltip" data-placement="top" title="修改">修改</i></a>&nbsp;&nbsp;';
             var dde = '<a href="javascript:void(0)" class="btn btn-xs btn-primary remove"> ' +

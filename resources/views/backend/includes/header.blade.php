@@ -7,9 +7,9 @@
         </span>
 
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg" style="font-size: 18px">
+        <span class="logo-lg" style="font-size: 15px">
             {{--{{ app_name() }}--}}
-            天津市眼科医院视光中心
+            天津市电竞协会后台管理网站
         </span>
     </a>
 

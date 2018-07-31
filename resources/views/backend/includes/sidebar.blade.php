@@ -15,7 +15,7 @@
         </div><!--user-panel-->
 
         <!-- search form (Optional) -->
-        {{ Form::open(['route' => 'admin.search.index', 'method' => 'get', 'class' => 'sidebar-form']) }}
+       <!--  {{ Form::open(['route' => 'admin.search.index', 'method' => 'get', 'class' => 'sidebar-form']) }} -->
         <div class="input-group">
             {{ Form::text('q', Request::get('q'), ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('strings.backend.general.search_placeholder')]) }}
 
@@ -43,7 +43,7 @@
             <li class="{{ active_class(Active::checkUriPattern('admin/access/*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-users"></i>
-                    <span>{{ trans('权限管理') }}</span>
+                    <span>{{ trans('权限模块') }}</span>
 
                     @if ($pending_approval > 0)
                         <span class="label label-danger pull-right">{{ $pending_approval }}</span>
@@ -51,282 +51,172 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     @endif
                 </a>
-
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/access/*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/access/*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/access/user*')) }}">
-                        <a href="{{ route('admin.access.user.index') }}">
+                  <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
+                       <!-- 接口路径 -->
+                        <a href="{{ route('admin.news.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('用户管理') }}</span>
-
-                            @if ($pending_approval > 0)
-                                <span class="label label-danger pull-right">{{ $pending_approval }}</span>
-                            @endif
+                            <span>{{ trans('权限管理') }}</span>
                         </a>
                     </li>
 
-                    <li class="{{ active_class(Active::checkUriPattern('admin/access/role*')) }}">
-                        <a href="{{ route('admin.access.role.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('角色管理') }}</span>
-                        </a>
-                    </li>
                 </ul>
+
             </li>
             @endauth
             <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-list"></i>
-                    <span>首页管理</span>
+                    <span>首页模块</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
 
                 <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.carousel.index') }}">
+                        <a href="{{ route('admin.carousel.index')}}">
                             <i class="fa fa-circle-o"></i>
                             <span>轮播图管理</span>
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.teser.index')}}">
+                        <a href="{{ route('admin.hotspot.index')}}">
                             <i class="fa fa-circle-o"></i>
-                            <span>特色案例管理</span>
+                            <span>热点管理</span>
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.media.index')}}">
+                        <a href="{{ route('admin.newtop.index')}}">
                             <i class="fa fa-circle-o"></i>
-                            <span>媒体报道管理</span>
+                            <span>资讯置顶管理</span>
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.physhot.index') }}">
+                        <a href="{{ route('admin.latestnews.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>人气医师管理</span>
+                            <span>最新活动管理</span>
                         </a>
                     </li>
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.problem.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>解疑服务管理</span>
-                        </a>
-                    </li>
+
                 </ul>
             </li>
 
             <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-list"></i>
-                    <span>快速入口管理</span>
+                    <span>资讯模块</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.optometry.index') }}">
+                       <!-- 接口路径 -->
+                        <a href="{{ route('admin.news.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('视光检查') }}</span>
+                            <span>{{ trans('新闻管理') }}</span>
                         </a>
                     </li>
+
+                </ul>
+            </li>
+            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>赛事模块</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                 <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.special.index') }}">
+                        <a href="{{ route('admin.news.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('特色服务') }}</span>
+                            <span>{{ trans('赛事管理') }}</span>
                         </a>
                     </li>
+
+                </ul>
+            </li>
+            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>活动模块</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
+                        <a href="{{ route('admin.activity.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>{{ trans('活动管理') }}</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>视频模块</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                  <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
                         <a href="{{ route('admin.video.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('视频空间') }}</span>
+                            <span>视频管理</span>
                         </a>
                     </li>
+
                 </ul>
             </li>
             <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
                 <a href="#">
                     <i class="fa fa-list"></i>
-                    <span>服务项目管理</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.service_menu.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('菜单管理') }}</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.service_project.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('项目管理') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>特色技术管理</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.characteristic_menu.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('菜单管理') }}</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.characteristic_project.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>{{ trans('项目管理') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>产品资讯</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.product.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>营销活动</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.eyesvideo.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>视光相关产品</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>专业医师</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.physician.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>专业医师列表</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.phy_type.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>医师职称</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>门店管理</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.store.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>连锁门店</span>
-                        </a>
-                    </li>
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
-                        <a href="{{ route('admin.store_type.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>门店简称</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>新闻资讯</span>
+                    <span>用户模块</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
                         <a href="{{ route('admin.news.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>新闻列表</span>
+                            <span>用户详情</span>
                         </a>
                     </li>
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
+                        <a href="{{ route('admin.news.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>积分详情</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>学生认证审核</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+            </li>
+            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>积分模块</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+
+                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
+                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
+                        <a href="{{ route('admin.news.index') }}">
+                            <i class="fa fa-circle-o"></i>
+                            <span>积分录入</span>
+                        </a>
+                    </li>
+                      <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
                         <a href="{{ route('admin.news_type.index') }}">
                             <i class="fa fa-circle-o"></i>
-                            <span>新闻资讯类型</span>
+                            <span>历史录入</span>
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>在线预约</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.order.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>预约列表</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>提问</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.ask.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>提问列表</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>在线留言</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.message.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>留言管理</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer*')) }} treeview">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span>会员管理</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
-                    <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer')) }}">
-                        <a href="{{ route('admin.users.index') }}">
-                            <i class="fa fa-circle-o"></i>
-                            <span>会员列表</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+
         </ul><!-- /.sidebar-menu -->
     </section><!-- /.sidebar -->
 </aside>

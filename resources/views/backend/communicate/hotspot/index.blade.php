@@ -1,6 +1,6 @@
 @extends ('backend.layouts.app')
 
-@section ('title', trans('labels.backend.access.users.management'))
+@section ('title', '热点')
 
 @section('after-styles')
     {{ Html::style("https://cdn.datatables.net/v/bs/dt-1.10.15/datatables.min.css") }}
@@ -10,29 +10,44 @@
 
 @section('page-header')
     <h1>
-        视频管理
-        <small>视频列表</small>
+        热点管理
+        <small>热点列表</small>
     </h1>
 @endsection
 
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">视频管理</h3>
+            <h3 class="box-title">热点列表</h3>
 
             <div class="box-tools pull-right">
-                <a href="{{route('admin.video.create')}}" class="btn btn-success btn-xs">新增</a>
-            </div><!--box-tools pull-right-->
-        </div><!-- /.box-header -->
+                <a href="{{route('admin.hotspot.add')}}" class="btn btn-success btn-xs">新建l热点</a>
+
+        </div>
+        </div>
+      <!--   <div id="toolbar" class="btn-group">
+            <div class="form-inline" role="form">
+                <div class="form-group">
+                    {{--<label for="" ><span> &nbsp; &nbsp;病人名：</span><input class="form-control ss" type="text" name="name" placeholder="" ></label>
+                    <label for="" ><span> &nbsp;手机号：</span><input class="form-control ss" type="text" name="phone" placeholder="" ></label>
+                    <button id="search" type="submit" class="btn btn-default" style="margin-left: 52px">查&nbsp; &nbsp; &nbsp; &nbsp;询</button>--}}
+
+
+                </div>
+            </div>
+        </div>-->
+
+
         <div class="box-body">
             <div class="table-responsive" >
 
-                <table  id="table"  data-toggle="table" data-url="{{route('admin.video.getdata')}}" data-toolbar="#toolbar"
+                <table  id="table"  data-toggle="table" data-url="{{route('admin.hotspot.data')}}" data-toolbar="#toolbar"
                         {{--data-click-to-select="true"--}}
                         data-show-refresh="true"
                         data-show-toggle="true"
                         data-side-pagination="server"
                         data-pagination="true"
+                        data-sort-order="desc"
                         data-page-size="10"
                         data-page-list="[10, 20, 30, 40]"
                         data-pagination-first-text="第一页"
@@ -43,12 +58,11 @@
                     <thead >
                     <tr>
                         <th data-field="" data-checkbox="true"></th>
-                        <th data-field="id" data-formatter="getidnex" data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
-
-                        <th data-field="title"  data-align="center">标题</th>
-                        <th data-field="intro"  data-align="center">链接</th>
-                        <th data-field="picture" data-formatter="avatarFormatter" data-align="center">图片</th>
-
+                        <th data-field="index" data-formatter="getidnex"  data-align="center">ID</th>
+                        <th data-field="hot_title"  data-align="center">标题</th>
+                        <th data-field="hot_picture" data-formatter="avatarFormatter" data-align="center">热点图片</th>
+                        <th data-field="hot_link"  data-align="center">跳转链接</th>
+                       <!--   <th data-field="hot_type"  data-formatter="typeFormatter" data-align="center">类型</th>-->
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
                     </thead>
@@ -64,6 +78,7 @@
     {{ Html::script("js/backend/plugin/datatables/dataTables-extend.js") }}
     <script src="/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-zh-CN.js"></script>
+
     <script>
         function getidnex(e, value, index) {
             var options = $('#table').bootstrapTable('getOptions');
@@ -78,10 +93,10 @@
 
 
             });
-            /*var $key = $('#key-submit');
+            var $key = $('#key-submit');
             $key.click(function () {
                 $table.bootstrapTable('refresh');
-            });*/
+            });
             $('#key-submit').click(function(){
                 $.ajaxSetup({
                     headers: {
@@ -167,7 +182,7 @@
                     });
                     $.ajax({
                         type: 'DELETE',
-                        {{--url: '{{route('admin/video/deletes')}}',--}}
+                        {{--url: '{{route('admin/news/deletes')}}',--}}
                         url: '',
                         dataType: 'json',
                         data:{'id':row.id},
@@ -184,7 +199,7 @@
                     });
                 }
             };
-            /*$(".form_datetime").datetimepicker({
+           /* $(".form_datetime").datetimepicker({
                 format: 'yyyy-mm-dd hh:ii',
                 weekStart: 1,
                 language: 'zh-CN'
@@ -209,15 +224,50 @@
                         });
                         $.ajax({
                             type: 'post',
-                            url: '{{route('admin.video.delopty')}}',
+                            url: '{{route('admin.hotspot.delete')}}',
                             dataType: 'json',
                             data: {id:row.id},
                             success: function (data) {
+
                                 if (data.code == 2000) {
                                     $('#table').bootstrapTable('remove', {field: 'id', values: [row.id]});
-                                    swal("已删除!", "已成功删除.", "success");
-                                }else{
-                                    swal("删除失败!", "请稍后再试！", "warning");
+                                    swal("成功!", "已成功删除.", "success");
+                                }
+                            },
+                            error: function (data) {
+                                $('#table').bootstrapTable('remove', {field: 'id', values: [row.id]});
+                                swal("已删除!", "已成功删除.", "success");
+                            }
+                        });
+                    });
+                },
+                'click .noremove': function (e, value, row) {
+                    swal({
+                        title: "确定?",
+                        text: "你将取消屏蔽该数据吗!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "取消屏蔽",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true
+                    }, function () {
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            type: 'post',
+                            url: '{{route('admin.hotspot.delete')}}',
+                            dataType: 'json',
+                            data: {id:row.id},
+                            success: function (data) {
+
+                                if (data.code == 2000) {
+                                    $('#table').bootstrapTable('refresh');
+                                    swal("成功!", "已成功取消.", "success");
                                 }
                             },
                             error: function (data) {
@@ -228,36 +278,6 @@
                     });
                 },
 
-                'click .top': function (e, value, row) {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
-                        type: 'post',
-                        url: '{{route('admin.news.top')}}',
-                        dataType: 'json',
-                        data: {id: row.id},
-                        success: function (data) {
-                            if (data.code == 2000) {
-                                console.log(data.data);
-                                $('#table').bootstrapTable('refresh');
-                                swal("成功!", data.msg, "success");
-                            }else if(data.code == 2001){
-                                swal("失败!", data.msg, "warning");
-                            }else{
-                                swal("失败!", "请稍后再试！", "warning");
-
-                            }
-                        },
-                        error: function (data) {
-
-                            swal("失败!", "出错.", "error");
-                        }
-                    })
-
-                },
                 'click .update' : function(e, value, row){
                     window.location.href='{{url('admin/front/update')}}'+'/'+row.id;
                 }
@@ -291,11 +311,6 @@
                 alert(111);
             }
         });*/
-         function avatarFormatter(value, row, index){
-
-            var avatar = '<img src="'+row.picture+'" width="250px"  height="100px"/>'
-            return avatar;
-        }
         //搜索参数
         function getQueryParams(params) {
             $('#toolbar').find('.ss').each(function () {
@@ -307,31 +322,28 @@
 
             return params; // body data
         }
-        function sexFormatter(value) {
+        function typeFormatter(value) {
             switch (value){
                 case 1:
-                    return '男';
+                    return '首页';
                     break;
                 case 2:
-                    return '女';
+                    return '专业医师';
+                    break;
+                case 3:
+                    return '特色案例';
                     break;
             }
         }
 
+        function avatarFormatter(value, row, index){
+
+            var avatar = '<img src="'+row.hot_picture+'" width="250px"  height="100px"/>'
+            return avatar;
+        }
+
         function actionFormatter(value, row, index) {
-            if(row.news_top==1){
-                var ddq = '<a href="javascript:void(0)" class="btn btn-xs btn-primary top"> ' +
-                    '<i class="fa fa-pencil top" data-toggle="tooltip" data-placement="top" ' +
-                    'data-toggle="tooltip" data-placement="top" title="置顶">取消置顶</i></a>&nbsp;&nbsp;';
-            }else if(row.news_top==0){
-                var ddq = '<a href="javascript:void(0)" class="btn btn-xs btn-primary top"> ' +
-                    '<i class="fa fa-pencil top" data-toggle="tooltip" data-placement="top" ' +
-                    'data-toggle="tooltip" data-placement="top" title="置顶">置顶</i></a>&nbsp;&nbsp;';
-            }
-            var ddf = '<a href="{{url('admin/video/info')}}/'+row.id+'" class="btn btn-xs btn-primary "> ' +
-                '<i class="fa fa-pencil " data-toggle="tooltip" data-placement="top" ' +
-                'data-toggle="tooltip" data-placement="top" title="查看">查看</i></a>&nbsp;&nbsp;';
-            var del = '<a href="{{url('admin/video/update')}}/'+row.id+'" class="btn btn-xs btn-primary update"> ' +
+            var del = '<a href="{{url('admin/hotspot/update')}}/'+row.id+'" class="btn btn-xs btn-primary update"> ' +
                 '<i class="fa fa-pencil update" data-toggle="tooltip" data-placement="top" ' +
                 'data-toggle="tooltip" data-placement="top" title="修改">修改</i></a>&nbsp;&nbsp;';
             var dde = '<a href="javascript:void(0)" class="btn btn-xs btn-primary remove"> ' +
@@ -347,12 +359,7 @@
                 var freeze = ''
                 //return edit+' '+freeze+' '+del;
             }*/
-            if(row.news_type==6 || row.news_type==10){
-                return ddq+ddf+del+dde;
-
-            }else{
-                return ddf+del+dde;
-            }
+            return del+' '+dde;
 
         }
 

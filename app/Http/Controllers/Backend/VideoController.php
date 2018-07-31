@@ -8,9 +8,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
-use App\Models\Service\Optometry;
+use App\Models\Service\Video;
+use Illuminate\Http\Request;
+use Mockery\Exception;
 class VideoController extends Controller
 {
     /**
@@ -29,7 +31,7 @@ class VideoController extends Controller
     public function getdata(Request $request){
         $offset = $request->get('offset');
         $limit = $request->get('limit');
-        $query = Optometry::where('type',3)->select();
+        $query = Video::select('id','title','intro','picture','ll');
         $total = $query->count();
         $offset = $offset ? $offset : 0;
         $limit = $limit ? $limit : 10;
@@ -43,15 +45,16 @@ class VideoController extends Controller
      */
     public function create(Request $request){
         if($request->isMethod('post')){
-            $opto = new Optometry();
-            $opto->title = $request->input('title');
-            $opto->intro = $request->input('intro');
-            $opto->type = 3;
-            $opto->created_at = date('Y-m-d H:i:s');
-            if($opto->save()){
+            $video = new Video();
+            $video->title = $request->input('title');
+            $video->intro = $request->input('intro');
+            $video->picture=$request->input('picture');
+            $video->created_at = date('Y-m-d H:i:s');
+            $video->updated_at = date('Y-m-d H:i:s');
+            if($video->save()){
                 return redirect()->route('admin.video.index')->withFlashSuccess('添加成功');
             }else{
-                return back()->withErrors('添加医师失败，请重新添加');
+                return back()->withErrors('添加视频呢失败，请重新添加');
             }
         }
         return view('backend.service.video.create');
@@ -63,8 +66,8 @@ class VideoController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function info($id){
-        $data = Optometry::find($id);
-        return view('backend.service.video.show',['special'=>$data]);
+        $video = Video::find($id);
+        return view('backend.service.video.show',['video'=>$video]);
     }
 
     /**
@@ -73,8 +76,8 @@ class VideoController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function update($id){
-        $data = Optometry::find($id);
-        return view('backend.service.video.edit',['special'=>$data]);
+        $video = Video::find($id);
+        return view('backend.service.video.edit',['video'=>$video]);
     }
 
     /**
@@ -82,16 +85,23 @@ class VideoController extends Controller
      * @param Request $request
      * @return $this
      */
-    public function edit(Request $request){
-        $data = Optometry::find($request->input('id'));
-        $data->title = $request->input('title');
-        $data->intro =$request->input('intro');
-        if($data->save()){
-            return redirect()->route('admin.video.index')->withFlashSuccess('修改成功');
-        }else{
-            return back()->withErrors('修改失败,请稍后再试');
-        }
-    }
+
+public function edit(Request $request){
+
+         $video= Video::find($request->input('id'));
+           // echo dump($video);
+        $video->title = $request->input('title');
+        $video->intro =$request->input('intro');
+        $video->picture =$request->input('picture');
+
+           if($video->save()){
+               return redirect()->route('admin.video.index')->withFlashSuccess('修改成功');
+           }else{
+               return back()->withErrors('修改失败,请稍后再试');
+           }
+
+}
+
     /**
      * 删除
      * @param Request $request
@@ -99,9 +109,9 @@ class VideoController extends Controller
      * @throws \Exception
      */
     public function delopty(Request $request){
-        $opto = new Optometry();
-        $optoinfo = $opto->find($request->input('id'));
-        if($optoinfo->delete()){
+        $video = new Video();
+        $videoinfo = $video->find($request->input('id'));
+        if($videoinfo->delete()){
             return return_json();
         }else{
             return return_err_json('请稍后再试','2001');

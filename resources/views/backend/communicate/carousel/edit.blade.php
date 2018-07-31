@@ -26,7 +26,7 @@
                     {{ Form::label('first_name', '标题', ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
                         {{ Form::text('title', $car->car_title, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
-                        {{ Form::hidden('id', $car->id, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入姓名']) }}
+                        {{ Form::hidden('id', $car->id, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">

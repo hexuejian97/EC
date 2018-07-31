@@ -1,61 +1,65 @@
 @extends ('backend.layouts.app')
 
-@section ('title', trans('labels.backend.access.users.management') . ' | ' . trans('labels.backend.access.users.create'))
+@section ('title', '首页' . ' | ' . '热点')
 
 @section('page-header')
     <h1>
-        视频空间
-        <small>视频空间</small>
+        热点管理
+        <small>修改热点</small>
     </h1>
 @endsection
 
 @section('content')
-    {{ Form::open(['route' => 'admin.video.create', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
+    {{ Form::open(['route' => 'admin.hotspot.edit', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
 
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">视频空间</h3>
+                <h3 class="box-title">修改热点</h3>
+
                 <div class="box-tools pull-right">
+
                 </div><!--box-tools pull-right-->
             </div><!-- /.box-header -->
 
             <div class="box-body">
                 <div class="form-group">
-                    {{ Form::label('title', '标题', ['class' => 'col-lg-2 control-label']) }}
-                    <div class="col-lg-10">
-                        {{ Form::text('title', null, ['class' => 'form-control', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入标题']) }}
+                    {{ Form::label('first_name', '标题', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                        {{ Form::text('title', $hot->hot_title, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        {{ Form::hidden('id', $hot->id, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入姓名']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
                 <div class="form-group">
-                    {{ Form::label('intro', '链接', ['class' => 'col-lg-2 control-label']) }}
-                    <div class="col-lg-10">
-                        {{ Form::text('intro', null, ['class' => 'form-control', 'maxlength' => '500', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入标题']) }}
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
-                 <div class="form-group">
-                    {{ Form::label('picture', '封图', ['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('relay', '链接', ['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
-                    <img src="" alt="" style="width:250px;height:100px" id="img">
-                    <div id="container1">
-                        <a class="btn btn-default btn-lg " id="pickfiles" href="#" >
-                            <i class="glyphicon glyphicon-plus"></i>
-                            <span>选择文件</span>
-                        </a>
-                    </div>
-                    {{ Form::text('picture', null, ['id' => 'picture','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '' ,'readonly' => 'readonly']) }}
+                        {{ Form::text('link', $hot->hot_link, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                    </div><!--col-lg-10-->
                 </div>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    {{ Form::label('goods_pic', '图片', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        <img src="{{$hot->hot_picture}}" alt="" style="width:250px;height:100px" id="img">
+                        <div id="container1">
+                            <a class="btn btn-default btn-lg " id="pickfiles" href="#" >
+                                <i class="glyphicon glyphicon-plus"></i>
+                                <span>选择文件</span>
+                            </a>
+                        </div>
+                        {{ Form::text('picture', $hot->hot_picture, ['id' => 'hot_picture','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '' ,'readonly' => 'readonly']) }}
+                    </div>
                 </div><!--form control-->
+                <!--form control-->
             </div><!-- /.box-body -->
         </div><!--box-->
 
         <div class="box box-info">
             <div class="box-body">
                 <div class="pull-left">
-                    {{ link_to_route('admin.video.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
+                    {{ link_to_route('admin.hotspot.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
                 </div><!--pull-left-->
 
                 <div class="pull-right">
-                    {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+                    {{ Form::submit('修改', ['class' => 'btn btn-success btn-xs']) }}
                 </div><!--pull-right-->
 
                 <div class="clearfix"></div>
@@ -67,24 +71,10 @@
 
 @section('after-scripts')
     {{ Html::script('js/backend/access/users/script.js') }}
-    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.all.min.js"> </script>
-    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
-    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
-    <script type="text/javascript" src="/layDate-v5.0.7/laydate/laydate.js"></script>
-    <script>
-        var ue = UE.getEditor('editor');
-        //常规用法
-        laydate.render({
-            elem: '#test1'
-        });
-    </script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/qiniu.js"></script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/moxie.js"></script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/plupload.dev.js"></script>
-
- <script>
+    <script>
         $(function(){
             $.post('{{route('admin.upToken')}}',{},function(data){
                 //照片
@@ -117,19 +107,6 @@
                     drop_element: 'container1',          // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
                     chunk_size: '4mb',                  // 分块上传时，每块的体积
                     auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
-                    //x_vars : {
-                    //    查看自定义变量
-                    //    'time' : function(up,file) {
-                    //        var time = (new Date()).getTime();
-                    // do something with 'time'
-                    //        return time;
-                    //    },
-                    //    'size' : function(up,file) {
-                    //        var size = file.size;
-                    // do something with 'size'
-                    //        return size;
-                    //    }
-                    //},
                     init: {
                         'FilesAdded': function(up, files) {
                             plupload.each(files, function(file) {
@@ -156,7 +133,7 @@
                             var sourceLink = domain+'/'+res.key; //获取上传成功后的文件的Url
                             console.log(sourceLink);
                             $("#img").attr('src',sourceLink);
-                            $("#picture").val(sourceLink);
+                            $("#hot_picture").val(sourceLink);
 
                         },
                         'Error': function(up, err, errTip) {
@@ -164,17 +141,10 @@
                         },
                         'UploadComplete': function() {
                             //队列文件处理完毕后，处理相关的事情
-
-
                         },
                         'Key': function(up, file) {
                             // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
                             // 该配置必须要在unique_names: false，save_key: false时才生效
-                            var last = file.name.split('.').splice(-1);
-                            console.log(file);
-                            var key ="<?php echo '9'.rand(1111,9999).time()?>";
-                            // do something with key here
-                            return key+'.'+last[0];
                         }
                     }
                 });

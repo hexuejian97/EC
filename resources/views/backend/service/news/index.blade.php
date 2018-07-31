@@ -30,7 +30,7 @@
                     <select class="select2" name="name">
                         <option value="" >请选择区域</option>
                         @foreach($nt as $k=>$v)
-                            <option value="{{$v->id}}">{{$v->nt_name}}</option>
+                            <option value="{{$v->id}}">{{$v->type_name}}</option>
                         @endforeach
                     </select>
                     <button id="search" type="submit" class="btn btn-default" style="margin-left: 52px">查&nbsp; &nbsp; &nbsp; &nbsp;询</button>
@@ -60,8 +60,8 @@
                         <th data-field="" data-checkbox="true"></th>
                         <th data-field="index" data-formatter="getidnex"  data-sort-name="id" data-sort-order="desc" data-align="center">ID</th>
                         <th data-field="news_title"  data-align="center">新闻标题</th>
-                        <th data-field="nt_name"  data-align="center">新闻类型</th>
-                        <th data-field="news_intro"  data-align="center">简介</th>
+                        <th data-field="type_name"  data-align="center">新闻类型</th>
+                        <th data-field="updated_at"  data-align="center">更新时间</th>
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
                     </thead>

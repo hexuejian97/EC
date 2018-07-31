@@ -34,13 +34,18 @@
 
                     <div role="tabpanel" class="tab-pane mt-30 active" id="overview">
                         <table class="table table-striped table-hover">
-                            <tbody><tr>
+                            <tbody>
+                            <tr>
                                 <th>标题</th>
-                                <td>{{$special->title}}</td>
+                                <td>{{$video->title}}</td>
                             </tr>
                             <tr>
                                 <th>简介</th>
-                                <td>{{$special->intro}}</td>
+                                <td>{{$video->intro}}</td>
+                            </tr>
+                            <tr>
+                                <th>封图</th>
+                                <td>{{$video->picture}}</td>
                             </tr>
                             </tbody></table>                    </div><!--tab overview profile-->
 

@@ -4,134 +4,94 @@
 
 @section('page-header')
     <h1>
-        新闻资讯管理
-        <small>修改新闻资讯</small>
+        新增活动
     </h1>
 @endsection
 
 @section('content')
-    {{ Form::open(['route' => 'admin.news.edit', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
+    {{ Form::open(['route' => 'admin.activity.create', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post']) }}
 
-    <div class="box box-success">
-        <div class="box-header with-border">
-            <h3 class="box-title">修改新闻资讯</h3>
-            <div class="box-tools pull-right">
-            </div><!--box-tools pull-right-->
-        </div><!-- /.box-header -->
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">新增活动</h3>
+                <div class="box-tools pull-right">
+                </div><!--box-tools pull-right-->
+            </div><!-- /.box-header -->
 
-        <div class="box-body">
-            <div class="form-group">
-                {{ Form::label('first_name', '资讯标题', ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('news_title', $news->news_title, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入姓名']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
-            <div class="form-group">
-                {{ Form::label('last_name', '发表时间',['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-4">
-                    {{ Form::text('news_time', $news->news_time, ['id' => 'test1' ,'class' => 'form-control demo-input', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请选择日期']) }}
-                    {{ Form::hidden('id', $news->id, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请选择日期']) }}
-                </div><!--col-lg-10-->
-            </div><!--form control-->
-            <div class="form-group" style="margin-bottom: 10px;">
-                {{ Form::label('goods_pic', '封推图', ['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    <img src="{{$news->news_picture}}" alt="" style="width:100px;height:100px" id="img">
+            <div class="box-body">
+                <div class="form-group">
+                    {{ Form::label('first_name', '活动名称', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                        {{ Form::text('act_title', null, ['class' => 'form-control', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入活动名称']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('setime', '活动起止时间', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-2">
+                        {{ Form::text('act_stime', null, ['class' => 'form-control', 'maxlength' => '15', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '2000-1-1']) }}
+                        至
+                   {{ Form::text('act_etime', null, ['class' => 'form-control', 'maxlength' => '15', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '2000-9-1']) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ Form::label('act_link', '活动链接',['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-10">
+                         {{ Form::text('act_link', null, ['class' => 'form-control', 'maxlength' => '200', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请输入活动链接']) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                 <div class="form-group">
+                    {{ Form::label('picture', '封图', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                    <img src="" alt="" style="width:250px;height:100px" id="img">
                     <div id="container1">
                         <a class="btn btn-default btn-lg " id="pickfiles" href="#" >
                             <i class="glyphicon glyphicon-plus"></i>
                             <span>选择文件</span>
                         </a>
                     </div>
-                    {{ Form::text('news_picture', $news->news_picture, ['id' => 'phy_picture','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '' ,'readonly' => 'readonly']) }}
+                    {{ Form::text('picture', null, ['id' => 'picture','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '' ,'readonly' => 'readonly']) }}
                 </div>
-            </div><!--form control-->
-            <div class="form-group">
-                {{ Form::label('last_name', '资讯类型',['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    <select class='form-control' name="news_type" required='required'>
-                        <option value="{{$news->news_type}}" class="check">{{$news->type_name}}</option>
-                        @foreach($nt as $k=>$v)
-                            <option value="{{$v->id}}" class="forcheck">{{$v->type_name}}</option>
-                        @endforeach
-                    </select>
-                </div><!--col-lg-10-->
-            </div>
-            <div class="form-group">
-                {{ Form::label('publisher', '发布人',['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('publisher', $news->publisher, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入发布人']) }}
+                </div><!--form control-->
+            </div><!-- /.box-body -->
+        </div><!--box-->
 
-                </div>
-            </div>
-          <!--   <div class="form-group">
-                {{ Form::label('last_name', '是否为第三方资讯',['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    <input type="radio" name="agent_status" value="1" @if($news['agent_status']==1) checked="checked" @endif>是 &nbsp;&nbsp;&nbsp;
-                    <input type="radio" name="agent_status" value="2" @if($news['agent_status']==2) checked="checked" @endif>否
-                </div>
-            </div> -->
-           <!--  <div class="form-group">
-                {{ Form::label('last_name', '第三方资讯地址',['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    {{ Form::text('agent', $news->agent, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入职称']) }}
+        <div class="box box-info">
+            <div class="box-body">
+                <div class="pull-left">
+                    {{ link_to_route('admin.activity.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
+                </div><!--pull-left-->
 
-                </div>
-            </div> -->
-            <div class="form-group">
-                {{ Form::label('news_content', '资讯内容',['class' => 'col-lg-2 control-label']) }}
-                <div class="col-lg-10">
-                    <textarea name="news_content" id="editor"  style="width: 100%;height: 300px" cols="30" rows="10">{!! $news->news_content !!}</textarea>
-                </div><!--col-lg-10-->
-            </div><!--form control-->
-        </div><!-- /.box-body -->
-    </div><!--box-->
+                <div class="pull-right">
+                    {{ Form::submit(trans('buttons.general.crud.create'), ['class' => 'btn btn-success btn-xs']) }}
+                </div><!--pull-right-->
 
-    <div class="box box-info">
-        <div class="box-body">
-            <div class="pull-left">
-                {{ link_to_route('admin.news.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
-            </div><!--pull-left-->
-
-            <div class="pull-right">
-                {{ Form::submit('修改', ['class' => 'btn btn-success btn-xs']) }}
-            </div><!--pull-right-->
-
-            <div class="clearfix"></div>
-        </div><!-- /.box-body -->
-    </div><!--box-->
+                <div class="clearfix"></div>
+            </div><!-- /.box-body -->
+        </div><!--box-->
 
     {{ Form::close() }}
 @endsection
 
 @section('after-scripts')
     {{ Html::script('js/backend/access/users/script.js') }}
-    <script type="text/javascript" charset="utf-8" src="/qiniu_ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/qiniu_ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="/layDate-v5.0.7/laydate/laydate.js"></script>
     <script>
-        var ue = UE.getEditor('editor',{
-            catchRemoteImageEnable: false
-        });
+        var ue = UE.getEditor('editor');
         //常规用法
         laydate.render({
             elem: '#test1'
-        });
-        var check = $('.check').val();
-        $('.forcheck').each(function(index,element){
-            if($(this).val() == check){
-                $('.forcheck').eq(index).remove();
-            }
         });
     </script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/qiniu.js"></script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/moxie.js"></script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/plupload.dev.js"></script>
 
-    <script>
+ <script>
         $(function(){
             $.post('{{route('admin.upToken')}}',{},function(data){
                 //照片
@@ -164,6 +124,19 @@
                     drop_element: 'container1',          // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
                     chunk_size: '4mb',                  // 分块上传时，每块的体积
                     auto_start: true,                   // 选择文件后自动上传，若关闭需要自己绑定事件触发上传
+                    //x_vars : {
+                    //    查看自定义变量
+                    //    'time' : function(up,file) {
+                    //        var time = (new Date()).getTime();
+                    // do something with 'time'
+                    //        return time;
+                    //    },
+                    //    'size' : function(up,file) {
+                    //        var size = file.size;
+                    // do something with 'size'
+                    //        return size;
+                    //    }
+                    //},
                     init: {
                         'FilesAdded': function(up, files) {
                             plupload.each(files, function(file) {
@@ -190,7 +163,7 @@
                             var sourceLink = domain+'/'+res.key; //获取上传成功后的文件的Url
                             console.log(sourceLink);
                             $("#img").attr('src',sourceLink);
-                            $("#phy_picture").val(sourceLink);
+                            $("#picture").val(sourceLink);
 
                         },
                         'Error': function(up, err, errTip) {
@@ -198,10 +171,17 @@
                         },
                         'UploadComplete': function() {
                             //队列文件处理完毕后，处理相关的事情
+
+
                         },
                         'Key': function(up, file) {
                             // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
                             // 该配置必须要在unique_names: false，save_key: false时才生效
+                            var last = file.name.split('.').splice(-1);
+                            console.log(file);
+                            var key ="<?php echo '9'.rand(1111,9999).time()?>";
+                            // do something with key here
+                            return key+'.'+last[0];
                         }
                     }
                 });

@@ -32,51 +32,38 @@
                         {{ Form::text('news_time', null, ['id' => 'test1' ,'class' => 'form-control demo-input', 'maxlength' => '191', 'required' => 'required', 'autofocus' => 'autofocus', 'placeholder' => '请选择日期']) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
-                <div class="form-group" style="margin-bottom: 10px;">
-                    {{ Form::label('goods_pic', '封推图', ['class' => 'col-lg-2 control-label']) }}
-                    <div class="col-lg-10">
-                        <img src="" alt="" style="width:100px;height:100px" id="img">
-                        <div id="container1">
-                            <a class="btn btn-default btn-lg " id="pickfiles" href="#" >
-                                <i class="glyphicon glyphicon-plus"></i>
-                                <span>选择文件</span>
-                            </a>
-                        </div>
-                        {{ Form::text('news_picture', null, ['id' => 'phy_picture','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '' ,'readonly' => 'readonly']) }}
+                <div class="form-group">
+                    {{ Form::label('news_picture', '封图', ['class' => 'col-lg-2 control-label']) }}
+                    <div class="col-lg-6">
+                    <img src="" alt="" style="width:250px;height:100px" id="img">
+                    <div id="container1">
+                        <a class="btn btn-default btn-lg " id="pickfiles" href="#" >
+                            <i class="glyphicon glyphicon-plus"></i>
+                            <span>选择文件</span>
+                        </a>
                     </div>
+                    {{ Form::text('news_picture', null, ['id' => 'news_picture','class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '' ,'readonly' => 'readonly']) }}
+                </div>
                 </div><!--form control-->
                 <div class="form-group">
-                    {{ Form::label('last_name', '资讯类型',['class' => 'col-lg-2 control-label']) }}
+                    {{ Form::label('news_type', '资讯类型',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-10">
                         <select class="form-control" name="news_type" id="" required="required">
                             <option value="">请选择</option>
                             @foreach($nt as $k=>$v)
-                                <option value="{{$v->id}}">{{$v->nt_name}}</option>
+                                <option value="{{$v->id}}">{{$v->type_name}}</option>
                             @endforeach
                         </select>
                     </div><!--col-lg-10-->
                 </div>
-                <div class="form-group">
-                    {{ Form::label('last_name', '资讯简介',['class' => 'col-lg-2 control-label']) }}
-                    <div class="col-lg-10">
-                        {{ Form::text('news_intro', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入简介']) }}
+                 <div class="form-group">
+                {{ Form::label('publisher', '发布人',['class' => 'col-lg-2 control-label']) }}
+                <div class="col-lg-10">
+                    {{ Form::text('publisher', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入发布人']) }}
 
-                    </div><!--col-lg-10-->
-                </div><!--form control-->
-                <div class="form-group">
-                    {{ Form::label('last_name', '是否为第三方资讯',['class' => 'col-lg-2 control-label']) }}
-                    <div class="col-lg-10">
-                        <input type="radio" name="agent_status" value="1">是 &nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="agent_status" value="2" checked="checked">否
-                    </div><!--col-lg-10-->
                 </div>
-                <div class="form-group">
-                    {{ Form::label('last_name', '第三方资讯地址',['class' => 'col-lg-2 control-label']) }}
-                    <div class="col-lg-10">
-                        {{ Form::text('agent', null, ['class' => 'form-control', 'maxlength' => '191', 'required' => 'required', 'placeholder' => '请输入简介']) }}
+            </div>
 
-                    </div><!--col-lg-10-->
-                </div>
                 <div class="form-group">
                     {{ Form::label('news_content', '资讯内容',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-10">
@@ -105,16 +92,14 @@
 
 @section('after-scripts')
     {{ Html::script('js/backend/access/users/script.js') }}
-    <script type="text/javascript" charset="utf-8" src="/qiniu_ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/qiniu_ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/utf8-php/ueditor.all.min.js"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/utf8-php/lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="/layDate-v5.0.7/laydate/laydate.js"></script>
     <script>
-        var ue = UE.getEditor('editor',{
-            catchRemoteImageEnable: false
-        });
+        var ue = UE.getEditor('editor');
         //常规用法
         laydate.render({
             elem: '#test1'
@@ -124,7 +109,7 @@
     <script src="http://ouvegnn6u.bkt.clouddn.com/moxie.js"></script>
     <script src="http://ouvegnn6u.bkt.clouddn.com/plupload.dev.js"></script>
 
-    <script>
+ <script>
         $(function(){
             $.post('{{route('admin.upToken')}}',{},function(data){
                 //照片
@@ -196,7 +181,7 @@
                             var sourceLink = domain+'/'+res.key; //获取上传成功后的文件的Url
                             console.log(sourceLink);
                             $("#img").attr('src',sourceLink);
-                            $("#phy_picture").val(sourceLink);
+                            $("#news_picture").val(sourceLink);
 
                         },
                         'Error': function(up, err, errTip) {
