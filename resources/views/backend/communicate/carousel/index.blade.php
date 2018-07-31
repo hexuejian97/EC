@@ -23,19 +23,19 @@
             <div class="box-tools pull-right">
                 <a href="{{route('admin.carousel.add')}}" class="btn btn-success btn-xs">新建l轮播</a>
 
-            </div><!--box-tools pull-right-->
-        </div><!-- /.box-header -->
-        <div id="toolbar" class="btn-group">
+        </div>
+        </div>
+      <!--   <div id="toolbar" class="btn-group">
             <div class="form-inline" role="form">
                 <div class="form-group">
                     {{--<label for="" ><span> &nbsp; &nbsp;病人名：</span><input class="form-control ss" type="text" name="name" placeholder="" ></label>
                     <label for="" ><span> &nbsp;手机号：</span><input class="form-control ss" type="text" name="phone" placeholder="" ></label>
                     <button id="search" type="submit" class="btn btn-default" style="margin-left: 52px">查&nbsp; &nbsp; &nbsp; &nbsp;询</button>--}}
 
-                    {{--批量操作--}}
+
                 </div>
             </div>
-        </div>
+        </div>-->
 
 
         <div class="box-body">
@@ -62,7 +62,7 @@
                         <th data-field="car_title"  data-align="center">标题</th>
                         <th data-field="car_picture" data-formatter="avatarFormatter" data-align="center">轮播图片</th>
                         <th data-field="car_link"  data-align="center">跳转链接</th>
-                        <th data-field="car_type"  data-formatter="typeFormatter" data-align="center">类型</th>
+
                         <th data-formatter="actionFormatter" data-events="actionEvents">操作</th>
                     </tr>
                     </thead>
@@ -93,10 +93,10 @@
 
 
             });
-            /*var $key = $('#key-submit');
+            var $key = $('#key-submit');
             $key.click(function () {
                 $table.bootstrapTable('refresh');
-            });*/
+            });
             $('#key-submit').click(function(){
                 $.ajaxSetup({
                     headers: {
@@ -199,7 +199,7 @@
                     });
                 }
             };
-            /*$(".form_datetime").datetimepicker({
+           /* $(".form_datetime").datetimepicker({
                 format: 'yyyy-mm-dd hh:ii',
                 weekStart: 1,
                 language: 'zh-CN'

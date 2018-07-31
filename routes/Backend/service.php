@@ -94,8 +94,8 @@ Route::get('/teser/teserdata', 'ServiceController@teserdata')->name('teser.teser
 /**
  *媒体报道
  */
-Route::get('/media/index', 'ServiceController@media')->name('media.index');
-Route::get('/media/mediadata', 'ServiceController@mediadata')->name('media.mediadata');
+Route::get('/newtop/index', 'ServiceController@newtop')->name('newtop.index');
+Route::get('/newtop/newtopdata', 'ServiceController@newtopdata')->name('newtop.newtopdata');
 
 /**
  * 解疑服务
@@ -105,8 +105,8 @@ Route::get('/problem/problemdata', 'ServiceController@problemdata')->name('probl
 /**
  * 人气医师
  */
-Route::get('/physhot/index', 'ServiceController@physhot')->name('physhot.index');
-Route::get('/physhot/physhotdata', 'ServiceController@physhotdata')->name('physhot.physhotdata');
+/*Route::get('/physhot/index', 'ServiceController@physhot')->name('physhot.index');
+Route::get('/physhot/physhotdata', 'ServiceController@physhotdata')->name('physhot.physhotdata');*/
 /**
  * 快速入口 - 视光检查
  */
@@ -199,18 +199,35 @@ Route::any('/eyesvideo/update/{id}', 'EyesVideoController@update')->name('eyesvi
 Route::any('/eyesvideo/edit', 'EyesVideoController@edit')->name('eyesvideo.edit');
 Route::any('/eyesvideo/delopty', 'EyesVideoController@delopty')->name('eyesvideo.delopty');
 /**
- *在线留言
+ *活动模块
  */
-Route::any('/message/index', 'MessageController@index')->name('message.index');
-Route::any('/message/getdata', 'MessageController@getdata')->name('message.getdata');
-Route::any('/message/create', 'MessageController@create')->name('message.create');
-Route::any('/message/info/{id}', 'MessageController@info')->name('message.info');
-Route::any('/message/delopty', 'MessageController@delopty')->name('message.delopty');
+Route::any('/activity/index', 'activityController@activityIndex')->name('activity.index');
+Route::any('/activity/getdata', 'activityController@activitygetdata')->name('activity.getdata');
+Route::any('/activity/create', 'activityController@activityAdd')->name('activity.create');
+Route::any('/activity/info/{id}', 'activityController@activityinfo')->name('activity.info');
+Route::any('/activity/delete', 'activityController@activityDelete')->name('activity.delete');
+Route::any('/activity/edit', 'activityController@activityedit')->name('activity.edit');
 
+Route::any('/activity/update/{id}', 'activityController@activityupdate')->name('activity.update');
 /**
- *会员管理
+ *用户管理
  */
 Route::any('/users/index', 'UsersController@index')->name('users.index');
 Route::any('/users/getdata', 'UsersController@getdata')->name('users.getdata');
 Route::any('/users/info/{id}', 'UsersController@info')->name('users.info');
+
+
+/*
+最新新闻
+*/
+Route::get('/latestnews/index', 'ServiceController@latestnewsIndex')->name('latestnews.index');
+Route::get('/latestnews/data', 'ServiceController@latestnewsData')->name('latestnews.data');
+Route::get('/latestnews/add', 'ServiceController@latestnewsAdd')->name('latestnews.add');
+Route::post('/latestnews/create', 'ServiceController@latestnewsCreate')->name('latestnews.create');
+Route::get('/latestnews/update/{id}', 'ServiceController@latestnewsUpdate')->name('latestnews.update');
+Route::post('/latestnews/edit', 'ServiceController@latestnewsEdit')->name('latestnews.edit');
+Route::post('/latestnews/delete', 'ServiceController@latestnewsDelete')->name('latestnews.delete');
+/*
+*赛事管理
+*/
 

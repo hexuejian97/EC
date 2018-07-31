@@ -1,0 +1,49 @@
+
+2018/7/25:
+/resources/views/backend/includes/sidebar.blade.php 首页标题、侧边栏菜单及子级菜单更改（舍弃地方所加注释未删除(待用)）
+/resources/views/backend/service/media/index.blade.php  资讯置顶管理标题处理 待处理关联问题
+/resources/views/backend/communicate/hotspot/index.blade.php	热点管理标题处理  待处理关联问题
+2018/7/26:
+/resources/views/backend/service/news/index.blade.php 新闻管理标题处理 待处理关联问题
+/resources/views/backend/service/
+/routes/backend/service 所有功能的路径
+/app/Http/Controllers/Backend/ServiceController 基本服务控制器
+/resources/views/backend/includes/sidebar.blade.php  line:126  →admin.news.index
+/resources/views/backend/includes/sidebar.blade.php  line:126  想直接修改为admin.news.edit但是方法不可访问，
+直接去找控制器相应部分想了一下，发现并不返回视图，只是数据处理，而且定义的post路由，不可能出现页面
+2018/7/27
+首页bootstrap-table.min.js等报404错误,确认是路径问题，但是找不到✔
+已解决：更改APatch两个配置文件里的访问路径为项目路径
+/app/Http/Controllers/Backend/CommunicationController.php  line:234 轮播图管理,去掉类型(数据库同删除类型字段)✔
+/resources/views/backend/service/teser/index.blade.php 轮播图管理，view层去掉类型✔
+
+ 轮播图管理完成(所有不相关代码注释未删)✔
+在Model模块连接对应的热点模块✔
+热点管理首页定向
+
+
+首页热点管理基本完成，有2bug：点进页面一直刷新/选择图片前端接收不到图片
+后者解决：后端连接并查找数据库的接口名拼错✔
+前者解决：如果没有相关表，在数据库添加相关表，并且注意大小写敏感，在最前方use包括上引用那个表的类✔
+
+最新活动管理界面主要是布局，四个最新活动位，下拉框选项读取数据库中活动的标题✔
+视频管理增加视频封面图片列，修改的bug试了很长时间，修改确定后变成添加，微调代码后又接收不到信息
+新闻管理未实现随着类型修改新闻标题前的类型字符串的改变
+边写bug边改bug
+
+2018/7/28
+记录bug，活动管理修改删除无法正常工作，可能需要改的地方有index中按钮部分，控制器中参数部分，Routes中路径部分
+
+2018/7/31
+修复修改按钮：活动首页没有传来id导致修改页面id找不到无法对应相应活动✔
+修复删除按钮：活动首页删除控件代码路径不对✔
+修改完成简单测试了下各个控件的作用，又发现修改时结束时间未传来，发现是读取字段拼错✔
+活动模块完成✔
+
+赛事模块：
+原型未给出，大致包含:
+1、赛事名称
+2、赛事起止时间
+3、比赛类型
+4、报名队伍/个人
+5、

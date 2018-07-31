@@ -654,9 +654,9 @@ class ServiceController extends Controller
 
     public function newsTypeCreate(){
         try{
-           $req = $this->request->input('nt_name');
+           $req = $this->request->input('news_type');
            $nt = new NewsType();
-           $nt->nt_name = $req;
+           $nt->news_type = $req;
            if($nt->save()){
                return redirect()->route('admin.news_type.index')->withFlashSuccess('创建新闻类型成功');
            }else{
@@ -676,7 +676,7 @@ class ServiceController extends Controller
         try{
             $req = $this->request->all();
             $nt = NewsType::find($req['id']);
-            $nt->nt_name = $req['nt_name'];
+            $nt->news_type = $req['news_type'];
             if($nt->save()){
                 return redirect()->route('admin.news_type.index')->withFlashSuccess('修改成功');
             }else{
@@ -722,7 +722,7 @@ class ServiceController extends Controller
         $limit = $this->request->get('limit');
         $type = $this->request->get('name');
         $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
-            ->select('news.*','news_type.nt_name');
+            ->select('news.*','news_type.type_name');
         if($this->request->get('name')){
             $query->where('news_type', $type);
         }
@@ -752,10 +752,9 @@ class ServiceController extends Controller
             $news->news_title = $req['news_title'];
             $news->news_type = $req['news_type'];
             $news->news_picture = $req['news_picture'];
-            $news->news_intro = $req['news_intro'];
             $news->news_time = $req['news_time'];
             $news->news_content = $req['news_content'];
-            $news->agent = $req['agent'];
+            $news->publisher=$req['publisher'];
             $news->agent_status = $req['agent_status'];
             if($news->save()){
                 return redirect()->route('admin.news.index')->withFlashSuccess('创建新闻资讯成功');
@@ -770,7 +769,7 @@ class ServiceController extends Controller
     public function newsUpdate($id){
         try{
             $news = News::join('news_type','news.news_type','=','news_type.id')
-                ->select('news.*','news_type.nt_name')->find($id);
+                ->select('news.*','news_type.type_name')->find($id);
              $nt = NewsType::get();
              return view('backend.service.news.edit',['news'=>$news,'nt'=>$nt]);
         }catch (Exception $e){
@@ -786,10 +785,8 @@ class ServiceController extends Controller
             $news->news_time = $req['news_time'];
             $news->news_picture = $req['news_picture'];
             $news->news_type = $req['news_type'];
-            $news->news_intro = $req['news_intro'];
             $news->news_content = $req['news_content'];
-            $news->agent = $req['agent'];
-            $news->agent_status = $req['agent_status'];
+            $news->publisher=$req['publisher'];
             if($news->save()){
                 return redirect()->route('admin.news.index')->withFlashSuccess('修改成功');
             }else{
@@ -816,7 +813,7 @@ class ServiceController extends Controller
 
     public function newsInfo($id){
         $news = News::join('news_type','news.news_type','=','news_type.id')
-            ->select('news.*','news_type.nt_name')->find($id);
+            ->select('news.*','news_type.type_name')->find($id);
         return view('backend.service.news.show',['news'=>$news]);
     }
 
@@ -826,8 +823,9 @@ class ServiceController extends Controller
      */
     public function newsTop(){
         try{
-            $id = $this->request->input('id');
+           $id = $this->request->input('id');
            $news = News::find($id);
+           echo var_dump($id);
            if($news->news_type == 10 && $news->news_top == 0){
                $newss = News::where([
                    ['news_type', '=', '10'],
@@ -1032,7 +1030,7 @@ class ServiceController extends Controller
         $type = $this->request->get('type');
         $name = $this->request->get('name');
         $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
-            ->select('news.*','news_type.nt_name');
+            ->select('news.*','news_type.news_type');
         if($this->request->get('name')){
             $query->where('news_type', '=', 6);
             $query->where('news_title', 'like', "%$name%");
@@ -1052,17 +1050,17 @@ class ServiceController extends Controller
      * 媒体查询
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function media(){
+    public function newtop(){
         $data = News::where('news_type',10)->select('id','news_title')->get();
-        return  view('backend.service.media.index',['data'=>$data]);
+        return  view('backend.communicate.newtop.index',['data'=>$data]);
     }
-    public function mediadata(){
+    public function newtopdata(){
         $offset = $this->request->get('offset');
         $limit = $this->request->get('limit');
         $type = $this->request->get('type');
         $name = $this->request->get('name');
         $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
-            ->select('news.*','news_type.nt_name');
+            ->select('news.*','news_type.news_type');
         $query->where('news_type', '=', 10)->where('news_top',1);
         if($this->request->get('name')){
             $query->where('news_title', 'like', "%$name%");
@@ -1075,28 +1073,7 @@ class ServiceController extends Controller
 
     }
 
-    /**
-     * 人气医师
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function physhot(){
-        $data = Physician::select('id','phy_name')->get();
-        return  view('backend.service.physhot.index',['data'=>$data]);
-    }
-    public function physhotdata(){
-        $offset = $this->request->get('offset');
-        $limit = $this->request->get('limit');
-        $name = $this->request->get('name');
-        $query = Physician::where('phy_sort',1)->select();
-        if($this->request->get('name')){
-            $query->where('phy_name', 'like', "%$name%");
-        }
-        $total = $query->count();
-        $offset = $offset ? $offset : 0;
-        $limit = $limit ? $limit : 10;
-        $list = $query->skip($offset)->take($limit)->get();
-        return ['total' => $total, 'rows' => $list];
-    }
+
 
     /**
      * 解疑服务
@@ -1152,6 +1129,44 @@ class ServiceController extends Controller
         $physician->status = $this->request->get('action',1);
         $physician->save();
         return return_json([],1,'操作成功');
+    }
+    /*
+    *最新活动管理
+    */
+    public function latestnewsIndex(){
+        return view('backend.communicate.latestnews.index');
+    }
+
+    public function latestnewsData(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $query = News::select('news_title');
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+        return ['total' => $total, 'rows' => $list];
+    }
+    public function latestnewsUpdate($id){
+        $hot = News::find($id);
+        return view('backend.communicate.latestnews.edit',['hot'=>$hot]);
+    }
+
+    public function latestnewsEdit(){
+        try{
+            $req = $this->request->all();
+            $hot = News::find($req['id']);
+            $hot->hot_title = $req['title'];
+            $hot->hot_link = $req['link'];
+            $hot->hot_picture = $req['picture'];
+            if($hot->save()){
+                return redirect()->route('admin.latestnews.index')->withFlashSuccess('修改成功');
+            }else{
+                return back()->withErrors('修改失败,请稍后再试');
+            }
+        }catch (Exception $e){
+            \Log::info($e->getMessage());
+        }
     }
 }
 

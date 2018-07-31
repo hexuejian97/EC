@@ -4,15 +4,14 @@
 
 @section('page-header')
     <h1>
-        新闻资讯管理
-        <small>新闻资讯详情</small>
+        活动详情
     </h1>
 @endsection
 
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">新闻资讯详情</h3>
+            <h3 class="box-title">活动详情</h3>
 
             <div class="box-tools pull-right">
             </div><!--box-tools pull-right-->
@@ -35,33 +34,25 @@
                     <div role="tabpanel" class="tab-pane mt-30 active" id="overview">
                         <table class="table table-striped table-hover">
                             <tbody><tr>
-                                <th>标题</th>
-                                <td>{{$news->news_title}}</td>
-                            </tr>
-
-                            <tr>
-                                <th>类型</th>
-                                <td>{{$news->type_name}}</td>
+                                <th>活动名称</th>
+                                <td>{{$act->act_title}}</td>
                             </tr>
                             <tr>
-                                <th>封推</th>
-                                <td><img src="{{$news->news_picture}}" width="100px" height="80px"></td>
+                                <th>活动起止时间</th>
+                                <td>{{$act->act_stime}}</td>
+                                <td>{{$act->act_etime}}</td>
                             </tr>
                             <tr>
-                                <th>发布时间</th>
-                                <td>{{$news->news_time}}</td>
+                                <th>创建时间</th>
+                                <td>{{$act->created_at}}</td>
                             </tr>
-                            <tr>
+                             <tr>
                                 <th>更新时间</th>
-                                <td>{{$news->updated_at}}</td>
+                                <td>{{$act->updated_at}}</td>
                             </tr>
                             <tr>
-                                <th>发布人</th>
-                                <td>{{$news->publisher}}</td>
-                            </tr>
-                            <tr>
-                                <th>内容</th>
-                                <td>{!! $news->news_content !!}</td>
+                                <th>活动封图</th>
+                                <td>{{$act->act_picture}}</td>
                             </tr>
                             </tbody></table>                    </div><!--tab overview profile-->
 
@@ -72,4 +63,12 @@
 
         </div><!-- /.box-body -->
     </div><!--box-->
+     <div class="box box-info">
+            <div class="box-body">
+                <div class="pull-left">
+                    {{ link_to_route('admin.news.index', trans('buttons.general.cancel'), [], ['class' => 'btn btn-danger btn-xs']) }}
+                </div><!--pull-left-->
+                <div class="clearfix"></div>
+            </div><!-- /.box-body -->
+        </div><!--box-->
 @endsection

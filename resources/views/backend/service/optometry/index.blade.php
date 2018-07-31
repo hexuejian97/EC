@@ -10,18 +10,18 @@
 
 @section('page-header')
     <h1>
-        视光检查
-        <small>视光检查列表</small>
+        新闻管理
+        <small>新闻列表</small>
     </h1>
 @endsection
 
 @section('content')
     <div class="box box-success">
         <div class="box-header with-border">
-            <h3 class="box-title">视光检查</h3>
+            <h3 class="box-title">新闻管理</h3>
 
             <div class="box-tools pull-right">
-                <a href="{{route('admin.optometry.create')}}" class="btn btn-success btn-xs">新增</a>
+                <a href="{{route('admin.optometry.create')}}" class="btn btn-success btn-xs">新增新闻</a>
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
         <div class="box-body">

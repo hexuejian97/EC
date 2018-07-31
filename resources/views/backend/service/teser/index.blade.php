@@ -11,16 +11,16 @@
 
 @section('page-header')
     <h1>
-        新闻管理
-        <small>新闻列表</small>
+        热点管理
+        <small>热点新闻列表</small>
     </h1>
 @endsection
 
 @section('content')
-    <div class="box box-success">
-        <div class="box-header with-border">
+     <div class="box box-success">
+    <!--    <div class="box-header with-border">
             <h3 class="box-title">新闻列表</h3>
-        </div><!-- /.box-header -->
+        </div>
         <div id="toolbar" class="btn-group">
             <div class="form-inline" role="form">
                 <div class="form-group">
@@ -34,7 +34,7 @@
                     {{--批量操作--}}
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="box-body">
             <div class="table-responsive" >

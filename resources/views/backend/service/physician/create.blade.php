@@ -68,6 +68,7 @@
                     {{ Form::label('last_name', '门店',['class' => 'col-lg-2 control-label']) }}
                     <div class="col-lg-6">
                         <select class="form-control" name="phy_store" id="">
+
                             @foreach($store as $k=>$v)
                                 <option value="{{$v->id}}" >{{$v->store_name}}</option>
                             @endforeach

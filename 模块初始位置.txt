@@ -1,0 +1,13 @@
+模块初始位置
+轮播图管理：
+/app/Http/Controllers/Backend/CommunicationController.php
+/resources/views/backend/service/teser/index.blade.php
+热点管理：
+/app/Http/Controllers/Backend/Search/CommunicationController.php
+/resources/views/backend/Communicate/hotspot/index.blade.php
+最新活动管理：
+/resources/views/backend/Communicate/hotspot/index.blade.php
+/app/Http/Controllers/Backend/Search/CommunicationController.php
+视频管理：
+/app/Http/Controllers/Backend/Search/VideoController.php
+/resources/views/backend/service/video/index.blade.php

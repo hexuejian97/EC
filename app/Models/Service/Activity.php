@@ -11,9 +11,9 @@ namespace App\Models\Service;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class Activity extends Model
 {
-    protected $table= 'message';
-    public  $timestamps=false;
+    protected $table= 'activity';
+   // public  $timestamps=false;
 
 }

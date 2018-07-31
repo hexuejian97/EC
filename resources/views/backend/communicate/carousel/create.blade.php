@@ -33,7 +33,7 @@
 
                 </div><!--col-lg-10-->
             </div><!--form control-->
-            <div class="form-group">
+           <!--   <div class="form-group">
                 {{ Form::label('last_name', '类型',['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-6">
                     <select class="form-control" name="car_type" id="">
@@ -41,8 +41,8 @@
                         <option value="2">专业医师</option>
                         <option value="3">特色案例</option>
                     </select>
-                </div><!--col-lg-10-->
-            </div><!--form control-->
+                </div>
+            </div>-->
             <div class="form-group" style="margin-bottom: 10px;">
                 {{ Form::label('goods_pic', '轮播图片', ['class' => 'col-lg-2 control-label']) }}
                 <div class="col-lg-6">
