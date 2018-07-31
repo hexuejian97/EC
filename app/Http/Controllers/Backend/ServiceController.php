@@ -172,7 +172,11 @@ class ServiceController extends Controller
             $news->news_time = $req['news_time'];
             $news->news_content = $req['news_content'];
             $news->publisher=$req['publisher'];
+<<<<<<< HEAD
 
+=======
+            $news->agent_status = $req['agent_status'];
+>>>>>>> bde2147ec0d58b153e8ebf721fb0035dd5582f9a
             if($news->save()){
                 return redirect()->route('admin.news.index')->withFlashSuccess('创建新闻资讯成功');
             }else{
@@ -285,6 +289,182 @@ class ServiceController extends Controller
     }
 
 
+<<<<<<< HEAD
+=======
+    public function phyTypeData(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        //$name = $this->request->get('phy_name');
+        $query = PhyType::select();
+        /*if($this->request->get('name')){
+            $query->where('phy_name', 'like', "%$name%");
+        }*/
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+        return ['total' => $total, 'rows' => $list];
+    }
+
+    public function phyTypeAdd(){
+        return view('backend.service.phytype.create');
+    }
+
+    public function phyTypeCreate(){
+        try{
+            $name = $this->request->input('pt_name');
+            $pt = new PhyType();
+            $pt->pt_name = $name;
+            if($pt->save()){
+                return redirect()->route('admin.phy_type.index')->withFlashSuccess('创建医师职称成功');
+            }else{
+                return back()->withErrors('创建失败,请稍后再试');
+            }
+        }catch(Exception $e){
+            \Log::info($e->getMessage());
+        }
+    }
+
+    public function phytypeUpdate($id){
+        $pt = PhyType::find($id);
+        return view('backend.service.phytype.edit',['pt'=>$pt]);
+    }
+
+    public function phyTypeEdit(){
+        try{
+            $req = $this->request->all();
+           $pt = PhyType::find($req['id']);
+           $pt->pt_name = $req['pt_name'];
+           if($pt->save()){
+               return redirect()->route('admin.phy_type.index')->withFlashSuccess('修改医师职称成功');
+           }else{
+                return back()->withErrors('修改失败,请稍后再试');
+           }
+        }catch (Exception $e){
+            \Log::info($e->getMessage());
+        }
+    }
+
+    public function phyTypeDelete(){
+        try{
+            $id = $this->request->input('id');
+            $news = Physician::where('phy_type',$id)->first();
+            if(!empty($news)){
+                return return_err_json('此医师职称下有医师,请先清除医师再试','2001');
+            }
+            $nt = PhyType::find($id);
+            if($nt->delete()){
+                return return_json();
+            }else{
+                return return_err_json('请稍后再试','2001');
+            }
+        }catch (Exception $e){
+            \Log::info($e->getMessage());
+        }
+    }
+
+    public function storeTypeIndex(){
+        return view('backend.service.storetype.index');
+    }
+
+    public function storeTypeData(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $type = $this->request->get('type');
+        $query = storeType::select();
+        if($this->request->get('type')){
+            $query->where('news_type', '=', $type);
+        }
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+        return ['total' => $total, 'rows' => $list];
+    }
+
+    public function storeTypeAdd(){
+        return view('backend.service.storetype.create');
+    }
+
+    public function storeTypeCreate(){
+        try{
+            $req = $this->request->all();
+            $st = new storeType();
+            $st->st_name = $req['st_name'];
+            if($st->save()){
+                return redirect()->route('admin.store_type.index')->withFlashSuccess('创建成功');
+            }else{
+                return back()->withErrors('创建失败,请稍后再试');
+            }
+        }catch (Exception $e){
+            \Log::info($e->getMessage());
+        }
+    }
+
+    public function storeTypeUpdate($id){
+        $st = storeType::find($id);
+        return view('backend.service.storetype.edit',['st'=>$st]);
+    }
+
+    public function storeTypeEdit(){
+        try{
+            $req = $this->request->all();
+            $st = storeType::find($req['id']);
+            $st->st_name = $req['st_name'];
+            if($st->save()){
+                return redirect()->route('admin.store_type.index')->withFlashSuccess('修改成功');
+            }else{
+                return back()->withErrors('修改失败,请稍后再试');
+            }
+        }catch (Exception $e){
+            \Log::info($e->getMessage());
+        }
+    }
+
+    public function storeTypeDelete(){
+        try{
+            $id = $this->request->input('id');
+            $st = storeType::find($id);
+            if($st->delete()){
+                return return_json();
+            }else{
+                return return_err_json();
+            }
+        }catch (Exception $e){
+            \Log::info($e->getMessage());
+        }
+    }
+
+    /**
+     * 特色案例
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function  teser(){
+        $data = News::where('news_type',6)->select('id','news_title')->get();
+        return  view('backend.service.teser.index',['data'=>$data]);
+    }
+    public function teserdata(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $type = $this->request->get('type');
+        $name = $this->request->get('name');
+        $query = News::join('news_type','news.news_type','=','news_type.id')->orderBy('created_at','desc')
+            ->select('news.*','news_type.news_type');
+        if($this->request->get('name')){
+            $query->where('news_type', '=', 6);
+            $query->where('news_title', 'like', "%$name%");
+        }else{
+            $query->where('news_type', '=', 6)->where('news_top',1);
+        }
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+//        dd($list);
+        return ['total' => $total, 'rows' => $list];
+
+    }
+>>>>>>> bde2147ec0d58b153e8ebf721fb0035dd5582f9a
 
     /**
      * 媒体查询
@@ -313,9 +493,51 @@ class ServiceController extends Controller
 
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> bde2147ec0d58b153e8ebf721fb0035dd5582f9a
 
 
 
+    /*
+    *最新活动管理
+    */
+    public function latestnewsIndex(){
+        return view('backend.communicate.latestnews.index');
+    }
+
+    public function latestnewsData(){
+        $offset = $this->request->get('offset');
+        $limit = $this->request->get('limit');
+        $query = News::select('news_title');
+        $total = $query->count();
+        $offset = $offset ? $offset : 0;
+        $limit = $limit ? $limit : 10;
+        $list = $query->skip($offset)->take($limit)->get();
+        return ['total' => $total, 'rows' => $list];
+    }
+    public function latestnewsUpdate($id){
+        $hot = News::find($id);
+        return view('backend.communicate.latestnews.edit',['hot'=>$hot]);
+    }
+
+    public function latestnewsEdit(){
+        try{
+            $req = $this->request->all();
+            $hot = News::find($req['id']);
+            $hot->hot_title = $req['title'];
+            $hot->hot_link = $req['link'];
+            $hot->hot_picture = $req['picture'];
+            if($hot->save()){
+                return redirect()->route('admin.latestnews.index')->withFlashSuccess('修改成功');
+            }else{
+                return back()->withErrors('修改失败,请稍后再试');
+            }
+        }catch (Exception $e){
+            \Log::info($e->getMessage());
+        }
+    }
     /*
     *最新活动管理
     */

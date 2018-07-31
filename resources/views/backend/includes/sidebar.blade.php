@@ -54,7 +54,11 @@
                   <ul class="treeview-menu {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'menu-open') }}" style="display: none; {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'display: block;') }}">
                     <li class="{{ active_class(Active::checkUriPattern('admin/log-viewer/logs')) }}">
                        <!-- 接口路径 -->
+<<<<<<< HEAD
                         <a href="{{ route('admin.news.index') }}">
+=======
+                        <a href="{{ route('admin.users.index') }}">
+>>>>>>> bde2147ec0d58b153e8ebf721fb0035dd5582f9a
                             <i class="fa fa-circle-o"></i>
                             <span>{{ trans('权限管理') }}</span>
                         </a>

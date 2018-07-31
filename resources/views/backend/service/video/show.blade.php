@@ -47,6 +47,10 @@
                                 <th>封图</th>
                                 <td>{{$video->picture}}</td>
                             </tr>
+                            <tr>
+                                <th>封图</th>
+                                <td>{{$special->picture}}</td>
+                            </tr>
                             </tbody></table>                    </div><!--tab overview profile-->
 
 
